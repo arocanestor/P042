@@ -1,0 +1,98 @@
+<div ui-view="cdat-cancelacion">
+
+    <gs-row>
+
+        <gs>
+
+            <box ng-if="!noJuridico">
+                <header>
+                    <h3 style="color:#2980b9">Antes de continuar con la cancelaci&oacute;n, mencione lo siguiente:</h3>
+                </header>
+
+                <gs-row>
+                    <gs>
+                        <div gui="wysiwyg" ng-bind-html="textos.texto2"></div>
+                    </gs>
+                </gs-row>
+
+            </box>
+
+        </gs>
+    </gs-row>
+
+    <gs-row>
+        <gs>
+            <box>
+                <gs-row ng-if="productosCDaT.length == 0">
+                    <gs>
+                        <gui-caption type="info" ng-model="caption.productos" text-align="center"></gui-caption>
+                    </gs>
+                </gs-row>
+
+                <form name="cancelacion" ng-if="productosCDaT.length > 0">
+
+                    <header>
+                        <h3 style="color:#2980b9">{{ subtitle }}</h3>
+                    </header>
+
+                    <gs-row>
+
+                        <gs col="x-5">
+                            <label gui="label">Seleccione la cuenta a donde el cliente quiere trasladar los recursos:
+                                <!-- <select gui="input-control" ng-model="cancelacion.producto" ng-options="producto as producto.label for producto in productos" required>
+                              <option value="">Seleccione producto</option>
+                          </select> -->
+                            </label>
+                        </gs>
+                        <gs col="x-4">
+                            <select gui="input-control" ng-model="cancelacion.producto" gui-validate rules='{"required": true}' ng-options="producto as producto.label for producto in productos" ng-change="$gui.guardarInfo(cancelacion.producto)">
+                                <option value="">Seleccione producto</option>
+                            </select>
+                        </gs>
+
+                    </gs-row>
+
+                    <gs-row>
+                        <gs>
+                            <div overflow="x">
+                                <table gui="table:table-bordered:table-zebra:table-summary">
+                                    <!-- <caption>{{ tableTitle + ' ' + consulta.numero}}</caption> -->
+                                    <tbody>
+                                        <tr>
+                                            <th text-align="center">N&uacute;mero de CDAT Virtual</th>
+                                            <th text-align="center">Fecha de Apertura</th>
+                                            <th text-align="center">Fecha de vencimiento</th>
+                                            <th text-align="center">Valor inicial de la inversión</th>
+                                            <th text-align="center">Plazo (en d&iacute;as)</th>
+                                            <th text-align="center">Tasa (E.A)</th>
+                                            <th text-align="center">Intereses netos &uacute;ltimo periodo</th>
+                                            <th text-align="center">Capitalizaci&oacute;n intereses</th>
+                                            <th text-align="center">Valor actual de la inversi&oacute;n</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr ng-repeat="producto in productosCDaT">
+                                            <td>{{producto.numeroCompletoCDAT}}</td>
+                                            <td>{{producto.fechaExpedicion}}</td>
+                                            <td>{{producto.fechaProximoVencimiento}}</td>
+                                            <td>{{producto.valorInicial}}</td>
+                                            <td>{{producto.plazo +' d&iacute;as'}}</td>
+                                            <td>{{producto.sumatoriaTasas}}</td>
+                                            <td>{{producto.valorNetoUltimosInteresesLiquidados}}</td>
+                                            <td>{{producto.tipoDeNegocio == 'CAPITALIZABLE' ? 'Si' : 'No'}}</td>
+                                            <td>{{producto.valorNetoPagar}}</td>
+                                            <td><button gui="form-button" bg-color="alizarin" ng-disabled="((producto.valIndicadorReinversion != '3') && (producto.valIndicadorReinversion != '4')) || (!cancelacion.$valid)" ng-click="$gui.cancelacion(producto)">Cancelar</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </gs>
+                    </gs-row>
+
+                </form>
+            </box>
+
+        </gs>
+    </gs-row>
+
+
+</div>

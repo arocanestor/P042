@@ -1,0 +1,210 @@
+<div ui-view="evaluacion-xpress" ng-if="!autorizaciones">
+
+    <gs-row ng-if="evaluacion.estado == 'APR' && !autorizaciones">
+        <gs>
+            <box>
+                <gs-row>
+                    <gs>
+                        <gui-caption type="info" ng-model="caption.info" text-align="center"></gui-caption>
+                    </gs>
+                </gs-row>
+            </box>
+            <box>
+                <header>
+                    <h3>Resultado Evaluaci&oacute;n</h3>
+                </header>
+
+                <gs-row>
+                    <gs>
+                        <gui-caption type="success" ng-model="caption.exito" text-align="center"></gui-caption>
+                    </gs>
+                </gs-row>
+                <gs-row >
+                    <gs col="x-4">
+                        <label gui="label:label-inline"><span>Tarjeta:</span>
+                            <input gui="input-control" ng-model="tarjeta" text-align="right" disabled/>
+                        </label>
+                    </gs>
+                    <gs col="x-4">
+                        <label gui="label:label-inline"><span>Cupo Aprobado:</span>
+                            <input gui="input-control" ng-model="evaluacion.monto" gui-validate text-align="right" disabled/>
+                        </label>
+                    </gs>
+                    <gs col="x-4">
+                        <label gui="label:label-inline"><span>Punto de Entrega:</span>
+                            <input gui="input-control" ng-model="ubicacion.DirRecidencia" gui-validate text-align="right" disabled/>
+                        </label>
+                    </gs>
+                </gs-row>
+                <gs-row>
+                <gs col="x-12|md-12">
+                    <gui-caption type="info" ng-model="caption.resultSimulacion" text-align="center"></gui-caption>
+                </gs>
+                </gs-row>
+                <gs-row>
+                    <gs pull-left>
+                        <input type="button"  ng-click="$gui.desistir()"  gui="form-button" bg-color="alizarin" value="Desistir"/>
+                    </gs>
+                    <gs push-right>
+                        <input type="button" ng-click="$gui.continuar()"  gui="form-button" bg-color="alizarin" value="Continuar"/>
+                    </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+    <gs-row ng-if="evaluacion.estado == 'NEG' && !autorizaciones">
+        <gs>
+            <box>
+                <header>
+                    <h3>Resultado Evaluaci&oacute;n</h3>
+                </header>
+                <gs-row>
+                    <gs col="x-4">
+                        <label gui="label:label"><span>Producto Solicitado:</span></label>
+                    </gs>
+                </gs-row>
+                <gs-row col="x-4">
+                    <gs>
+                        <label gui="label:label-inline"><span>Tarjeta:</span>
+                            <input gui="input-control" ng-model="tarjeta" text-align="right" disabled/>
+                        </label>
+                    </gs>
+                </gs-row>
+                <gs-row>
+                    <gs col="x-4">
+                        <label gui="label:label"><span>La solicitud ha sido negada por los siguientes motivos:</span></label>
+                    </gs>
+                </gs-row>
+                <gs-row ng-if="evaluacion.causal">
+                    <gs col="x-8">
+                        <div gui="wysiwyg" ng-bind-html="evaluacion.causal">
+                        </div>
+                    </gs>
+                </gs-row>
+                <!-- <gs-row ng-if="evaluacion.causal2">
+                    <gs col="x-8">
+                        <div gui="wysiwyg" ng-bind-html="evaluacion.causal2">
+                        </div>
+                    </gs>
+                </gs-row>
+                <gs-row ng-if="evaluacion.causal3">
+                    <gs col="x-4">
+                        <div gui="wysiwyg" ng-bind-html="evaluacion.causal3">
+                        </div>
+                    </gs>
+                </gs-row>
+                <gs-row ng-if="evaluacion.causal4">
+                    <gs col="x-4">
+                        <div gui="wysiwyg" ng-bind-html="evaluacion.causal4">
+                        </div>
+                    </gs>
+                </gs-row>
+                <gs-row ng-if="evaluacion.causal5">
+                    <gs col="x-4">
+                        <div gui="wysiwyg" ng-bind-html="evaluacion.causal5">
+                        </div>
+                    </gs>
+                </gs-row> -->
+
+                <gs-row>
+                    <gs col="x-12">
+                        <gui-caption type="info" ng-model="caption.negado" text-align="center"></gui-caption>
+                    </gs>
+                </gs-row>
+
+                <gs-row>
+                    <gs>
+                        <hr/>
+                    </gs>
+                </gs-row>
+                <gs-row>
+                    <gs push-right>
+                        <input type="button" ng-click="$gui.desistir()"  gui="form-button" bg-color="alizarin" value="Finalizar"/>
+                    </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+    <gs-row ng-if="evaluacion.estado == 'CON' && !autorizaciones">
+      <gs>
+         <form name='form.checkboxes'>
+             <box>
+                 <gs-row>
+                     <gs>
+                         <gui-caption type="info" ng-model="caption.paso3" text-align="center"></gui-caption>
+                     </gs>
+                 </gs-row>
+             </box>
+             <box>
+               <!-- <gs>
+                  <span>El cliente autoriza con su huella la firma electrónica de los siguientes documentos:<span>
+               </gs> -->
+               <gs-row>
+                   <gs col="x-12 | md-12">
+                       <ul gui="check-list">
+                           <li ng-repeat="check in lovs.lov_checks_pxpress">
+                             <label cursor="pointer" ng-attr-color="{{ !form.checkboxes['check-' + check.codigo].$valid ? 'alizarin' : '' }}">
+                                 <input ng-name name="{{'check-' + check.codigo}}" type="checkbox" ng-model="account[routeApp[1]].checks[check.codigo]" ng-required="checksValidate[check.codigo]"/>
+                                 <span ng-bind-html="check.desc"></span>
+                                 <span ng-if="check.codigo == 'pagare'"> - <a href="" ng-click="mostrarAutorizaciones()" title="Autorizaciones y Declaraciones">(Autorizaciones y Declaraciones)</a></span>
+                             </label>
+                         </li>
+                     </ul>
+                   </gs>
+                   <gs col="x-12|md-12">
+                       <gui-caption type="info" ng-model="caption.info1" text-align="center"></gui-caption>
+                   </gs>
+              </gs-row>
+             </box>
+        </form>
+      </gs>
+    </gs-row>
+    <gs-row  ng-if="form.checkboxes.$valid && !autorizaciones">
+            <gs>
+                <box>
+                    <gs-row>
+                        <gs>
+                             <header>
+                                <h3>Solicite Huella al Cliente</h3>
+                             </header>
+                             <app-biometric-assistant ng-model="$gui.bioCapture" casb="casbData"></app-biometric-assistant>
+                             <gs push-right>
+                                <input type="button" ng-model="boton" ng-click="$gui.crearPagare()"  gui="form-button" bg-color="alizarin" value="Continuar" ng-disabled="!form.checkboxes.$valid || !habilitarEvaluacion"></input>
+                             </gs>
+                        </gs>
+                    </gs-row>
+                </box>
+            </gs>
+    </gs-row>
+
+</div>
+
+<div ng-if="autorizaciones">
+    <gs-row ng-if="autorizaciones">
+        <gs>
+            <!-- PRODUCTO SOLICITADO -->
+            <box>
+
+                <gs-row>
+                    <gs>
+                        <header>
+                            <h3 style="color:#2980b9">{{ caption.autoriza }}</h3></header>
+
+                        <gs-row>
+                            <gs>
+                                <div gui="wysiwyg" ng-bind-html="textos.texto2">
+                                </div>
+                            </gs>
+                        </gs-row>
+                        <gs>
+                            <hr/>
+                        </gs>
+
+                        <gs pull-left>
+                            <button gui="form-button" ng-click="quitarAutorizaciones()" bg-color="concrete">Regresar</button>
+                        </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+</div>

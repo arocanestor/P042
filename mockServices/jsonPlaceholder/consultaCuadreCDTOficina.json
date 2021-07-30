@@ -1,0 +1,27 @@
+{
+   "caracterAceptacion": "B",
+   "codMsgRespuesta": "0",
+   "registros": [
+      {
+         "codOficina": "9",
+         "codJornadaConsulta": "1",
+         "tipoTransaccion": "APERTURA",
+         "valorTotal": "100000.00",
+         "cantidad": "3"
+      },
+      {
+         "codOficina": "9",
+         "codJornadaConsulta": "1",
+         "tipoTransaccion": "CANCELACIONES",
+         "valorTotal": "120000.00",
+         "cantidad": "3"
+      },
+      {
+         "codOficina": "9",
+         "codJornadaConsulta": "1",
+         "tipoTransaccion": "ENDOSOS",
+         "valorTotal": "155000.00",
+         "cantidad": "6"
+      }
+   ]
+}

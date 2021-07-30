@@ -1,0 +1,166 @@
+<div ui-view="">
+
+    <gs-row>
+        <gs>
+            <box>
+
+                <header>
+                    <h3 style="color:#2980b9">Realice el fraccionamiento del CDT No. {{ numCDT[0].valNumeroCDT }}</h3>
+                </header>
+
+                <form name="form.fraccion" novalidate>
+                    <gs-row>
+
+                        <gs>
+                            <table gui="table:table-narrow:table-bordered" gui-tooltip gui-title="{{ 'La sumatoria de todos los nuevos CDT debe ser igual al valor actual de la inversión.' }}">
+                                <caption>Nuevo tipo de manejo y valor de la inversi&oacute;n de los nuevos CDT</caption>
+                                <thead>
+                                    <tr>
+                                        <th width="30" align="Center"></th>
+                                        <th align="left">Tipo de manejo</th>
+                                        <th align="left">Valor de la inversi&oacute;n</th>
+                                        <th width="30"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr ng-repeat="fraccionamiento in fraccionamientos">
+                                        <td align="Center" ng.model="fraccionamiento.numero">
+                                            <h3>{{ fraccionamiento.numero }}</h3>
+                                        </td>
+                                        <td>
+                                            <select gui="input-control" ng-model="fraccionamiento.tipoManejo" gui-validate rules='{"required": true}' ng-change="$gui.llenarTabla(fraccionamiento)" ng-options="lov as lov.desc for lov in lovs.lov_cdt_endoso_tipo_manejo">
+                                                <option value="">Seleccione </option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div gui="overlabel" gui-mask="currency" ng-model="fraccionamiento.valorInversion"></div>
+                                            <input text-align="right" ng-change="$gui.validarFraccionamiento()" type="text" gui="input-control" ng-model="fraccionamiento.valorInversion" maxlength="17" gui-validate rules='{"required": true, "min": "{{infoCDTFrac.montoMin}}",  "max": "{{infoCDTFrac.montoMax}}", "lt":"{{cdtSeleccionado.valMontoActualOperacion}}"}'
+                                              chars="only-numbers" />
+                                        </td>
+                                        <td>
+                                            <button gui="form-button" ng-click="$gui.removeTitular($index, fraccionamientos);" ng-disabled="fraccionamiento.remover == false"><i class="fa fa-times" ng-keypress="" color="alizarin"></i></button>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr style="font-size:10px">
+                                        <td></td>
+                                        <td text-align="right">Valor Actual Inversión &nbsp;</td>
+                                        <td>&nbsp; {{ cdtSeleccionado[0].valMontoActualOperacion | currency }}</td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </gs>
+
+                        <gs push-right text-align="right">
+                            <h3 style="color:#2980b9">Total</h3>
+                            <h3 color="{{ valorTotalSuma == cdtSeleccionado[0].valMontoActualOperacion ? 'turquoise' : 'alizarin' }}">{{ $program.sumarValor(fraccionamientos) | currency }}</h3>
+                        </gs>
+
+                        <gs>
+                            <button gui="form-button" style="padding:10px; height: auto;" align="center" cursor="pointer" bg-color="peter-river" ng-disabled="fraccionamientos.length > 4 || valorTotalSuma >= cdtSeleccionado[0].valMontoActualOperacion"
+                              ng-click="$gui.agregarFraccionamiento(fraccionamientos)"><i class="fa fa-plus"></i> Adicionar CDT</button>
+                        </gs>
+
+                    </gs-row>
+
+                    <br>
+                    <br>
+
+                    <gs-row>
+
+                        <gs>
+                            <header>
+                                <h3 style="color:#2980b9">Solicite la siguiente autorización al(los) cliente(s), marque las casilla si está(n) de acuerdo: </h3>
+                            </header>
+
+                            <gs-row>
+
+                                <gs col="x-12">
+                                    <ul gui="check-list">
+                                        <li ng-repeat="check in lovs.lov_checks_CDT_filtrado">
+                                            <label cursor="pointer" ng-attr-color="{{ !form.fraccion.checkFraccionamiento.$valid ? 'alizarin' : '' }}"><input ng-name name="checkFraccionamiento" type="checkbox" ng-model="checkFraccionamiento"
+                                                  ng-required="true" ng-change="$gui.validarFraccionamiento(checkFraccionamiento)" /><span ng-bind-html="check.desc"></span> </label>
+                                        </li>
+                                    </ul>
+                                </gs>
+
+                            </gs-row>
+
+                        </gs>
+                    </gs-row>
+                </form>
+
+                <gs-row>
+                    <gs push-right>
+                        <button gui="form-button" bg-color="alizarin" ng-disabled=" (valCDT !== $program.sumarValor(fraccionamientos)) || valorTotalSuma !== cdtSeleccionado[0].valMontoActualOperacion || !form.fraccion.$valid" ng-click="$gui.aplicarFraccionamiento()">Continuar</button>
+                    </gs>
+                    <gs pull-left>
+                        <button gui="form-button" bg-color="asbestos" ui-sref="^">Regresar </button>
+                    </gs>
+                </gs-row>
+
+            </box>
+
+            <box ng-if="verFracciones && valorTotalSuma == cdtSeleccionado[0].valMontoActualOperacion && form.fraccion.$valid">
+
+                <gui-caption ng-show="numCDT[0].codCapitalizaIntereses == 'N'" type="info" text-align="center" ng-model="estado.capitaliza"></gui-caption>
+
+                <gui-caption type="attention" text-align="center" ng-show="$program.validarFormularios()" ng-model="caption.cdtIncompleto"></gui-caption>
+
+                <div gui-collapsibles collapsible-group="third" collapsible-responsive="true">
+                    <div ng-repeat="fraccionamiento in fraccionamientos" gui-pane title="{{ 'CDT # ' +  (fraccionamiento.numero) + ' ' + ($program.validarFormularios(fraccionamiento) ? '(Faltan datos)' : '') }}"
+                      pane-initial="true">
+                        <gui-include ng-src="resources/html/views/cdt/novedades/novedadFraccionamiento/titulares.html" gui-tooltip gui-title="Ingresa los datos por cada CDT"></gui-include>
+                    </div>
+                </div>
+
+            </box>
+
+            <box ng-if="verFracciones == true && valorTotalSuma == cdtSeleccionado[0].valMontoActualOperacion && form.fraccion.$valid">
+
+                <gs-row>
+                    <gs push-right>
+                        <button gui="form-button" bg-color="alizarin" ng-disabled="form.fraccion.$valid == false || $program.validarFormularios() || !$program.validarHuellasCapturadas()" ng-click="$gui.crearCliente()">Aplicar Fraccionamiento</button>
+                    </gs>
+                </gs-row>
+
+                <gs-row ng-if="llamadoConstitucion == 1">
+                    <gs col="x-12|md-12">
+
+                        <gui-caption type="success" ng-model="mensajeConstitucion" text-align="center"></gui-caption>
+
+                    </gs>
+                </gs-row>
+
+                <gs-row ng-if="llamadoConstitucion == 2">
+                    <gs col="x-12|md-12">
+
+                        <gui-caption type="error" ng-model="mensajeConstitucion" text-align="center"></gui-caption>
+
+                    </gs>
+                </gs-row>
+            </box>
+
+        </gs>
+    </gs-row>
+    <gs-row>
+        <gs>
+            <box>
+            <gui-caption text-align="center" type="{{estado.tipo}}" ng-value="$program.validadorCapturasHuellas()" ng-model="estado.huellas"></gui-caption>
+            </box>
+        </gs>
+    </gs-row>
+
+    <gui-modal modal-active="$program.modalHuella.active" modal-title="$program.modalHuella.nombrePersona">
+
+        <app-biometric-assistant ng-model="$gui.bioCapture" casb="autenticacion" />
+
+        <gui-caption type="info" ng-model="caption.info" text-align="center"></gui-caption>
+
+    </gui-modal>
+
+</div>

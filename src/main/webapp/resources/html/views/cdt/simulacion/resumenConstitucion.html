@@ -1,0 +1,86 @@
+<div ui-view="cdt-constitucion-resumen-biometric">
+
+    <gs-row>
+        <gs>
+            <box>
+                <form>
+
+                    <header>
+                        <h3 style="color:#2980b9">Paso 3: Confirme con el(los) cliente(s) la información de apertura</h3>
+                    </header>
+
+                    <gs-row>
+
+                      <gs col="x-6" col-push="x-3">
+                        <table gui="table:table-bordered:table-summary:table-fixed" style="font-size:14px">
+                            <tbody>
+                                <tr>
+                                    <th>Valor de la inversi&oacute;n</th>
+                                    <td align="right">{{simulacion.valorInversion | currency}}</td>
+                                </tr>
+                                <tr>
+                                    <th >Plazo</th>
+                                    <td align="right">{{proyeccion.valPlazoDias ? proyeccion.valPlazoDias + ' días' : ''}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tasa E.A</th>
+                                    <td align="right">{{ (proyeccion.valTasaEfectiva && simulacion.tipoCDT.valTieneTasaVariable != 'S') ? (proyeccion.valTasaEfectiva + '%') : proyeccion.valTasaEfectiva }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Fecha vencimiento</th>
+                                    <td align="right">{{proyeccion.fecFechaVencimientoHomologado}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Total intereses después de impuestos</th>
+                                    <td align="right">{{proyeccion.valTotalInteresesNetoHomologado}}</td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2" style="color:#2980b9">
+                                    <div>
+                                        <i class="{{tituloIcono}}" color="asbestos"></i><span ng-click="$gui.cambiarValor()">{{tituloVer}}</span>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr ng-if="habilitaVista">
+                                    <th >Capitalizaci&oacute;n intereses</th>
+                                    <td align="right">{{simulacion.interes}}</td>
+                                </tr>
+                                <tr  ng-if="habilitaVista">
+                                    <th>Periodicidad pago intereses</th>
+                                    <td align="right">{{simulacion.frecuenciaDesc}}</td>
+                                </tr>
+                                <tr  ng-if="habilitaVista">
+                                    <th>Intereses despu&eacute;s de impuestos por periodo</th>
+                                    <td align="right">{{proyeccion.valNetoPeriodo | currency}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      </gs>
+
+                      <gs col="x-12|md-12">
+                          <gui-caption type="info" ng-model="caption.confirmHuella" text-align="center"></gui-caption>
+                      </gs>
+                  </gs-row>
+
+                    <gs-row>
+                        <gs>
+                            <hr />
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+                      <gs pull-left>
+                          <button gui="form-button" bg-color="asbestos" ui-sref="^">Regresar</button>
+                      </gs>
+
+                      <gs push-right>
+                          <button  gui="form-button" bg-color="alizarin" ui-sref=".biometric">Continuar</button>
+                      </gs>
+                    </gs-row>
+
+                </form>
+            </box>
+        </gs>
+    </gs-row>
+
+</div>

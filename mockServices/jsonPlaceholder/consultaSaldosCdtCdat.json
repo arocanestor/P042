@@ -1,0 +1,19 @@
+{
+   "fechaExpedicion": "2017/05/03",
+   "valorNetoUltimosInteresesLiquidados": "$35,564.00",
+   "modalidad": 2,
+   "fechaProximoVencimiento": "2018/10/28",
+   "caracterAceptacion": "B",
+   "plazo": 268,
+   "plazoRendimientos": 9,
+   "sumatoriaTasas": "5.95",
+   "numero": 43335,
+   "ultimaRetencionEfectuada": "$1,482.00",
+   "serie": "AF",
+   "codMsgRespuesta": "0",
+   "valorInicial": "$765,979.00",
+   "valorNetoPagar": "$765,980.00",
+   "ultimosRendimientosLiquidados": "$37,046.00",
+   "tipoDeNegocio": "CAPITALIZABLE",
+   "valIndicadorReinversion": 3
+}

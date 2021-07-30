@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="/WebBaseNg/resources/img/favicon.ico">
+    <title>SPA DAV</title>
+
+    <!-- SHIV -->
+    <script src="/WebBaseNg/resources/js/plugins/shiv.min.js"></script>
+
+
+    <!-- PRIOR STYLES -->
+    <style>
+        /* TIANES */
+        html {
+            overflow-y: scroll
+        }
+
+        body {
+            margin: 0;
+            font-weight: 200;
+            -webkit-text-size-adjust: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-text-size-adjust: none;
+            -moz-font-smoothing: antialiased
+        }
+
+        article,
+        aside,
+        footer,
+        header,
+        hgroup,
+        nav,
+        section {
+            display: block
+        }
+
+        dd,
+        dl,
+        dt,
+        form,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        input,
+        ol,
+        p,
+        select,
+        textarea,
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            font-size: inherit
+        }
+
+        img {
+            border: none;
+            -ms-interpolation-mode: bicubic
+        }
+
+        a {
+            text-decoration: none
+        }
+
+        input[type=checkbox] {
+            display: inline-block;
+            vertical-align: middle;
+            margin: -2px 0 0 0
+        }
+    </style>
+
+    <!-- APP STYLES -->
+    <link rel="stylesheet" type="text/css" href="/WebBaseNg/resources/css/build.min.css" />
+    <style>
+        /* CUSTOM APP STYLES */
+        [gui^="classic-kpi"] {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 10px 10px 20px 10px;
+        }
+
+        [gui^="classic-kpi"] header {
+            min-height: 60px;
+        }
+
+        [gui^="classic-kpi"] header h6 {
+            min-height: 40px;
+        }
+
+        [gui^="classic-kpi"] header i {
+            font-size: 66px !important;
+            float: none !important;
+        }
+
+        [gui^="classic-kpi"] section span {
+            font-size: 12px;
+            text-transform: none;
+            font-weight: bold;
+        }
+
+        [gui^=classic-kpi] .bloqued-kpi {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKAQMAAAC3/F3+AAAAA1BMVEUAAACnej3aAAAAAXRSTlOZyTXzhgAAAApJREFUCNdjwAsAAB4AAdpxxYoAAAAASUVORK5CYII=);
+            position: absolute;
+
+        }
+
+        [gui^=classic-kpi] .bloqued-kpi i {
+            position: absolute;
+            top: 50%;
+            margin-top: -20px;
+            left: 50%;
+            margin-left: -17px;
+            font-size: 40px;
+        }
+
+        [gui^=classic-kpi] .bloqued-kpi span {
+            position: absolute;
+            bottom: 5px;
+            margin-top: -20px;
+            right: 0;
+            left: 0;
+            padding: 0 10px;
+            font-size: 12px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div xhr gui="preloader" ng-attr-style="{{ 'display:' + (active ? 'block' : 'none') }}">
+        <div class="spinner"></div>
+    </div>
+
+    <div>
+        <!-- HEADER -->
+        <header id="header">
+            <div class="header-user">
+
+                <button float="right" gui="button" dav-buttons action="close" ng-click="close()"><i
+                        class="fa fa-sign-out-alt fa-lg"></i> Cerrar</button>
+                <button float="right" gui="button" dav-buttons action="cancel" ng-click="close()"><i
+                        class="fa fa-times fa-lg"></i> Cancelar</button>
+
+            </div>
+
+            <div class="header-title">
+                <h1>Novedades Dafuturo</h1>
+            </div>
+        </header>
+
+        <!-- BREADCRUMBS -->
+        <nav id="nav">
+            <gs-container>
+                <gs-row>
+                    <gs>
+                        <gui-breads></gui-breads>
+                    </gs>
+                </gs-row>
+            </gs-container>
+        </nav>
+
+        <!-- CONTENT -->
+        <section id="section">
+            <gs-container ui-view="main"></gs-container>
+        </section>
+
+    </div>
+
+    <!-- APP -->
+    <script async src="/WebBaseNg/resources/js/lib/requirejs/require.min.js"
+        data-main="/WebBaseNg/resources/js/main.js?v=2018-12-14"></script>
+
+</body>
+
+</html>

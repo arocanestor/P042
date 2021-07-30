@@ -1,0 +1,257 @@
+<div ui-view="novedad_main">
+
+    <gs-row>
+        <gs>
+            <hgroup gui="hgroup">
+                <div>
+                    <i class="fa {{ icon }}" color="asbestos"></i>
+                </div>
+                <div>
+                    <h1>{{ title }}</h1>
+                    <div style="float:right">
+                        <i style="font-size:14px" class="fa fa-building" color="asbestos"></i>
+                        <i style="font-size:14px" color="asbestos">Oficina: {{ codOficina || $data.oficina }}</i>
+                    </div>
+                    <h2>{{ extract }}</h2>
+                </div>
+            </hgroup>
+        </gs>
+    </gs-row>
+
+    <gs-row>
+
+        <gs>
+
+            <box>
+                <header>
+                    <h3 style="color:#2980b9">Seleccione el CDT al que se le aplicará la novedad:</h3>
+                </header>
+
+                <form name="form.consultacdt">
+                    <!-- productos creditos asociados -->
+                    <gs-row>
+                        <gs>
+                            <div style="{{cdts.length > 7 ? 'overflow-y:scroll': ''}}">
+                                <table gui="table:table-bordered:table-editable:table-narrow:table-zebra">
+                                    <thead>
+                                        <tr>
+                                            <th width="40"></th>
+                                            <th style="font-size:13px" width="160">N&uacute;mero de CDT</th>
+                                            <th style="font-size:13px" width="150">N&uacute;mero CDT Físico</th>
+                                            <th style="font-size:13px" width="100">Fecha vencimiento</th>
+                                            <th style="font-size:13px" width="140" align="center">Valor de la inversión
+                                            </th>
+                                            <th style="font-size:13px" width="100">Plazo <br>(en días)</th>
+                                            <th style="font-size:13px" width="100">Tasa (E.A.)</th>
+                                            <th style="font-size:13px" width="140">Intereses pendientes <br>por pagar
+                                            </th>
+                                            <th style="font-size:13px">Subestado</th>
+                                            <th style="font-size:13px" width="110">Tipo de manejo</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div style="{{cdts.length > 7 ? 'height: 200px;overflow-y:auto': ''}}">
+                                <table gui="table:table-bordered:table-editable:table-narrow:table-zebra">
+                                    <tbody>
+                                        <tr ng-repeat="cdt in cdts" ng-class="{active: cdt.check}">
+                                            <td width="40" td-form>
+                                                <label><input type="checkbox" check-id="{{ index }}"
+                                                        ng-model="cdt.check" value="true"
+                                                        ng-change="$gui.guardarInfoCheck(cdt.check)"></label>
+                                            </td>
+                                            <td style="font-size:13px" width="160" text-align="center">
+                                                {{cdt.valNumeroCDT}}</td>
+                                            <td style="font-size:13px" width="150" text-align="center">
+                                                {{cdt.valNumeroPreimpreso.toString() ? cdt.valNumeroPreimpreso : ' -- -- -- ' }}
+                                            </td>
+                                            <td style="font-size:13px" width="100" text-align="center">
+                                                {{cdt.fecVencimientoOperacionHomologado}}</td>
+                                            <td style="font-size:13px" width="140" text-align="right">
+                                                {{cdt.valMontoActualOperacionHomologado}}</td>
+                                            <td style="font-size:13px" width="100" text-align="center">
+                                                {{cdt.valPlazoEnDias}}</td>
+                                            <td style="font-size:13px" width="100" text-align="center">
+                                                {{cdt.valTasaEfectiva + '%'}}</td>
+                                            <td style="font-size:13px" width="140" text-align="right">
+                                                {{cdt.valRendimientoXPagaNeto | davCurrency | currency }}</td>
+                                            <td style="font-size:13px" text-align="center">
+                                                {{cdt.subEstado.toUpperCase() || ' -- -- -- ' }}</td>
+                                            <td style="font-size:13px" width="110" text-align="center">
+                                                {{cdt.valTipoManejo}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <table gui="table:table-bordered:table-editable:table-narrow:table-zebra">
+                                <tfoot>
+                                    <tr>
+                                        <td> Registros Seleccionados: {{ (cdts | filter : {check: true}).length }} </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </gs>
+
+                        <gs col="x-12|md-12">
+                            <gui-caption type="info" ng-model="caption.intereses" text-align="center"></gui-caption>
+                        </gs>
+
+                    </gs-row>
+
+                </form>
+
+            </box>
+
+        </gs>
+    </gs-row>
+
+    <gs-row>
+
+        <gs>
+
+            <box>
+                <header>
+                    <h3 style="color:#2980b9">Recuerde las novedades que puede realizar:</h3>
+                </header>
+
+                <gs-row>
+                    <gs>
+                        <div gui="wysiwyg" ng-bind-html="textos.texto2"></div>
+                    </gs>
+                </gs-row>
+                <gs-row>
+                    <gs col="x-3|md-6">
+                        <label gui="label">Seleccione la novedad a aplicar:
+                            <select gui="input-control" ng-init="novedad.tipo = ''" ng-model="novedad.tipo"
+                                ng-disabled="(cdts | filter : {check: true}).length == 0" gui-validate
+                                rules='{"display":"Novedad a aplicar", "required": true}'
+                                ng-change="$gui.abrirNovedad()">
+                                <option ng-disabled="false" value="">Seleccione..</option>
+                                <option ng-repeat="lov in lovs.lov_cdt_novedades" ng-disabled="
+                            lov.codigo == '1' ? ( ( (cdts | filter : {check:true}) | filter: {valEstado:'VEN'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoLegal:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoLegal:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoNovedades:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoNovedades:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valDescAccionSiguiente:'POR CANCELAR'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valProductoEnGarantia:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valProductoEnGarantia:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valTipoDeposito:'CDAT'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: $gui.greaterThan).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {mostrarCDT: false}).length > 0 ||
+                            ( cdts | filter : {check: true}).length > 1) :
+                            lov.codigo == '2' ? ( ( (cdts | filter : {check:true}) | filter: {valEstado:'VEN'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoLegal:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoLegal:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoNovedades:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoNovedades:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valDescAccionSiguiente:'POR CANCELAR'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valProductoEnGarantia:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valProductoEnGarantia:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valTipoDeposito:'CDAT'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: $gui.greaterThan).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {mostrarCDT: false}).length > 0 ||
+                            ( cdts | filter : {check: true}).length > 1) :
+                            lov.codigo == '3' ? ( ( (cdts | filter : {check:true}) | filter: {valEstado:'VEN'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoLegal:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoLegal:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoNovedades:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoNovedades:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valDescAccionSiguiente:'POR CANCELAR'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valProductoEnGarantia:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valProductoEnGarantia:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valTipoDeposito:'CDAT'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: $gui.greaterThan).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {mostrarCDT: false}).length > 0 ||
+                            ( cdts | filter : {check: true}).length <= 1) :
+                            lov.codigo == '4' ? ( ( (cdts | filter : {check:true}) | filter: {valEstado:'VEN'}).length > 0 ||
+                            ( (cdts | filter : {check:true})[0].codCapitalizaIntereses !== 'N' ) ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoLegal:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoLegal:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoNovedades:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoNovedades:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valDescAccionSiguiente:'POR CANCELAR'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valProductoEnGarantia:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valProductoEnGarantia:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valTipoDeposito:'CDAT'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: $gui.greaterThan).length > 0 ||
+                            ( cdts | filter : {check: true}).length > 1) :
+                            lov.codigo == '5' ? ( ( (cdts | filter : {check:true}) | filter: {valBloqueoLegal:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoLegal:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valDescAccionSiguiente:'POR CANCELAR'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valProductoEnGarantia:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valProductoEnGarantia:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valTipoDeposito:'CDAT'}).length > 0 ||
+                            ( cdts | filter : {check: true}).length > 1) :
+                            lov.codigo == '6' ? ( ( (cdts | filter : {check:true}) | filter: {valEstado:'VEN'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoLegal:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoLegal:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true})[0].fecVencimientoOperacionHomologado == fechaSistema ) ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoNovedades:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valBloqueoNovedades:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valDescAccionSiguiente:'POR CANCELAR'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valProductoEnGarantia:'S'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valProductoEnGarantia:'s'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {valTipoDeposito:'CDAT'}).length > 0 ||
+                            ( (cdts | filter : {check:true}) | filter: {mostrarCDT: false}).length > 0 ||
+                            ( cdts | filter : {check: true}).length > 1) : false
+                            " value="{{lov.codigo}}">{{lov.desc}}</option>
+                            </select>
+                        </label>
+                    </gs>
+
+                    <gs col="x-2|md-6">
+                        <label gui="label">&nbsp;
+                            <button gui="form-button" ng-disabled="!novedad.tipo || form.novedades.$invalid"
+                                bg-color="alizarin" ng-click="$gui.llamarNovedad()">Continuar</button>
+                        </label>
+                    </gs>
+
+                </gs-row>
+                <gs-row>
+                    <gs>
+                        <hr />
+                    </gs>
+                </gs-row>
+                <form name="form.novedades">
+
+                    <gs-row>
+
+                        <gs col="x-4|md-4">
+                            <label gui="label">Digite el código de agente/vendedor en caso de ser
+                                un referido:
+                                <input gui="input-control" chars="only-numbers" name="agente_vendedor-1"
+                                    ng-model="$data.codAgenteVendedor" gui-validate rules='{"required": true}'
+                                    maxlength="15" text-align="left" />
+                            </label>
+                        </gs>
+                        <gs col="x-1|md-1">
+                            <label gui="label">&nbsp;
+                                <button ng-click="$data.codAgenteVendedor = $data.codAgenteVendedorRecovery;
+                                    $data.codAgenteVendedorCopy = $data.codAgenteVendedorRecovery;" gui-tooltip
+                                    gui-title="{{'Restaurar Información'}}" ng-init="hover = false"
+                                    ng-mouseover="hover = true" ng-mouseleave="hover = false" gui="form-button"
+                                    bg-color="alizarin"><i
+                                        class="fa {{ hover ? 'fa-spin' : ''}} fa-sync-alt"></i></button>
+                            </label>
+                        </gs>
+
+                    </gs-row>
+
+                    <gs-row>
+                        <gs col="x-4|md-4">
+                            <label gui="label">Confirme el código agente vendedor:
+                                <input gui="input-control" chars="only-numbers" name="agente_vendedor-2"
+                                    ng-model="$data.codAgenteVendedorCopy" gui-validate
+                                    rules='{"required": true, "equal":"{{$data.codAgenteVendedor}}"}' maxlength="15"
+                                    text-align="left" />
+                            </label>
+                        </gs>
+                    </gs-row>
+                </form>
+            </box>
+
+        </gs>
+    </gs-row>
+
+</div>

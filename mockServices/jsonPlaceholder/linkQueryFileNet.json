@@ -1,0 +1,87 @@
+{
+  "codMsgRespuesta": "0",
+  "caracterAceptacion": "B",
+  "contextoRespuesta": {
+    "resultadoTransaccion": {
+      "codEstadoTransaccion": "1",
+      "valCaracterAceptacion": "B",
+      "valNumeroAprobacion": null,
+      "idTransaccion": null,
+      "fecOperacion": 1545319524761
+    },
+    "error": null,
+    "paginacion": null
+  },
+  "listaDocumentos": [{
+    "documentos": [{
+      "propiedads": [{
+        "valLlave": "tipoDocumento",
+        "valValor": "AprobacionCDT"
+      }, {
+        "valLlave": "fechaExpedicion",
+        "valValor": "Thu Dec 20 10:25:13 COT 2018"
+      }, {
+        "valLlave": "numeroIdentificacion",
+        "valValor": "52005"
+      }, {
+        "valLlave": "tipoIdentificacion",
+        "valValor": "1"
+      }, {
+        "valLlave": "DateCreated",
+        "valValor": "Thu Dec 20 10:25:13 COT 2018"
+      }, {
+        "valLlave": "Id",
+        "valValor": "{F471250C-A47F-4A11-B3B1-0FA99B9ED403}"
+      }, {
+        "valLlave": "documentTitle",
+        "valValor": "0981CF0300036792_FraccionarCDT_20181220103037.pdf"
+      }]
+    }, {
+      "propiedads": [{
+        "valLlave": "tipoDocumento",
+        "valValor": "AprobacionCDT"
+      }, {
+        "valLlave": "fechaExpedicion",
+        "valValor": "Thu Dec 20 10:23:23 COT 2018"
+      }, {
+        "valLlave": "numeroIdentificacion",
+        "valValor": "52005"
+      }, {
+        "valLlave": "tipoIdentificacion",
+        "valValor": "1"
+      }, {
+        "valLlave": "DateCreated",
+        "valValor": "Thu Dec 20 10:23:23 COT 2018"
+      }, {
+        "valLlave": "Id",
+        "valValor": "{1A466D85-5D1E-421A-BCC3-A16A4B622C54}"
+      }, {
+        "valLlave": "documentTitle",
+        "valValor": "0981CF0300036792_FraccionarCDT_20181219153037.pdf"
+      }]
+    }, {
+      "propiedads": [{
+        "valLlave": "tipoDocumento",
+        "valValor": "AprobacionCDT"
+      }, {
+        "valLlave": "fechaExpedicion",
+        "valValor": null
+      }, {
+        "valLlave": "numeroIdentificacion",
+        "valValor": "52005"
+      }, {
+        "valLlave": "tipoIdentificacion",
+        "valValor": "1"
+      }, {
+        "valLlave": "DateCreated",
+        "valValor": "Wed Dec 19 15:30:38 COT 2018"
+      }, {
+        "valLlave": "Id",
+        "valValor": "{3F38C194-52EE-488F-B45F-AEC0A27AB243}"
+      }, {
+        "valLlave": "documentTitle",
+        "valValor": "0981CF0300036792_FraccionarCDT_20181219153037.pdf"
+      }]
+    }]
+  }]
+}

@@ -1,0 +1,547 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<wsdl:definitions
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:ns1="http://services.evaluadorlight.piac.davivienda.com"
+    name="EvaluadorService"
+    targetNamespace="http://services.evaluadorlight.piac.davivienda.com">
+    <wsdl:types>
+        <xs:schema
+            xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://services.evaluadorlight.piac.davivienda.com"
+            attributeFormDefault="unqualified"
+            elementFormDefault="unqualified"
+            targetNamespace="http://services.evaluadorlight.piac.davivienda.com">
+            <xs:element name="detalleError" type="tns:detalleError"/>
+            <xs:element name="mensajeError" type="tns:mensajeError"/>
+            <xs:element name="solicitarEvaluacionLightResponse" type="tns:solicitarEvaluacionLightResponse"/>
+            <xs:element name="solicitarEvaluacionLigth" type="tns:solicitarEvaluacionLigth"/>
+            <xs:complexType name="solicitarEvaluacionLigth">
+                <xs:sequence>
+                    <xs:element name="Solicitud" type="tns:SolicitudType"/>
+                    <xs:element name="Solicitantes" type="tns:SolicitantesType"/>
+                    <xs:element name="Productos" type="tns:ListaProductos"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SolicitudType">
+                <xs:sequence>
+                    <xs:element name="numeroSolicitud" type="xs:string"/>
+                    <xs:element name="numeroSolicitantes" type="xs:int"/>
+                    <xs:element name="numeroProductosSolicitados" type="xs:int"/>
+                    <xs:element name="fechaSolicitud" type="xs:date"/>
+                    <xs:element minOccurs="0" name="agente" type="xs:string"/>
+                    <xs:element minOccurs="0" name="oficina" type="xs:string"/>
+                    <xs:element minOccurs="0" name="canal" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ciudad" type="xs:string"/>
+                    <xs:element minOccurs="0" name="departamento" type="xs:int"/>
+                    <xs:element minOccurs="0" name="flagReferido" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fechaReferido" type="xs:date"/>
+                    <xs:element minOccurs="0" name="agenteReferido" type="xs:string"/>
+                    <xs:element minOccurs="0" name="oficinaReferido" type="xs:string"/>
+                    <xs:element minOccurs="0" name="canalReferido" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ciudadReferido" type="xs:string"/>
+                    <xs:element minOccurs="0" name="tipoCiudad" type="xs:string"/>
+                    <xs:element minOccurs="0" name="flagCampanaFirme" type="xs:string"/>
+                    <xs:element minOccurs="0" name="documentosZonaGris" type="xs:string"/>
+                    <xs:element minOccurs="0" name="estadoOportunidad" type="xs:string"/>
+                    <xs:element minOccurs="0" name="grupoProductoRPRBuro" type="xs:string"/>
+                    <xs:element minOccurs="0" name="grupoSubproductoRPRBuro" type="xs:string"/>
+                    <xs:element minOccurs="0" name="atributoSolicitud" type="tns:atributoSolicitudType"/>
+                    <xs:element minOccurs="0" name="flagFraudeVendedor" type="xs:string"/>
+                    <xs:element minOccurs="0" name="flagFraudeCentroNegocio" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="atributoSolicitudType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Atributos" type="tns:atributoType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="atributoType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="nombreAtributo" type="xs:string"/>
+                    <xs:element minOccurs="0" name="valorAtributo" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SolicitantesType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Solicitante" type="tns:SolicitanteType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SolicitanteType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ciudadResidencia" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deptoResidencia" type="xs:int"/>
+                    <xs:element minOccurs="0" name="edad" type="xs:int"/>
+                    <xs:element minOccurs="0" name="esFuncionarioBanco" type="xs:string"/>
+                    <xs:element minOccurs="0" name="estadoCivil" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fechaExpCedula" type="xs:date"/>
+                    <xs:element name="numeroIdentificacion" type="xs:string"/>
+                    <xs:element name="primerApellido" type="xs:string"/>
+                    <xs:element minOccurs="0" name="profesion" type="xs:string"/>
+                    <xs:element minOccurs="0" name="relacionTitular" type="xs:int"/>
+                    <xs:element minOccurs="0" name="segmentoComercialN1" type="xs:int"/>
+                    <xs:element minOccurs="0" name="segmentoComercialN2" type="xs:int"/>
+                    <xs:element minOccurs="0" name="segmentoComercialN3" type="xs:int"/>
+                    <xs:element minOccurs="0" name="tipoCiudad" type="xs:string"/>
+                    <xs:element name="tipoIdentificacion" type="xs:int"/>
+                    <xs:element name="tipoPersona" type="xs:string"/>
+                    <xs:element minOccurs="0" name="tipoResidencia" type="xs:string"/>
+                    <xs:element name="tipoSolicitante" type="xs:int"/>
+                    <xs:element minOccurs="0" name="documentosZonaIngresos" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ciudadExpedicionCedula" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deptoExpedicionCedula" type="xs:int"/>
+                    <xs:element minOccurs="0" name="estrato" type="xs:int"/>
+                    <xs:element minOccurs="0" name="genero" type="xs:string"/>
+                    <xs:element minOccurs="0" name="nacionalidad" type="xs:int"/>
+                    <xs:element minOccurs="0" name="pep" type="xs:string"/>
+                    <xs:element minOccurs="0" name="decisionListasRestrictivas" type="xs:string"/>
+                    <xs:element minOccurs="0" name="causalListasRestricitivas" type="xs:string"/>
+                    <xs:element minOccurs="0" name="flagFraudeCliente" type="xs:string"/>
+                    <xs:element minOccurs="0" name="vigenciaExamenMedico" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="vigenciaExtraprima" type="xs:date"/>
+                    <xs:element minOccurs="0" name="fechaNacimiento" type="xs:date"/>
+                    <xs:element minOccurs="0" name="flagAsegurable" type="xs:string"/>
+                    <xs:element minOccurs="0" name="porcentajeAsegurabilidad" type="xs:string"/>
+                    <xs:element minOccurs="0" name="flagImpactadoFATCA" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ingresosPreaprobacion" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="ingresoAnalista" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="metodoExtractos" type="tns:MetodoExtractosType"/>
+                    <xs:element minOccurs="0" name="metodoDeclRenta" type="tns:MetodoDeclRentaType"/>
+                    <xs:element minOccurs="0" name="metodoInterno" type="tns:MetodoInternoType"/>
+                    <xs:element minOccurs="0" name="metodoDeclarado" type="tns:MetodoDeclaradoType"/>
+                    <xs:element minOccurs="0" name="metodoQuanto" type="tns:MetodoQuantoType"/>
+                    <xs:element minOccurs="0" name="metodoLibranza" type="tns:MetodoLibranzaType"/>
+                    <xs:element minOccurs="0" name="metodoCartaLaboral" type="tns:MetodoCartaLaboralType"/>
+                    <xs:element minOccurs="0" name="metodoCertificados" type="tns:MetodoCertificadosType"/>
+                    <xs:element minOccurs="0" name="actividadesLaborales" type="tns:ActividadesLaboralesType"/>
+                    <xs:element minOccurs="0" name="atributosSolicitante" type="tns:AtributosSolicitanteType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MetodoExtractosType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ingresos" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="ingresosMotor" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="saldoPromedio" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MetodoDeclRentaType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="formatoDeclaracion" type="xs:int"/>
+                    <xs:element minOccurs="0" name="costos" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="impuesto" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="ingresos" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="rentaGravableAlt" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="rentaLiquida" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="patrimonioBruto" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="patrimonioLiquido" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MetodoInternoType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="fechaIngresoCertificado" type="xs:date"/>
+                    <xs:element minOccurs="0" name="ingesoTotal" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MetodoDeclaradoType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ingresosEmpleado" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="ingesoIndependiente" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="ingresosPensionado" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MetodoQuantoType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="esperado" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="maximo" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="minimo" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MetodoLibranzaType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="deducciones" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="ingresosAdicionales" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="ingresosBasicos" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="otrosDescuentos" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MetodoCartaLaboralType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ingresoFijo" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="ingresoPromedio" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="ingresoVariable" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MetodoCertificadosType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="MetodoCertificado" type="tns:MetodoCertificadoType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MetodoCertificadoType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="numeroDeMetodoCertificado" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ingreso" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ActividadesLaboralesType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="ActividadLaboral" type="tns:ActividadLaboralType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ActividadLaboralType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="actividadLaboral" type="xs:string"/>
+                    <xs:element minOccurs="0" name="flagPrincipal" type="xs:string"/>
+                    <xs:element minOccurs="0" name="actividadEconomica" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fechaInicio" type="xs:date"/>
+                    <xs:element minOccurs="0" name="fechaFin" type="xs:date"/>
+                    <xs:element minOccurs="0" name="tipoContrato" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cargo" type="xs:string"/>
+                    <xs:element minOccurs="0" name="carrera" type="xs:string"/>
+                    <xs:element minOccurs="0" name="nitEmpresa" type="xs:string"/>
+                    <xs:element minOccurs="0" name="flagFraudeEmpresa" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mesesActivo" type="xs:int"/>
+                    <xs:element minOccurs="0" name="mesesCesante" type="xs:int"/>
+                    <xs:element minOccurs="0" name="anoQueCursa" type="xs:int"/>
+                    <xs:element minOccurs="0" name="universidad" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AtributosSolicitanteType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="AtributoSolicitante" type="tns:AtributoSolicitanteType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AtributoSolicitanteType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="nombreAtributo" type="xs:string"/>
+                    <xs:element minOccurs="0" name="valorAtributo" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ListaProductos">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Producto" type="tns:ProductoType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ProductoType">
+                <xs:sequence>
+                    <xs:element name="codIdProducto" type="xs:string"/>
+                    <xs:element name="tipo" type="xs:string"/>
+                    <xs:element name="familia" type="xs:string"/>
+                    <xs:element minOccurs="0" name="nivelesProducto" type="tns:NivelesProductoType"/>
+                    <xs:element name="amortizacion" type="xs:string"/>
+                    <xs:element name="moneda" type="xs:string"/>
+                    <xs:element name="tipoTasa" type="xs:string"/>
+                    <xs:element minOccurs="0" name="tipoCobertura" type="xs:string"/>
+                    <xs:element minOccurs="0" name="plazoSolicitado" type="xs:int"/>
+                    <xs:element minOccurs="0" name="montoSolicitado" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="opcionCompra" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="flagReferido" type="xs:string"/>
+                    <xs:element minOccurs="0" name="libranza" type="xs:int"/>
+                    <xs:element minOccurs="0" name="codigoConvenio" type="xs:int"/>
+                    <xs:element minOccurs="0" name="tipoConvenio" type="xs:string"/>
+                    <xs:element minOccurs="0" name="codigoConvenioClubesYColegios" type="xs:string"/>
+                    <xs:element minOccurs="0" name="prioridad" type="xs:int"/>
+                    <xs:element minOccurs="0" name="flagMultiplesSolicitantes" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cuotaSolicitadaSimulador" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="momentoAutorizacionLibranza" type="xs:int"/>
+                    <xs:element minOccurs="0" name="productoNovedadFM" type="xs:string"/>
+                    <xs:element minOccurs="0" name="garantia" type="tns:GarantiaType"/>
+                    <xs:element minOccurs="0" name="condicionesTDC" type="tns:CondicionesTDCType"/>
+                    <xs:element minOccurs="0" name="seguros" type="tns:SegurosType"/>
+                    <xs:element minOccurs="0" name="catalogo" type="tns:CatalogoType"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="productoCompra" nillable="true" type="tns:ProductoCompraType"/>
+                    <xs:element minOccurs="0" name="productoAsociado" type="tns:ProductoAsociadoType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="NivelesProductoType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="NivelProducto" type="tns:NivelProductoType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="NivelProductoType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="numeroNivel" type="xs:string"/>
+                    <xs:element minOccurs="0" name="valorNivel" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GarantiaType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="tipoGarantia" type="xs:string"/>
+                    <xs:element minOccurs="0" name="matriculaGarantiaExistente" type="xs:string"/>
+                    <xs:element minOccurs="0" name="nivelesGarantia" type="tns:NivelesGarantiaType"/>
+                    <xs:element minOccurs="0" name="valorAutorizado" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="valorGarantia" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="fechaAvaluo" type="xs:date"/>
+                    <xs:element minOccurs="0" name="montoSolicitudesCurso" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="valorAvaluo" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="valorComercial" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="valorGarantiaReportado" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="atributosGarantia" type="tns:AtributosGarantiaType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="NivelesGarantiaType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="NivelGarantia" type="tns:NivelGarantiaType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="NivelGarantiaType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="numeroNivel" type="xs:int"/>
+                    <xs:element minOccurs="0" name="valorNivel" type="xs:string"/>
+                    <xs:element minOccurs="0" name="valorVariable" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AtributosGarantiaType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Atributo" type="tns:atributoType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CondicionesTDCType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="banda" type="xs:int"/>
+                    <xs:element minOccurs="0" name="color" type="xs:int"/>
+                    <xs:element minOccurs="0" name="limiteSobrecupo" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SegurosType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Seguro" type="tns:SeguroType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SeguroType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="tipoSeguro" type="xs:string"/>
+                    <xs:element minOccurs="0" name="tasaFinal" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="flagSeguro" type="xs:string"/>
+                    <xs:element minOccurs="0" name="datosSeguro" type="tns:DatosSeguroType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DatosSeguroType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="secuenciaDeDatosSeguro" type="xs:string"/>
+                    <xs:element minOccurs="0" name="tasaFinal" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="extraPrima" type="tns:ExtraPrimaType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ExtraPrimaType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="secuenciaExtraprima" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="valorExtraprima" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CatalogoType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="tasaEvaluacionMinimo" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="tasaEvaluacionMaximo" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="plazoMinimo" type="xs:int"/>
+                    <xs:element minOccurs="0" name="plazoMaximo" type="xs:int"/>
+                    <xs:element minOccurs="0" name="montoMinimo" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="montoMaximo" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="tasaUtilizacion" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="tasaCobertura" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="tasaPeriodoGracia" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="tasaDiferido" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="plazoCobertura" type="xs:int"/>
+                    <xs:element minOccurs="0" name="plazoPeriodoGracia" type="xs:int"/>
+                    <xs:element minOccurs="0" name="plazoDiferido" type="xs:int"/>
+                    <xs:element minOccurs="0" name="pcteDiferido" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="pcteOpcionCompraMaximo" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="redondeo" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="tasaEvaluacionAuxiliar" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="periodicidadPagoNormal" type="xs:int"/>
+                    <xs:element minOccurs="0" name="periodicidadPagoExtra" type="xs:int"/>
+                    <xs:element minOccurs="0" name="montoPagoExtra" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="plazoInicioPagoExtra" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ProductoCompraType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="indExterno" type="xs:string"/>
+                    <xs:element minOccurs="0" name="codigoProducto" type="xs:string"/>
+                    <xs:element minOccurs="0" name="codigoSubProducto" type="xs:string"/>
+                    <xs:element minOccurs="0" name="montoDesembolsado" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="saldoActual" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="cuotaActual" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ProductoAsociadoType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="saldoProductoBase" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="fechaAperturaProductoBase" type="xs:date"/>
+                    <xs:element minOccurs="0" name="montoProductoBase" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="solicitarEvaluacionLightResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="solicitud" nillable="true" type="tns:SolicitudRespType"/>
+                    <xs:element minOccurs="0" name="estadoSolicitud" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="descripcionEstadoSolicitud" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="errores">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="error" type="tns:detalleError"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SolicitudRespType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="numeroSolicitud" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fechaEvaluacion" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="flagCampanaFirme" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="decisionComportamiento" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="decisionEndeudamiento" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="decisionOtorgamiento" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="nivelDeAtribucion" nillable="true" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="nivelDeAtribucionTasa" nillable="true" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="flagResolucionCasos" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="decisionSolicitud" nillable="true" type="tns:DecisionSolicitudType"/>
+                    <xs:element minOccurs="0" name="flagsAdicionales" nillable="true" type="tns:FlagsAdicionalesType"/>
+                    <xs:element minOccurs="0" name="flagsRequiereVerificacion" nillable="true" type="tns:FlagsRequiereVerificacionType"/>
+                    <xs:element minOccurs="0" name="productos" nillable="true" type="tns:ProductosType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DecisionSolicitudType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="decisionCategory" type="xs:string"/>
+                    <xs:element minOccurs="0" name="decisionText" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sortedReasonCodeTable" type="tns:SortedReasonCodeTableType"/>
+                    <xs:element minOccurs="0" name="scoreSolicitud" type="tns:ScoreSolicitudType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SortedReasonCodeTableType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="I1" type="xs:string"/>
+                    <xs:element minOccurs="0" name="I2" type="xs:string"/>
+                    <xs:element minOccurs="0" name="I3" type="xs:string"/>
+                    <xs:element minOccurs="0" name="I4" type="xs:string"/>
+                    <xs:element minOccurs="0" name="I5" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ScoreSolicitudType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="score" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="FlagsAdicionalesType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="FlagAdicional" type="tns:FlagAdicionalType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="FlagAdicionalType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="numeroDeFlagAdicional" type="xs:int"/>
+                    <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+                    <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="FlagsRequiereVerificacionType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="FlagRequiereVerificacion" type="tns:FlagRequiereVerificacionType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="FlagRequiereVerificacionType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="secuenciaFlagRequiereVerificacion" type="xs:string"/>
+                    <xs:element minOccurs="0" name="flagRequiereVerificacion" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ProductosType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Producto" type="tns:ProductoRespType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ProductoRespType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="decisionComportamiento" type="xs:string"/>
+                    <xs:element minOccurs="0" name="decisionEndeudamiento" type="xs:string"/>
+                    <xs:element minOccurs="0" name="decisionOtorgamiento" type="xs:string"/>
+                    <xs:element minOccurs="0" name="idProducto" type="xs:string"/>
+                    <xs:element minOccurs="0" name="montoMaximo" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="montoMaximoContraoferta" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="montoMaximoSinCobertura" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="montoMaximoSombra" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="aprobacion" type="tns:AprobacionType"/>
+                    <xs:element minOccurs="0" name="scoreSolicitantes" type="tns:ScoreSolicitantesType"/>
+                    <xs:element minOccurs="0" name="politicasProd" type="tns:PoliticasProdType"/>
+                    <xs:element minOccurs="0" name="scoreProd" type="tns:ScoreProdType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AprobacionType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="banda" type="xs:int"/>
+                    <xs:element minOccurs="0" name="color" type="xs:int"/>
+                    <xs:element minOccurs="0" name="limiteSobrecupo" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="montoAprobado" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="montoAprobadoSinCobertura" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="plazoAprobado" type="xs:int"/>
+                    <xs:element minOccurs="0" name="plazoAprobadoSinCobertura" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="sistemaAprobadoSinCobertura" type="xs:int"/>
+                    <xs:element minOccurs="0" name="valorGarantiaMinimo" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="calificacionOriginacion" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ScoreSolicitantesType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="ScoreSolicitante" type="tns:ScoreSolicitanteType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ScoreSolicitanteType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="secuenciaScoreSolicitante" type="xs:int"/>
+                    <xs:element minOccurs="0" name="scoreSolicitante" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="PoliticasProdType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="decisionCategory" type="xs:string"/>
+                    <xs:element minOccurs="0" name="decisionText" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sortedReasonCodeTable" type="tns:SortedReasonCodeTableType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ScoreProdType">
+                <xs:sequence>
+                    <xs:element name="score" type="xs:float"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="detalleError">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+                    <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="mensajeError">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="detalleRespuesta" type="xs:anyType"/>
+                    <xs:element minOccurs="0" name="errores">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="error" type="tns:detalleError"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="sessionType" nillable="true" type="xs:string"/>
+            <xs:element name="SolicitarEvaluacionLightFault" nillable="true" type="tns:mensajeError"/>
+            <xs:element name="solicitarEvaluacionLight" nillable="true" type="tns:solicitarEvaluacionLigth"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="solicitarEvaluacionLight">
+        <wsdl:part element="ns1:sessionType" name="sessionType"/>
+        <wsdl:part element="ns1:solicitarEvaluacionLight" name="solicitarEvaluacionLight"/>
+    </wsdl:message>
+    <wsdl:message name="solicitarEvaluacionLightResponse">
+        <wsdl:part element="ns1:solicitarEvaluacionLightResponse" name="solicitarEvaluacionLightResponse"/>
+    </wsdl:message>
+    <wsdl:message name="SolicitarEvaluacionLightFault">
+        <wsdl:part element="ns1:SolicitarEvaluacionLightFault" name="SolicitarEvaluacionLightFault"/>
+    </wsdl:message>
+    <wsdl:portType name="EvaluadorService">
+        <wsdl:operation name="solicitarEvaluacionLight">
+            <wsdl:input message="ns1:solicitarEvaluacionLight" name="solicitarEvaluacionLight"/>
+            <wsdl:output message="ns1:solicitarEvaluacionLightResponse" name="solicitarEvaluacionLightResponse"/>
+            <wsdl:fault message="ns1:SolicitarEvaluacionLightFault" name="SolicitarEvaluacionLightFault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,115 @@
+{
+  "382": [
+    {
+      "codigo": "1",
+      "desc": "Novedad a Cuenta Retiros"
+    },
+    {
+      "codigo": "2",
+      "desc": "Novedades Cuentas Asociadas"
+    },    
+    {
+      "codigo": "3",
+      "desc": "Programación de Retiros"
+    },
+    {
+      "codigo": "4",
+      "desc": "Novedad Aportes"
+    },
+    {
+      "codigo": "5",
+      "desc": "Traslado de Portafolios"
+    },
+    {
+      "codigo": "6",
+      "desc": "Seguros"
+    }
+    
+  ],
+  "378": [
+    {
+      "codigo": "01",
+      "desc": "Programación Retiro Parcial"
+    },
+    {
+      "codigo": "02",
+      "desc": "Programación Retiro de Rendimientos"
+    },
+    {
+      "codigo": "03",
+      "desc": "Programación Retiro Periódico Fijo"
+    },
+    {
+      "codigo": "04",
+      "desc": "Programación Retiro Total sin Cancelación"
+    },
+    {
+      "codigo": "05",
+      "desc": "Programación Retiro Total con Cancelación"
+    }
+  ],
+  "379": [
+    {
+      "codigo": "4",
+      "desc": "Mensual"
+    },
+    {
+      "codigo": "8",
+      "desc": "Bimestral"
+    },
+    {
+      "codigo": "5",
+      "desc": "Trimestral"
+    }
+  ],
+  "380": [
+    {
+      "codigo": "1",
+      "desc": "Mejor Oferta"
+    },
+    {
+      "codigo": "2",
+      "desc": "Se cumplió el objetivo de ahorro/inversión"
+    },
+    {
+      "codigo": "3",
+      "desc": "Negocio"
+    },
+    {
+      "codigo": "4",
+      "desc": "Mal Servicio"
+    },
+    {
+      "codigo": "5",
+      "desc": "Crédito Hipotecario aprobado en el Banco u otra Entidad"
+    },
+    {
+      "codigo": "6",
+      "desc": "Traslado a cuenta AFC"
+    },
+    {
+      "codigo": "7",
+      "desc": "Rentabilidad muy baja"
+    },
+    {
+      "codigo": "8",
+      "desc": "Productos no Aprobados"
+    },
+    {
+      "codigo": "9",
+      "desc": "Unificación del Portafolio en otra entidad"
+    },
+    {
+      "codigo": "10",
+      "desc": "Motivos Personales"
+    },
+    {
+      "codigo": "11",
+      "desc": "Otros"
+    },
+    {
+      "codigo": "12",
+      "desc": "Prueba"
+    }
+  ]
+}

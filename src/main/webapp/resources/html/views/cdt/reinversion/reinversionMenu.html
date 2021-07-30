@@ -1,0 +1,123 @@
+<div ui-view="simulacion-reinversion">
+
+    <gs-row>
+        <gs>
+            <hgroup gui="hgroup">
+                <div>
+                    <i class="fa {{ icon }}" color="asbestos"></i>
+                </div>
+                <div>
+                    <h1>{{ title }}</h1>
+                    <div style="float:right">
+                        <i style="font-size:14px" class="fa fa-building" color="asbestos"></i>
+                        <i style="font-size:14px" color="asbestos">Oficina: {{ codOficina || $data.oficina }}</i>
+                    </div>
+                    <h2>{{ extract }}</h2>
+                </div>
+            </hgroup>
+        </gs>
+    </gs-row>
+
+    <gs-row ng-show="caption.listas.status">
+        <gs>
+            <box>
+                <gs-row>
+                    <gs>
+                        <gui-caption type="{{ caption.listas.status }}" ng-model="caption.listas.content"
+                            text-align="center"></gui-caption>
+                    </gs>
+
+                    <gs ng-show="caption.confirmacionNic.status">
+
+                        <gui-caption type="{{ caption.confirmacionNic.status }}"
+                            ng-model="caption.confirmacionNic.content" text-align="center"></gui-caption>
+
+                    </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+
+
+
+    <gs-row ng-show="cdts.length != 0">
+
+        <gs>
+
+            <box>
+                <header>
+                    <h3 style="color:#2980b9">Seleccione el CDT que el cliente quiere reinvertir:</h3>
+                </header>
+
+                <form name="form.consultacdt">
+                    <!-- productos creditos asociados -->
+                    <gs-row>
+                        <gs>
+
+                            <table gui="table:table-bordered:table-editable:table-zebra">
+                                <thead>
+                                    <tr>
+                                        <th width="40"></th>
+                                        <th>N&uacute;mero de CDT</th>
+                                        <th>N&uacute;mero CDT físico</th>
+                                        <th>Fecha vencimiento</th>
+                                        <th width="150">Valor inicial de la inversión</th>
+                                        <th width="150">Plazo (en días)</th>
+                                        <th width="120">Tasa (E.A.)</th>
+                                        <th width="200">Intereses pendientes<br>por pagar</th>
+                                        <th>Subestado</th>
+                                        <th>Tipo de manejo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-show="caption.listas.status !== 'error'" ng-repeat="cdt in cdts">
+                                        <td>
+                                            <label><input type="radio" ng-model="checks.tabla"
+                                                    value="{{cdt.valNumeroCDT}}"
+                                                    ng-change="$gui.obtenerCdt(cdt)"></label>
+                                        </td>
+                                        <td>{{cdt.valNumeroCDT}}</td>
+                                        <td>{{cdt.valNumeroPreimpreso}}</td>
+                                        <td>{{cdt.fecVencimientoOperacionHomologado}}</td>
+                                        <td>{{cdt.valMontoInicialDepositoHomologado}}</td>
+                                        <td>{{cdt.valPlazoEnDias}}</td>
+                                        <td>{{cdt.valTasaEfectiva + '%'}}</td>
+                                        <td>{{cdt.valRendimientoXPagaNeto | currency}}</td>
+                                        <td>{{cdt.subEstado || ''}}</td>
+                                        <td>{{cdt.valTipoManejo}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </gs>
+
+                        <gs col="x-12|md-12">
+                            <gui-caption type="info" ng-model="caption.informacion" text-align="center"></gui-caption>
+                        </gs>
+
+                    </gs-row>
+
+                    <gs-row>
+
+                        <gs push-right>
+                            <button gui="form-button" bg-color="alizarin"
+                                ng-disabled="(caption.listas.status === 'error' || caption.confirmacionNic.status === 'error' || cdtSeleccionado.valRendimientoXPagaNeto > 0) || !checks.tabla"
+                                ui-sref=".simulacion" ng-click="$gui.guardarInfo()">Reinvertir</button>
+                        </gs>
+
+                    </gs-row>
+
+                </form>
+
+            </box>
+
+        </gs>
+    </gs-row>
+    <gs-row ng-show="cdts.length == 0">
+        <gs>
+            <box>
+                <gui-caption type="error" ng-model="caption.sinCDT" text-align="center"></gui-caption>
+            </box>
+        </gs>
+    </gs-row>
+
+</div>

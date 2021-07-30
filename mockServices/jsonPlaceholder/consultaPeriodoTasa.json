@@ -1,0 +1,29 @@
+{
+  "listaPeriodos": [{
+      "valCodPeriodo": "NNN",
+      "valDescPeriodo": "AL VENCIMIENTO"
+    },
+    {
+      "valCodPeriodo": "M",
+      "valDescPeriodo": "MENSUAL"
+    }
+  ],
+  "codMsgRespuesta": "0",
+  "consultaTasas": {
+    "valTasaEfectiva": 5.2,
+    "valTasaNominal": 5.1016
+  },
+  "caracterAceptacion": "B",
+  "consultaPlazo": {
+    "valPlazo": 90,
+    "valFechaVen": 1513573200000,
+    "valFechaVenHomologado": "2017-12-18T00:00:00"
+  },
+  "consultaTipoTasa": {
+    "codTipoTasa": "IPC",
+    "valDescTipoTasa": null,
+    "valTasaReferencial": 0,
+    "valOperador": "+",
+    "valSpread": 0.01
+  }
+}

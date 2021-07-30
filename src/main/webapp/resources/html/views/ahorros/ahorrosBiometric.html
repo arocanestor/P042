@@ -1,0 +1,83 @@
+<div>
+
+    <gs-row ng-if="!result.captions.account.type">
+        <gs>
+            <box>
+
+                <header>
+                    <h3>Solicite Huella al cliente</h3>
+                </header>
+
+                <gs-row>
+
+                    <gs col="x-12|md-12">
+                        <app-biometric-assistant ng-model="$gui.bioCapture" casb="autenticacion"></app-biometric-assistant>
+                    </gs>
+
+                    <!-- <gs col="x-12|md-12">
+                        <gui-caption type="info" ng-model="caption.firmaDigital" text-align="center"></gui-caption>
+                    </gs> -->
+
+                </gs-row>
+
+                <gs-row>
+                    <gs>
+                        <hr>
+                    </gs>
+                </gs-row>
+
+                <gs-row>
+
+                    <gs push-right><button gui="form-button" bg-color="alizarin" ng-click="$gui.createAccount();" ng-disabled="!biometricData.base64 || !biometricData.autenticado">Abrir Cuenta</button></gs>
+                    <gs pull-left><button gui="form-button" bg-color="asbestos" ui-sref="^">Volver</button></gs>
+
+                </gs-row>
+
+            </box>
+        </gs>
+    </gs-row>
+
+    <gs-row ng-if="result.captions.account.type">
+        <gs>
+            <box>
+                <gs-row>
+                    <gs ng-show="result.captions.account.type">
+                        <gui-caption type="{{ result.captions.account.type }}" ng-model="result.captions.account.message"></gui-caption>
+                    </gs>
+                    <gs ng-show="result.captions.gmf.type">
+                        <gui-caption type="{{ result.captions.gmf.type }}" ng-model="result.captions.gmf.message"></gui-caption>
+                    </gs>
+                    <gs ng-show="result.captions.docs.type">
+                        <gui-caption type="{{ result.captions.docs.type }}" ng-model="result.captions.docs.message"></gui-caption>
+                    </gs>
+                    <div ng-show="result.account">
+                        <gs>
+                            <hgroup gui="hgroup">
+                                <h3><b>N&uacute;mero de cuenta:</b> {{ result.account }}</h3>
+                            </hgroup>
+                        </gs>
+                        <gs>
+                            <hgroup gui="hgroup">
+                                <h3>{{ lov_msg['informeClienteCanalesVirtuales'].desc }}</h3>
+                            </hgroup>
+                        </gs>
+
+                        <gs>
+                            <hgroup gui="hgroup">
+                                <h3><b>Fecha y hora</b> {{ result.stamp | date : 'dd/MM/yyyy' }} {{ result.stamp | date : 'HH:mm:ss' }}</h3>
+                            </hgroup>
+                        </gs>
+
+                        <gs>
+                            <gui-caption type="info" ng-model="caption.informeEnvioContrato" text-align="center"></gui-caption>
+                        </gs>
+                    </div>
+
+                </gs-row>
+            </box>
+
+        </gs>
+    </gs-row>
+
+
+</div>

@@ -1,0 +1,277 @@
+
+    <gs-row ng-if="caption.listas.status == 'success' && !autorizacion">
+        <gs>
+            <box>
+                <header>
+                    <h3 style="color:#2980b9">{{ lov_msg['titulo-3-pasos'].desc }}</h3>
+                </header>
+                <div gui="wizard-progress">
+                    <ul>
+                        <li gui-sref="app.tarjeta-movil.xpress" gui-sref-class="current">
+                            <span>1</span>
+                            <b>Prean&aacute;lisis</b>
+                        </li>
+                        <li gui-sref="app.tarjeta-movil.xpress.evaluacion" gui-sref-class="current">
+                            <span>2</span>
+                            <b>Evaluaci&oacute;n</b>
+                        </li>
+                        <li gui-sref="app.tarjeta-movil.xpress.evaluacion.confirmacion" gui-sref-class="current">
+                            <span>3</span>
+                            <b>Confirmaci&oacute;n</b>
+                        </li>
+                    </ul>
+                </div>
+            </box>
+        </gs>
+    </gs-row>
+
+
+    <div ui-view="main-xpress">
+
+
+        <gs-row ng-show="caption.listas.status">
+            <gs>
+                <box>
+                    <gs-row>
+                        <gs>
+                            <gui-caption type="info" ng-model="caption.informacion" text-align="center"></gui-caption>
+                        </gs>
+                    </gs-row>
+                </box>
+            </gs>
+        </gs-row>
+
+        <gs-row>
+            <gs>
+
+                <box>
+                    <form name="form.Actividad">
+                    <div gui-collapsibles collapsible-group="datosCliente" collapsible-type="tabs">
+
+                        <div gui-pane title="Datos B&aacute;sicos">
+
+                            <gs-row>
+                                <gs col="x-4|md-6">
+                                    <label gui="label">Tipo de Identificación:
+                                      <select gui="input-control" ng-disabled = "{{estado == 1 || (estado == 3 && CLIENTE.IdentificationType) ? 'true' : 'false'}}" ng-model="datosBasicos.tipoId" gui-validate rules='{"required": true}' ng-options="tipoIdentificacion.codigo as tipoIdentificacion.desc for tipoIdentificacion in lovs.lov_tipo_identif">
+                                          <option  value="">Seleccione Ciudad </option>
+                                      </select>
+                            </label>
+                                </gs>
+                                <gs col="x-4|md-6">
+                                    <label gui="label">Número de Identificación:
+                                <input chars="only-numbers" maxlength="20" gui="input-control" gui-validate rules='{"required": true}' ng-model="datosBasicos.numeroId" ng-readonly = "{{estado == 1 || (estado == 3 && CLIENTE.IdentificationNumber) ? 'true' : 'false'}}"/>
+                            </label>
+                                </gs>
+                                <gs col="x-4|md-6">
+                                    <label gui="label">Fecha de Nacimiento:
+                                <input gui="input-control" gui-validate rules='{"required": true}' ng-model="datosBasicos.fechaNacimiento" ng-readonly = "{{estado == 1 || (estado == 3 && CLIENTE.Fechadenacimiento) ? 'true' : 'false'}}"/>
+                            </label>
+                                </gs>
+                                <gs col="x-4|md-6">
+                                    <label gui="label">Nombres:
+                                <input chars="letters" maxlength="30" gui="input-control" gui-validate rules='{"required": true}' ng-model="datosBasicos.nombres" ng-readonly = "{{estado == 1 || (estado == 3 && CLIENTE.Nombres) ? 'true' : 'false'}}"/>
+                            </label>
+                                </gs>
+                                <gs col="x-4|md-6">
+                                    <label gui="label">Primer apellido:
+                                <input chars="letters" maxlength="20" gui="input-control" gui-validate rules='{"required": true}' ng-model="datosBasicos.primerApellido" ng-readonly = "{{estado == 1 || (estado == 3 && CLIENTE.PrimerApellido) ? 'true' : 'false'}}"/>
+                            </label>
+                                </gs>
+                                <gs col="x-4|md-6">
+                                    <label gui="label">Segundo apellido:
+                                <input chars="letters" maxlength="20" gui="input-control" ng-model="datosBasicos.segundoApellido" ng-readonly = "{{estado == 1 || (estado == 3 && CLIENTE.SegundoApellido) ? 'true' : 'false'}}"/>
+                            </label>
+                                </gs>
+                            </gs-row>
+
+                        </div>
+
+                        <div gui-pane title="Datos Actividad Laboral">
+
+                                <div ng-repeat = "ingreso in actividades">
+                                    <box>
+                                        <gs-row >
+
+                                            <gs col="x-6|md-6">
+                                                <label gui="label">Actividad Laboral:
+                                                    <select gui="input-control" ng-model="ingreso.ActividadLaboral" gui-validate rules='{"required": true}'  ng-options="actividad.codigo as actividad.desc for actividad in listaactividad" ng-disabled = "{{ingreso.estado == 1 || (ingreso.estado == 3 && ingreso.ActividadLaboralDef) ? 'true' : 'false'}}">
+                                                         <option value="">Seleccione Actividad Laboral</option>
+                                                    </select>
+                                                </label>
+                                            </gs>
+                                            <gs col="x-6|md-6">
+                                                <label gui="label">Ingreso Mensual</label>
+                                                <div gui="overlabel" for="IngresoMensual" gui-mask="currency" ng-model="ingreso.IngresoMensual"></div>
+                                                <input gui="input-control" chars="0-9" id="IngresoMensual" ng-model="ingreso.IngresoMensual" ng-disabled="" gui-validate rules='{"required": true}' maxlength="15" text-align="right" ng-readonly="{{ingreso.estado == 1 || (ingreso.estado == 3 && ingreso.IngresoMensualDef) ? 'true' : 'false'}}"/>
+                                                <!-- <input gui="input-control" id="valorInversion" ng-model="simulacion.valorInversion" gui-validate rules='{"required": true, "min":'{{ simulacion.tipoCDAT.montoMin }}', "max":'{{ simulacion.tipoCDAT.montoMax }}'}' text-align="right" chars="only-numbers" value= "{{ simulacion.tipoCDAT.montoMin }}"/> -->
+                                            </gs>
+                                        </gs-row>
+                                        <gs-row>
+                                            <gs col="x-6|md-6">
+                                                <label gui="label">C&oacute;digo CIIU Actividad Econ&oacute;mica
+                                                    <select gui="input-control" ng-model="ingreso.CodigoCIIUActividadEconomica" gui-validate rules='{"required": true}' ng-change="$gui.cambioValoractividad(ingreso)" ng-options="actividad.codigo as actividad.codigo for actividad in listaCiiu" ng-disabled = "{{ingreso.estado == 1 || (ingreso.estado == 3 && ingreso.CodigoCIIUActividadEconomicaDef) ? 'true' : 'false'}}">
+                                                         <option value="">Seleccione C&oacute;digo CIIU Laboral</option>
+                                                    </select>
+                                                    <!-- <input gui="input-control" id="CodigoCIIUActividadEconomica" ng-model="actividad.CodigoCIIUActividadEconomica" ng-disabled="!actividad.ActividadLaboral"  gui-validate rules='{"required": true}'
+                                                    text-align="right" chars="only-numbers" /> -->
+                                                </label>
+                                                <!-- <actividad gui="input-control" id="valorInversion" ng-model="simulacion.valorInversion" gui-validate rules='{"required": true, "min":'{{ simulacion.tipoCDAT.montoMin }}', "max":'{{ simulacion.tipoCDAT.montoMax }}'}' text-align="right" chars="only-numbers" value= "{{ simulacion.tipoCDAT.montoMin }}"/> -->
+                                            </gs>
+                                            <gs col="x-6|md-6">
+                                                <label gui="label">Descripción Actividad CIIU
+                                                    <input chars="alpha-numeric" maxlength="450" gui="input-control" ng-model="ingreso.DescrpicionActividadCIIU" text-align="right" readonly/>
+                                                </label>
+                                                    <!-- <input gui="input-control" id="valorInversion" ng-model="simulacion.valorInversion" gui-validate rules='{"required": true, "min":'{{ simulacion.tipoCDAT.montoMin }}', "max":'{{ simulacion.tipoCDAT.montoMax }}'}' text-align="right" chars="only-numbers" value= "{{ simulacion.tipoCDAT.montoMin }}"/> -->
+                                            </gs>
+
+                                        </gs-row>
+                                    </box>
+                                </div>
+
+
+                        </div>
+
+                        <div gui-pane title="Datos de Ubicaci&oacute;n">
+
+                                <gs-row>
+                                    <gs col="x-4|md-6">
+                                        <label gui="label">Direcci&oacute;n de Residencia:
+                                            <input chars="alpha-numeric" maxlength="50" gui="input-control" ng-model="ubicacion.DirRecidencia" gui-validate rules='{"required": true}' text-align="right" ng-readonly = "{{estado == 1 || (estado == 3 && direccion.StreetAdress) ? 'true' : 'false'}}"/>
+                                        </label>
+                                    </gs>
+                                    <gs col="x-4|md-6">
+                                        <label gui="label">Departamento:
+                                            <input maxlength="50" ng-model="depaAut" gui="input-control"  gui-validate rules='{"required": true}' text-align="right" ng-readonly = "{{estado == 1 || (estado == 3 &&  direccion.DAV_PersonaDepartmentDesc) ? 'true' : 'false'}}" ng-init="depaAut = datosPantalla.departamento.desc" ac-related="departamento" />
+                                            <!-- <input type="text" gui="input-control" ng-model="depaAut" ac-related="departamento"/> -->
+                                            <gui-autocomplete ng-model="datosPantalla.departamento" ac-strict ac-related="departamento" ac-search="depaAut" ac-min-chars="1" ac-options="lovs.lov_state_abbrev"></gui-autocomplete>
+                                        </label>
+                                    </gs>
+                                    <gs col="x-4|md-6">
+                                        <label gui="label">Ciudad:
+                                            <input maxlength="50" ng-model="ciudadAut" gui="input-control" gui-validate rules='{"required": true}' text-align="right" ng-readonly = "{{estado == 1 || (estado == 3 && direccion.DAV_PersonaMunicipalityDesc) ? 'true' : 'false'}}" ng-init="ciudadAut = datosPantalla.ciudad.desc" ac-related="ciudad"/>
+                                            <gui-autocomplete ng-model="datosPantalla.ciudad" ac-strict ac-related="ciudad" ac-search="ciudadAut" ac-min-chars="1" ac-filter="{{datosPantalla.departamento.codigo}}" ac-options="lovs.lov_ciud_col_filtrada"></gui-autocomplete>
+                                        </label>
+                                    </gs>
+                                </gs-row>
+                                <gs-row>
+                                    <gs col="x-4|md-6">
+                                        <label gui="label">Correo Electrónico:
+                                            <input gui="input-control" chars="email" ng-model="ubicacion.Correoelectronico" gui-validate rules='{"email": true, "required": true}' text-align="right" ng-readonly = "{{estado == 1 || (estado == 3 && CorreoelectronicoDef) ? 'true' : 'false'}}"/>
+                                        </label>
+                                    </gs>
+                                    <gs col="x-4|md-6">
+                                        <label gui="label">Tel&eacute;fono:
+                                            <input chars="only-numbers" maxlength="13" gui="input-control" ng-model="ubicacion.Telefono" gui-validate rules='{"required": true}' text-align="right" ng-readonly = "{{estado == 1 || (estado == 3 && TelefonoDef) ? 'true' : 'false'}}" />
+                                        </label>
+                                    </gs>
+                                    <gs col="x-4|md-6">
+                                        <label gui="label">Celular:
+                                            <input chars="only-numbers" maxlength="13" gui="input-control" ng-model="ubicacion.Celular" gui-validate rules='{"required": true}' text-align="right" ng-readonly = "{{estado == 1 || (estado == 3 && celularDef) ? 'true' : 'false'}}" />
+                                        </label>
+                                    </gs>
+                                </gs-row>
+
+                        </div>
+
+                    </div>
+                    </form>
+                </box>
+
+                <!-- PRODUCTO SOLICITADO -->
+                <box>
+                    <form name="form.ProductoSolicitado">
+
+                        <gs-row>
+
+                            <gs col="x-4|md-6">
+                                <label gui="label">Seleccione el producto a solicitar:
+                                <select gui="input-control" ng-model="producto.ProductoSolicitado" gui-validate rules='{"required": true}' ng-options="tarjeta as tarjeta.desc for tarjeta in listaTarjetas" >
+                                    <option value="">Seleccione Tarjeta</option>
+                               </select>
+                           </label>
+                            </gs>
+
+                            <gs ng-if=" estado == 1 ? false : true ">
+                                <ul gui="checklist">
+                                    <li>
+                                        <label>
+                                            <h3>
+                                                <input ng-name name="{{ 'check-' + check.codigo }}" type="checkbox" ng-model="producto.centrales" ng-required="true" disabled/>
+                                                Solicite al cliente la <a href="" ng-click="$gui.assi()" cursor="pointer"> Autorización de Consulta en Centrales de Riesgo</a> para evaluar la solicitud.
+                                            </h3>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </gs>
+
+                            <app-devices-assistant datos-pdf="$gui.datosPdf" assistant-active="$gui.assistant" id-reporte="R_AUCCR_C023" assistant-steps="$gui.model.autorizacionCentralesSteps" silent-pdf="true" done="$program.doneAssistant"></app-devices-assistant>
+
+                            <!-- <gs ng-if="$gui.autorizaCentrales == false">
+                            <header>
+                                <h3>Solicite Huella al Cliente</h3>
+                            </header>
+                            <app-devices-assistant ng-model="$gui.bioCaptureAtorizacionCentrales"></app-biometric-assistant>
+                        </gs> -->
+
+                            <gs>
+                                <hr/>
+                            </gs>
+
+                            <gs push-right>
+                                <input type="button" ng-click="$gui.validacionesPrevias()" gui="form-button" bg-color="alizarin" value="Evaluar" ng-disabled="!form.Actividad.$valid || !form.ProductoSolicitado.$valid" />
+                            </gs>
+
+                        </gs-row>
+
+                    </form>
+                </box>
+
+            </gs>
+        </gs-row>
+
+    </div>
+
+
+<!-- <gs-row>
+        <gs>
+            <box>
+
+
+            </box>
+    </gs-row>
+    <gs-row>
+      <gs>
+         <box>
+           <header>
+               <h3>Autorizaciones del Producto</h3>
+           </header>
+           <gs>
+              <span>El cliente autoriza con su huella la firma electrónica de los siguientes documentos:<span>
+           </gs>
+           <gs-row>
+               <gs col="x-12">
+                 <label gui="label" cursor="pointer" >
+                 <input ng-name name="" type="checkbox" ng-model="producto.centrales"  ng-disabled="" ng-required="validateChecks[check.codigo]" required="required"/> <a href="/resources/js/controllers/xpress/pdf/autorizacion_huella.pdf" target=_blank>Autorización de uso de huella</a> como firma electrónica de docmentos</label>
+                 <label gui="label" cursor="pointer" >
+                 <input ng-name name="" type="checkbox" ng-model="producto.centrazles"  ng-disabled="" ng-required="validateChecks[check.codigo]"/>Solicitud de Producto<a href="/resources/js/controllers/xpress/pdf/Huella.pdf" target=_blank>, Autorizaciones y Declaraciones</a></label>
+                 <label gui="label" cursor="pointer" >
+                 <input ng-name name="" type="checkbox" ng-model="account[routeApp.1].checks[check.codigo]"  ng-disabled="" ng-required="validateChecks[check.codigo]"/> <a href="/resources/js/controllers/xpress/pdf/Pagare.pdf" target=_blank>Pagaré</a></label>
+               </gs>
+               <gs push-right>
+                   <input type="button" ng-click="$gui.evaluar();"  gui="form-button" bg-color="pomegranate" value="continuar" ng-disabled="!form.checkboxes.$valid" ui-sref=".biometric" />
+               </gs>
+          </gs-row>
+         </box>
+      </gs>
+    </gs-row>
+    <gs-row>
+        <gs>
+            <box>
+                <header>
+                    <h3>Solicite Huella al Cliente</h3>
+                </header>
+                <app-biometric-assistant ng-model="$gui.bioCapture" />
+            </box>
+        </gs>
+    </gs-row>-->

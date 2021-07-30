@@ -1,0 +1,35 @@
+{
+   "codMsgRespuesta": "0",
+   "caracterAceptacion": "B",
+   "periodo":    {
+      "valPlazoDias": 720,
+      "fecFechaVencimiento": 1579582800000,
+      "fecFechaVencimientoHomologado": "2020/01/21"
+   },
+   "periodos": [{"periodos":    [
+            {
+         "codPeriodo": "NNN",
+         "valDescripcionPeriodo": "AL VENCIMIENTO"
+      },
+            {
+         "codPeriodo": "M",
+         "valDescripcionPeriodo": "MENSUAL"
+      },
+            {
+         "codPeriodo": "B",
+         "valDescripcionPeriodo": "BIMESTRAL"
+      },
+            {
+         "codPeriodo": "T",
+         "valDescripcionPeriodo": "TRIMESTRAL"
+      },
+            {
+         "codPeriodo": "S",
+         "valDescripcionPeriodo": "SEMESTRAL"
+      },
+            {
+         "codPeriodo": "A",
+         "valDescripcionPeriodo": "ANUAL"
+      }
+   ]}]
+}

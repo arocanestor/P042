@@ -1,0 +1,11 @@
+{
+   "codMsgRespuesta": "0",
+   "camposFuturo":    {
+      "valCampoFuturo1": "VALIDACION PREVIA OK",
+      "valCampoFuturo2": null,
+      "valCampoFuturoValor1": null,
+      "valCampoFuturoValor2": null,
+      "valCampoFuturoValor3": null
+   },
+   "caracterAceptacion": "B"
+}

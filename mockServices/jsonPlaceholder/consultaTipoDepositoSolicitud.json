@@ -1,0 +1,118 @@
+{
+  "codMsgRespuesta": "0",
+  "caracterAceptacion": "B",
+  "depositos": [
+    {
+      "codTipoDeposito": "CF03",
+      "valDescripcionTipoDeposito": "COP-FIJA-BASE360-OFICINAS",
+      "codMoneda": 0,
+      "valBaseCalculo": "360",
+      "valTieneTasaVariable": "N",
+      "codSubproductoRPR": "5150",
+      "rangoMontos": [
+        {
+          "valMontoMin": 500000,
+          "valMontoMax": 9999999999999,
+          "valPlazoMin": 30,
+          "valPlazoMax": 2880,
+          "fecFechaPlazoMin": 1603256400000,
+          "fecFechaPlazoMax": 1853125200000,
+          "valMontoMinHomologado": "$500.000,00",
+          "valMontoMaxHomologado": "$9.999.999.999.999,00",
+          "fecFechaPlazoMinHomologado": "2020/10/21",
+          "fecFechaPlazoMaxHomologado": "2028/09/21"
+        }
+      ],
+      "categorias": [
+        {
+          "codCategoria": "NOM",
+          "valDescripcionCategoria": "NOMINATIVO"
+        }
+      ]
+    },
+    {
+      "codTipoDeposito": "CF07",
+      "valDescripcionTipoDeposito": "COP-FIJA-BASE 360 PER JURIDICA",
+      "codMoneda": 0,
+      "valBaseCalculo": "360",
+      "valTieneTasaVariable": "N",
+      "codSubproductoRPR": "5150",
+      "rangoMontos": [
+        {
+          "valMontoMin": 500000,
+          "valMontoMax": 9999999999999,
+          "valPlazoMin": 30,
+          "valPlazoMax": 2880,
+          "fecFechaPlazoMin": 1603256400000,
+          "fecFechaPlazoMax": 1853125200000,
+          "valMontoMinHomologado": "$500.000,00",
+          "valMontoMaxHomologado": "$9.999.999.999.999,00",
+          "fecFechaPlazoMinHomologado": "2020/10/21",
+          "fecFechaPlazoMaxHomologado": "2028/09/21"
+        }
+      ],
+      "categorias": [
+        {
+          "codCategoria": "NOM",
+          "valDescripcionCategoria": "NOMINATIVO"
+        }
+      ]
+    },
+    {
+      "codTipoDeposito": "CV14",
+      "valDescripcionTipoDeposito": "COP-IPC-BASE 366-FIN-OFICINAS",
+      "codMoneda": 0,
+      "valBaseCalculo": "366",
+      "valTieneTasaVariable": "S",
+      "codSubproductoRPR": "5150",
+      "rangoMontos": [
+        {
+          "valMontoMin": 500000,
+          "valMontoMax": 9999999999999,
+          "valPlazoMin": 89,
+          "valPlazoMax": 1836,
+          "fecFechaPlazoMin": 1608392057680,
+          "fecFechaPlazoMax": 1759332857680,
+          "valMontoMinHomologado": "$500.000,00",
+          "valMontoMaxHomologado": "$9.999.999.999.999,00",
+          "fecFechaPlazoMinHomologado": "2020/12/19",
+          "fecFechaPlazoMaxHomologado": "2025/10/01"
+        }
+      ],
+      "categorias": [
+        {
+          "codCategoria": "NOM",
+          "valDescripcionCategoria": "NOMINATIVO"
+        }
+      ]
+    },
+    {
+      "codTipoDeposito": "CV19",
+      "valDescripcionTipoDeposito": "TASA VARIABLE IPC PERS JUR",
+      "codMoneda": 0,
+      "valBaseCalculo": "366",
+      "valTieneTasaVariable": "S",
+      "codSubproductoRPR": "5150",
+      "rangoMontos": [
+        {
+          "valMontoMin": 500000,
+          "valMontoMax": 9999999999999,
+          "valPlazoMin": 89,
+          "valPlazoMax": 1836,
+          "fecFechaPlazoMin": 1608392057680,
+          "fecFechaPlazoMax": 1759332857680,
+          "valMontoMinHomologado": "$500.000,00",
+          "valMontoMaxHomologado": "$9.999.999.999.999,00",
+          "fecFechaPlazoMinHomologado": "2020/12/19",
+          "fecFechaPlazoMaxHomologado": "2025/10/01"
+        }
+      ],
+      "categorias": [
+        {
+          "codCategoria": "NOM",
+          "valDescripcionCategoria": "NOMINATIVO"
+        }
+      ]
+    }
+  ]
+}

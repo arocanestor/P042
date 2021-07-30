@@ -1,0 +1,126 @@
+<div ui-view="">
+
+    <gs-row ng-switch="Subestado">
+
+        <gs-row ng-switch-when="1">
+            <gs>
+                <form name="form.desbloqueo">
+
+                    <box>
+
+                        <header>
+                            <h3 style="color:#2980b9">Realice el desbloqueo del CDT No. {{ numCDT[0].valNumeroCDT }}</h3>
+                        </header>
+                        <span>
+                            <h3>El CDT se encuentra bloqueado por la siguiente causal:</h3>
+                        </span>
+                        <gs-row>
+                            <gs>
+                                <h3></h3>
+                            </gs>
+                        </gs-row>
+                        <gs-row>
+                            <gs ng-model="caption.informacion">
+                                <ul>
+                                    <li>
+                                        <h3>Para desbloquear un CDT​:</h3>
+                                    </li>
+                                </ul>
+                                <div gui="wysiwyg">
+                                    <ul>
+                                        <li>Si está bloqueado por pérdida, se deben cumplir las políticas de reposición.</li>
+                                        <li>Si está bloqueado por fallecimiento, se debe cumplir con la documentación para la sucesión.</li>
+                                        <li>Si está bloqueado por actualizacion de datos, se debe hacer la respectiva tarea en el “Nos Interesa Conocerlo”</li>
+                                    </ul>
+                                </div>
+                            </gs>
+                        </gs-row>
+                        <gs-row>
+
+                            <gs col="x-4|md-6">
+                                <label gui="label">Causal de desbloqueo:</label>
+                                <input gui="input-control" ng-model="desbloqueo.subEstado" disabled />
+                            </gs>
+                            <gs col="x-12|md-6">
+                                <label gui="label">Observaciones</label>
+                                <textarea gui="input-control" gui-validate rules='{"required": true}' maxlength="160" ng-model="desbloqueo.observaciones"></textarea>
+                            </gs>
+
+                            <gs col="x-3|md-6">
+                                <label gui="label">Correo electrónico:</label>
+                                <select gui="input-control" ng-model="bloqueo.correo" gui-validate rules='{"required": true}' ng-disabled="!desbloqueo.observaciones" ng-options="lov as lov.Email for lov in lovs.lov_email">
+                                    <option value="">Seleccione</option>
+                                </select>
+                            </gs>
+                        </gs-row>
+                        <gs-row>
+                            <gs pull-left>
+                                <button ui-sref="^" gui="form-button" bg-color="asbestos">Regresar</button>
+                            </gs>
+                            <gs push-right>
+                                <button gui="form-button" bg-color="alizarin" ng-disabled="!form.desbloqueo.$valid || buttonOffDesbloqueo" ng-click="$gui.aplicarDesbloqueo()">Aplicar Desbloqueo</button>
+                            </gs>
+                        </gs-row>
+
+                    </box>
+
+                </form>
+
+            </gs>
+        </gs-row>
+
+
+        <gs-row ng-switch-default>
+            <gs>
+
+                <form name="form.bloqueo">
+
+                    <box>
+
+                        <header>
+                            <h3 style="color:#2980b9">Realice el bloqueo del CDT No. {{ numCDT[0].valNumeroCDT }}</h3>
+                        </header>
+                        <span>
+                            <h3>Para BLOQUEAR el CDT, determine la causal:</h3>
+                        </span>
+                        <span></span>
+                        <gs-row>
+
+                            <gs col="x-4|md-6">
+                                <label gui="label">Causal de bloqueo:</label>
+                                <select gui="input-control" ng-change="$gui.changeforma()" ng-model="bloqueo.formaPagoIntereses" gui-validate rules='{"required": true}' ng-disabled="llamadoConstitucion == 2" ng-options="lov.codigo as lov.desc for lov in listaBloqueo">
+                                    <option value="">Seleccione</option>
+                                </select>
+                            </gs>
+                            <gs col="x-12|md-6">
+                                <label gui="label">Observaciones</label>
+                                <textarea gui="input-control" ng-disabled="!bloqueo.formaPagoIntereses" ng-model="bloqueo.observaciones" gui-validate rules='{"required": true}' ng-disabled="llamadoConstitucion == 2"></textarea>
+                            </gs>
+
+                            <gs col="x-3|md-6">
+                                <span style="width: 130px;">Correo electrónico:</span>
+                                <select gui="input-control" ng-model="bloqueo.correo" gui-validate rules='{"required": true}' ng-disabled="!bloqueo.formaPagoIntereses" ng-options="lov as lov.Email for lov in lovs.lov_email">
+                                    <option value="">Seleccione</option>
+                                </select>
+                            </gs>
+
+                        </gs-row>
+                        <gs-row>
+                            <gs pull-left>
+                                <button ui-sref="^" gui="form-button" bg-color="asbestos">Regresar</button>
+                            </gs>
+                            <gs push-right>
+                                <button gui="form-button" bg-color="alizarin" ng-disabled="!form.bloqueo.$valid || buttonOffBloqueo" ng-click="$gui.aplicarBloqueo()">Aplicar Bloqueo</button>
+                            </gs>
+                        </gs-row>
+                    </box>
+
+                </form>
+            </gs>
+        </gs-row>
+
+
+    </gs-row>
+
+
+</div>

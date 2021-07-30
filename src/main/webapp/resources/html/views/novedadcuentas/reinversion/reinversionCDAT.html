@@ -1,0 +1,114 @@
+<gs-row>
+    <gs col="100/1">
+        <box>
+
+          <header>
+              <h3 style="color:#2980b9">Realice la reinversión del CDAT Virtual en 3 pasos:</h3>
+          </header>
+
+          <div gui="wizard-progress">
+              <ul>
+                  <li gui-sref="app.cdat.reinversion.detalle.simulacion" gui-sref-class="current">
+                      <span>1</span>
+                      <b>Simulaci&oacute;n</b>
+                  </li>
+                  <li gui-sref="app.cdat.reinversion.detalle.simulacion.reinversion" gui-sref-class="current">
+                      <span>2</span>
+                      <b>Reinversi&oacute;n</b>
+                  </li>
+                  <li gui-sref="app.cdat.reinversion.detalle.simulacion.reinversion.resumen|app.cdat.reinversion.detalle.simulacion.reinversion.resumen.biometric" gui-sref-class="current">
+                      <span>3</span>
+                      <b>Confirmaci&oacute;n</b>
+                  </li>
+              </ul>
+          </div>
+        </box>
+    </gs>
+</gs-row>
+
+<div ui-view="cdat-reinversion-resumen">
+
+    <gs-row>
+        <gs>
+
+                <form name="form.constitucion">
+
+                      <box>
+
+                            <header>
+                                <h3 style="color:#2980b9">Paso 2: Solicite al cliente la siguiente informaci&oacute;n</h3>
+                            </header>
+
+                            <gs-row>
+
+                                <gs col="x-5|md-6">
+                                    <label gui="label">Alias con el que el cliente quiere identificar el CDAT Virtual
+                                        <input type="text" gui="input-control" ng-init="constitucion.nombre = ''" ng-model="constitucion.nombre" maxlength="200" required />
+                                    </label>
+                                </gs>
+
+                                <gs col="x-7|md-6">
+                                    <label gui="label">{{descCuentaReinversion()}}
+                                      <select gui="input-control" ng-init="constitucion.productoOrigen = ''" ng-model="constitucion.productoOrigen" ng-options="producto as producto.label for producto in productos" ng-change="guardarInfo()" required>
+                                          <option value="">Seleccione producto</option>
+                                      </select>
+                                    </label>
+                                </gs>
+
+                                <gs col="x-6|md-6" ng-if="simulacion.interes == 'No'">
+                                    <label gui="label">Seleccione la Cuenta a donde el cliente quiere que le transfieran los intereses
+                                      <select gui="input-control" ng-init="constitucion.productoDestino = ''" ng-model="constitucion.productoDestino" ng-options="producto as producto.label for producto in productos" ng-change="guardarInfo()" required>
+                                          <option value="">Seleccione producto</option>
+                                      </select>
+                                    </label>
+                                </gs>
+
+                            </gs-row>
+
+                       </box>
+
+                        <box>
+
+                            <header>
+                                <h3 style="color:#2980b9">Solicite las siguientes autorizaciones al Cliente, marque las casillas si el cliente est&aacute; de acuerdo:</h3>
+                            </header>
+
+                            <gs-row>
+                                <gs col="x-12">
+                                    <ul gui="check-list">
+                                      <li ng-repeat="check in lovs.listaReinversion" >
+                                        <label cursor="pointer" ng-attr-color="{{ !form.constitucion['check-' + check.codigo].$valid ? 'alizarin' : '' }}"><input ng-name name="{{ 'check-' + check.codigo }}" type="checkbox" ng-init="account[routeApp[2]].checks[check.codigo] = false" ng-model="account[routeApp[2]].checks[check.codigo]" ng-required="validateChecks[check.codigo]"/><span ng-bind-html="check.desc"></span> </label>
+                                      </li>
+                                    </ul>
+                                </gs>
+
+                                <gs col="x-12|md-12">
+                                    <gui-caption type="info" ng-model="caption.confirmApertura" text-align="center"></gui-caption>
+                                </gs>
+                            </gs-row>
+
+                            <gs-row>
+                                <gs>
+                                    <hr />
+                                </gs>
+                            </gs-row>
+
+                            <gs-row>
+
+                                <gs push-right>
+                                    <button gui="form-button" bg-color="alizarin" ng-disabled="!form.constitucion.$valid" ui-sref=".resumen">Continuar</button>
+                                </gs>
+
+                                <gs pull-left>
+                                    <button gui="form-button" bg-color="asbestos" ui-sref="^">Regresar</button>
+                                </gs>
+
+                            </gs-row>
+                        </box>
+                    </form>
+
+        </gs>
+    </gs-row>
+
+
+</div>

@@ -1,0 +1,28 @@
+{
+   "codMsgRespuesta": "0",
+   "caracterAceptacion": "B",
+   "depositos": [   {
+      "codTipoDeposito": "AF00",
+      "valDescripcionTipoDeposito": "CDAT VIRTUAL",
+      "codMoneda": 0,
+      "valBaseCalculo": "360",
+      "valTieneTasaVariable": "S",
+      "codSubproductoRPR": "5160",
+      "rangoMontos": [      {
+         "valMontoMin": 500000,
+         "valMontoMax": 9.999999999999E12,
+         "valPlazoMin": 30,
+         "valPlazoMax": 720,
+         "fecFechaPlazoMin": 1535000400000,
+         "fecFechaPlazoMax": 1595480400000,
+         "valMontoMinHomologado": "$500.000,00",
+         "fecFechaPlazoMinHomologado": "2018/08/23",
+         "fecFechaPlazoMaxHomologado": "2020/07/23",
+         "valMontoMaxHomologado": "$9.999.999.999.999,00"
+      }],
+      "categorias": [      {
+         "codCategoria": "NOM",
+         "valDescripcionCategoria": "NOMINATIVO"
+      }]
+   }]
+}

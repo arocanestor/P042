@@ -1,0 +1,205 @@
+<header>
+    <h3 style="color:#2980b9">{{fraccionamiento.tipoManejo.desc == 'INDIVIDUAL' ? 'Ingrese el nuevo titular' : 'Ingrese los nuevos titulares'}} - CDT # {{ indice + 1 }}</h3>
+</header>
+<form name="fraccionamiento.form.cabecera">
+    <gs-row>
+
+        <gs>
+
+            <table gui="table:table-compact:table-bordered:table-editable">
+                <caption>{{ fraccionamiento.tipoManejo.desc == 'INDIVIDUAL' ? 'Titular' : 'Titulares'}}</caption>
+                <thead>
+                    <tr>
+                        <th align="left">Tipo de identificación</th>
+                        <th align="left">Número de identificación</th>
+                        <th align="left">Nombres y apellidos</th>
+                        <th align="left">Confirmación NIC</th>
+                        <th align="left">Listas restrictivas</th>
+                        <th width="50"></th>
+                        <th width="50"></th>
+                        <th width="50"></th>
+                        <th width="50"></th>
+                    </tr>
+                </thead>
+                <tbody ng-init="indice = $index">
+                    <tr ng-repeat="titular in fraccionamiento.titulares" gui-tooltip gui-title="{{ fraccionamiento.tipoManejo.desc != 'INDIVIDUAL' && $index == 0 ? 'Titular principal' : ''}}" ng-class="{'error': (titular.vinculable === false || titular.confirmacion === false) && titular.confirmacionNic.content != dialogs.fechaMayor , 'attention': titular.vinculable === true && titular.confirmacionNic.content == dialogs.fechaMayor}">
+                        <td>
+                            <select gui="input-control" ng-model="titular.tipoIdentificacion" gui-validate rules='{"required": true}' ng-options="lov as lov.desc for lov in lovs.lov_cdt_tipo_documento" ng-change="$gui.validarListasNIC(titular, undefined, true)">
+                                <option value="">Seleccione...</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input gui-tooltip gui-title="{{ 'Recuerde no repetir el Titular o Número de identificación.' }}" type="text" gui="input-control" ng-model="titular.numIdentificacion" gui-validate rules='{"required": true, "boolean": {{ (fraccionamiento.titulares | filter : {tipoIdentificacion: titular.tipoIdentificacion, numIdentificacion: titular.numIdentificacion} : true).length < 2 }}}'
+                                chars="only-numbers" ng-blur="$gui.validarListasNIC(titular, undefined, !titular.numIdentificacion)" maxlength="16" name="{{ indice }}-titular-{{ $index }}" />
+                        </td>
+                        <td>{{ titular.nombres || titular.razonsocial }}</td>
+                        <td name="{{ indice }}-titular-nic-{{ $index }}" color="{{ $index == 0 ? (titular.vinculableNIC == true && titular.confirmacionNic.status == 'success' ? '' :  'alizarin') : (titular.vinculableNIC == true ? '' :  'alizarin') }}" ng-model="titular.NIC" align="center" gui-validate rules='{"boolean": {{$index == 0 ? (titular.vinculableNIC == true && titular.confirmacionNic.status == "success") : (titular.vinculableNIC == true) }} }'>{{ titular.confirmacionNic.content }}</td>
+                        <td align="center">{{ titular.listas.content }}</td>
+                        <td>
+                            <button gui="form-button" ng-click="$gui.capturarHuella(titular, titular)" ng-disabled="!titular.vinculable || titular.tipoIdentificacion.desc == 'NIT' || titular.hasApoderado || !fraccionamiento.form.cabecera['{{ indice }}-titular-{{ $index }}'].$valid || !fraccionamiento.form.cabecera['{{ indice }}-titular-nic-{{ $index }}'].$valid" bg-color="alizarin" title="capturar huella">
+                                <i class="fa fa-fingerprint"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button gui="form-button" type="button" ng-click="titular.hasApoderado = true; titular.autenticado = null; titular.base64 = ''; titular.huellaCapturada = false;" ng-disabled="titular.tipoIdentificacion.desc == 'NIT' || titular.hasApoderado || !titular.vinculable || !fraccionamiento.form.cabecera['{{ indice }}-titular-{{ $index }}'].$valid || !fraccionamiento.form.cabecera['{{ indice }}-titular-nic-{{ $index }}'].$valid"
+                                bg-color="alizarin" title="Novedad Con Poder">
+                                <i class="fa fa-file-signature"></i>
+                            </button>
+                        </td>
+                        <td align="center">
+                            <i color="{{titular.autenticado ? 'green-sea' : 'alizarin'}}" style="font-size: 20px;" ng-class='{"fa fa-check-circle": titular.autenticado, "fa fa-minus-circle": titular.autenticado === false}'></i>
+                        </td>
+                        <td>
+                            <button gui="form-button" ng-click="$gui.removeTitular($index, fraccionamiento.titulares);" ng-disabled="$index === 0 || $index == 1 && (fusion.tipoManejo.desc != 'INDIVIDUAL')"><i class="fa fa-times" ng-keypress="" color="alizarin"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </gs>
+
+        <gs ng-if="fraccionamiento.tipoManejo.desc != 'INDIVIDUAL'">
+            <button gui="form-button" style="padding:10px; height: auto;" align="center" cursor="pointer" bg-color="peter-river" ng-click="$gui.agregarTitular(fraccionamiento.titulares)" ng-disabled="fraccionamiento.titulares.length > 4">
+                <i class="fa fa-plus"></i>Adicionar un titular
+            </button>
+        </gs>
+
+    </gs-row>
+</form>
+
+<gs-row ng-if="(fraccionamiento.titulares | filter : {tipoIdentificacion:{desc: 'NIT'}}).length">
+    <form name="fraccionamiento.form.nit">
+
+        <gs>
+
+            <header>
+                <h3 style="color:#2980b9">Ingrese el autorizado</h3>
+            </header>
+
+            <gs-row>
+
+                <gs>
+
+                    <table gui="table:table-bordered:table-compact:table-editable">
+                        <caption>Autorizados</caption>
+                        <thead>
+                            <tr>
+                                <th align="left" width="280">Titular</th>
+                                <th align="left" width="220">Autorizado</th>
+                                <th align="left">Identificación</th>
+                                <th align="center">Confirmación NIC</th>
+                                <th align="center">Listas restrictivas</th>
+                                <th width="50"></th>
+                                <th width="50"></th>
+                                <th width="50"></th>
+                                <th width="50"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-class="{'error': !titular.autorizado.vinculable, 'attention': titular.autorizado.vinculable && !titular.autorizado.confirmacion}" ng-repeat="titular in fraccionamiento.titulares | filter : {tipoIdentificacion: {desc: 'NIT' }}"
+                                ng-init="titular.SP.relaciones = titular.SP.relaciones || []">
+                                <td>{{ titular.razonsocial }}</td>
+                                <td>
+                                    <input type="text" gui="input-control" ng-model="titular.relacionadoFilter" gui-validate rules='{"required": true}' placeholder="Nombre del relacionado" ng-disabled="!titular.numIdentificacion" />
+                                    <gui-autocomplete ng-model="titular.autorizado" ac-strict ac-search="titular.relacionadoFilter" ac-min-chars="3" ac-options="titular.SP.relaciones" ac-callback="$gui.validarThrowAC"></gui-autocomplete>
+                                </td>
+                                <td>{{ titular.autorizado.IdentificationTypeRel + ' - ' + titular.autorizado.IdentificationNumberRel }}</td>
+                                <!-- <td color="{{ $index == 0 ? (titular.autorizado.vinculableNIC == true && titular.autorizado.confirmacionNic.status == 'success' ? '' :  'alizarin') : (titular.autorizado.vinculableNIC == true ? '' :  'alizarin') }}" ng-model="titular.NICautorizado" align="center" gui-validate rules='{"boolean": {{$index == 0 ? (titular.autorizado.vinculableNIC == true && titular.autorizado.confirmacionNic.status == "success") : (titular.autorizado.vinculableNIC == true) }} }'>{{ titular.autorizado.confirmacionNic.content }}</td> -->
+                                <td align="center">{{ titular.autorizado.confirmacionNic.content }}</td>
+                                <td align="center" color="{{ !titular.autorizado.vinculable ? 'alizarin' : '' }}">{{ titular.autorizado.listas.content }}</td>
+                                <td>
+                                    <button gui="form-button" ng-click="$gui.capturarHuella(titular.autorizado, titular)" ng-disabled="!titular.autorizado.vinculable || titular.hasApoderado" bg-color="alizarin" title="capturar huella">
+                                        <i class="fa fa-fingerprint"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button gui="form-button" ng-click="titular.hasApoderado = true; titular.autenticado = null; titular.base64 = ''; titular.huellaCapturada = false;" ng-disabled="titular.hasApoderado || !titular.autorizado.IdentificationTypeRel"
+                                        bg-color="alizarin" title="Novedad con poder">
+                                        <i class="fa fa-file-signature"></i>
+                                    </button>
+                                </td>
+                                <td align="center">
+                                    <i color="{{ titular.autenticado ? 'green-sea' : 'alizarin' }}" style="font-size: 20px;" ng-class='{"fa fa-check-circle": titular.autenticado, "fa fa-minus-circle": titular.autenticado == false}'></i>
+                                </td>
+                                <td>
+                                    <button gui="form-button" disabled>
+                                        <i class="fa fa-times" color="alizarin"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </gs>
+
+            </gs-row>
+        </gs>
+    </form>
+</gs-row>
+
+<gs-row ng-if="(fraccionamiento.titulares | filter : {hasApoderado: true}).length">
+
+    <form name="fraccionamiento.form.apoderado">
+        <gs>
+            <header>
+                <h3 style="color:#2980b9">Ingrese la informaci&oacute;n del apoderado:</h3>
+            </header>
+
+            <gs-row>
+
+                <gs>
+
+                    <table gui="table:table-bordered:table-compact:table-editable">
+                        <caption>Apoderados</caption>
+                        <thead>
+                            <tr>
+                                <th width="280">Titular</th>
+                                <th width="220" align="left">Tipo de identificación</th>
+                                <th align="left">Número de identificación</th>
+                                <th align="left">Nombres y apellidos</th>
+                                <th width="50"></th>
+                                <th width="50"></th>
+                                <th width="50"></th>
+                                <th width="50"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="titular in fraccionamiento.titulares | filter : {hasApoderado: true}">
+                                <td>{{ titular.nombres || titular.razonsocial }}</td>
+                                <td>
+                                    <select gui="input-control" ng-model="titular.apoderado.tipoIdentificacion" gui-validate rules='{"required": true}' ng-options="lov as lov.desc for lov in lovs.lov_cdt_tipo_documento | filter : {desc: '!NIT'}">
+                                        <option value="">Seleccione </option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" gui="input-control" ng-model="titular.apoderado.numIdentificacion" gui-validate rules='{"required": true, "diff": {{ ((titular.autorizado.tipoIdentificacion.desc || titular.tipoIdentificacion.desc) == titular.apoderado.tipoIdentificacion.desc && (titular.autorizado.numIdentificacion || titular.numIdentificacion) == titular.apoderado.numIdentificacion) ? titular.autorizado.numIdentificacion || titular.numIdentificacion : "1"}}}' chars="only-numbers" maxlength="16" name="apoderado-num-{{ $index }}" />
+                                </td>
+                                <td>
+                                    <input type="text" gui="input-control" ng-model="titular.apoderado.nombres" ng-change="titular.apoderado.nombres = titular.apoderado.nombres.toUpperCase();" gui-validate rules='{"required": true}' maxlength="40" />
+                                </td>
+                                <td>
+                                    <button gui="form-button" ng-click="$gui.capturarHuella(titular.apoderado, titular)" ng-disabled="!titular.apoderado.tipoIdentificacion || !titular.apoderado.numIdentificacion || !titular.apoderado.nombres || !fraccionamiento.form.apoderado['apoderado-num-{{ $index }}'].$valid"
+                                        bg-color="alizarin" title="Capturar huella">
+                                        <i class="fa fa-fingerprint"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button gui="form-button" disabled bg-color="alizarin">
+                                        <i class="fa fa-file-signature"></i>
+                                    </button>
+                                </td>
+                                <td align="center">
+                                    <i color="{{ titular.autenticado ? 'green-sea' : 'alizarin' }}" style="font-size: 20px;" ng-class='{"fa fa-check-circle": titular.autenticado, "fa fa-minus-circle": titular.autenticado == false}'></i>
+                                </td>
+                                <td>
+                                    <button gui="form-button" ng-click="$gui.removerApoderado(titular, titular.apoderado);"><i class="fa fa-times" ng-keypress="" color="alizarin"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </gs>
+
+            </gs-row>
+        </gs>
+    </form>
+</gs-row>

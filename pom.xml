@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.davivienda.piac.webapplet.novedadesfondoinversion</groupId>
+    <artifactId>WebNovedadesFondoDeInversion</artifactId>
+    <name>SPA_P042_NovedadesFondoDeInversion</name>
+    <packaging>war</packaging>
+    <version>3.11.6</version>
+
+    <properties>
+        <java-version>1.6</java-version>
+        <org.springframework-version>3.1.1.RELEASE</org.springframework-version>
+        <org.aspectj-version>1.6.10</org.aspectj-version>
+        <org.slf4j-version>1.6.6</org.slf4j-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${org.springframework-version}</version>
+            <exclusions>
+                <!-- Exclude Commons Logging in favor of SLF4j -->
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${org.slf4j-version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${org.slf4j-version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.15</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>mail</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.jms</groupId>
+                    <artifactId>jms</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jdmk</groupId>
+                    <artifactId>jmxtools</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Servlet -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <packagingExcludes>
+                        .eslintignore, .svn, .git, gulpfile.js, *.json, *.txt, server.bat, .brackets.json, .vscode/*, gulp-tasks/*, mockServices/*, app_src/*
+                    </packagingExcludes>
+                    <warSourceExcludes>
+                        **/js/controllers/mainCtrl.js, **/js/services/api.js, **/js/app.js,**/js/routes/*.js, **/js/controllers/xpress/*.js, **/js/controllers/ahorros/*.js, **/js/controllers/cdat/**/*.js, **/js/controllers/cdt/**/*.js
+                    </warSourceExcludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.samaxes.maven</groupId>
+                <artifactId>minify-maven-plugin</artifactId>
+                <version>1.7.6</version>
+                <executions>
+
+                    <!-- APP -->
+                    <execution>
+                        <id>app-minify</id>
+                        <configuration>
+                            <jsSourceDir>resources/js</jsSourceDir>
+                            <jsSourceFiles>
+                                <jsSourceFile>app.js</jsSourceFile>
+                                <jsSourceFile>routes/route-novaportes.js</jsSourceFile>
+                                <jsSourceFile>routes/route-novasociada.js</jsSourceFile>
+                                <jsSourceFile>routes/route-novcuentas.js</jsSourceFile>
+                                <jsSourceFile>routes/route-proretiros.js</jsSourceFile>
+                                <jsSourceFile>routes/route-seguro.js</jsSourceFile>
+                                <jsSourceFile>routes/route-traportafolio.js</jsSourceFile>
+                                <jsSourceFile>controllers/mainCtrl.js</jsSourceFile>
+                                <jsSourceFile>services/api.js</jsSourceFile>
+                            </jsSourceFiles>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <nosuffix>true</nosuffix>
+                            <skipMerge>true</skipMerge>
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- ASOCIADAS MINIFY -->
+                    <execution>
+                        <id>controllers-asociadas-minify</id>
+                        <configuration>
+                            <jsSourceDir>resources/js/controllers/asociadas</jsSourceDir>
+                            <jsSourceFiles>
+                                <jsSourceFile>mainAsociadasCtrl.js</jsSourceFile>
+                            </jsSourceFiles>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <nosuffix>true</nosuffix>
+                            <skipMerge>true</skipMerge>
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- RETIROS MINIFY -->
+                    <execution>
+                        <id>controllers-retiros-minify</id>
+                        <configuration>
+                            <jsSourceDir>resources/js/controllers/retiros</jsSourceDir>
+                            <jsSourceFiles>
+                                <!-- Main -->
+                                <jsSourceFile>mainRetirosCtrl.js</jsSourceFile>
+
+                                <!-- Crear -->
+                                <jsSourceFile>crear/crearRetirosCtrl.js</jsSourceFile>
+                            </jsSourceFiles>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <nosuffix>true</nosuffix>
+                            <skipMerge>true</skipMerge>
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- APORTES MINIFY -->
+                    <execution>
+                        <id>controllers-aportes-minify</id>
+                        <configuration>
+                            <jsSourceDir>resources/js/controllers/aportes</jsSourceDir>
+                            <jsSourceFiles>
+                                <jsSourceFile>ahorrosBiometricCtrl.js</jsSourceFile>
+                                <jsSourceFile>ahorrosCtrl.js</jsSourceFile>
+                                <jsSourceFile>ahorrosTermsCtrl.js</jsSourceFile>
+                            </jsSourceFiles>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <nosuffix>true</nosuffix>
+                            <skipMerge>true</skipMerge>
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- CUENTAS MINIFY -->
+                    <execution>
+                        <id>controllers-cuentas-minify</id>
+                        <configuration>
+                            <jsSourceDir>resources/js/controllers/cuentas</jsSourceDir>
+                            <jsSourceFiles>
+
+                                <!-- Main -->
+                                <jsSourceFile>mainCDAT.js</jsSourceFile>
+
+                                <!-- Simulacion -->
+                                <jsSourceFile>simulacion/caracteristicasCDAT.js</jsSourceFile>
+                                <jsSourceFile>simulacion/simulacionCDAT.js</jsSourceFile>
+                                <jsSourceFile>simulacion/constitucionCDAT.js</jsSourceFile>
+                                <jsSourceFile>simulacion/resumenConstitucion.js</jsSourceFile>
+                                <jsSourceFile>simulacion/CDATBiometricCtrl.js</jsSourceFile>
+
+                                <!-- Reinversion -->
+                                <jsSourceFile>reinversion/caracteristicasCDAT.js</jsSourceFile>
+                                <jsSourceFile>reinversion/detalleCtrl.js</jsSourceFile>
+                                <jsSourceFile>reinversion/simulacionReinversion.js</jsSourceFile>
+                                <jsSourceFile>reinversion/reinversionCDAT.js</jsSourceFile>
+                                <jsSourceFile>reinversion/resumenReinversion.js</jsSourceFile>
+                                <jsSourceFile>reinversion/CDATBiometricCtrl.js</jsSourceFile>
+
+                                <!-- Cancelacion -->
+                                <jsSourceFile>cancelacion/cancelacionCDAT.js</jsSourceFile>
+                                <jsSourceFile>cancelacion/CDATBiometricCtrl.js</jsSourceFile>
+                                <jsSourceFile>cancelacion/resumenCancelacion.js</jsSourceFile>
+
+                            </jsSourceFiles>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <nosuffix>true</nosuffix>
+                            <skipMerge>true</skipMerge>
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- PORTAFOLIO MINIFY -->
+                    <execution>
+                        <id>controllers-portafolio-minify</id>
+                        <configuration>
+                            <jsSourceDir>resources/js/controllers/portafolio</jsSourceDir>
+                            <jsSourceFiles>
+                                <jsSourceFile>mainXpressCtrl.js</jsSourceFile>
+                                <jsSourceFile>caracteristicasCtrl.js</jsSourceFile>
+                                <jsSourceFile>autorizacionCtrl.js</jsSourceFile>
+                                <jsSourceFile>confirmacionCtrl.js</jsSourceFile>
+                                <jsSourceFile>evaluacionXpressCtrl.js</jsSourceFile>
+                                <jsSourceFile>tarjetaMovilCtrl.js</jsSourceFile>
+                            </jsSourceFiles>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <nosuffix>true</nosuffix>
+                            <skipMerge>true</skipMerge>
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <compilerArgument>-Xlint:all</compilerArgument>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,85 @@
+<gs-row>
+    <gs>
+        <hgroup gui="hgroup">
+            <div>
+                <i class="fa fa-user-circle" color="asbestos"></i>
+            </div>
+            <div>
+                <h1>{{ title }}</h1>
+                <h2>{{ extract }}</h2>
+            </div>
+        </hgroup>
+    </gs>
+</gs-row>
+
+<div ui-view="ahorros-main">
+
+    <gs-row ng-show="caption.listas.status">
+        <gs>
+            <box>
+                <gui-caption type="{{ caption.listas.status }}" ng-model="caption.listas.content" text-align="center"></gui-caption>
+            </box>
+        </gs>
+    </gs-row>
+
+    <gs-row ng-if="caption.listas.status === 'success'">
+        <gs>
+            <box>
+                <header>
+                    <h3>{{ lovs.lov_msg_venta_cuenta_obj['informarCaracteristicas'].desc }}</h3></header>
+                <gs-row>
+                    <gs>
+                        <div gui="wysiwyg" ng-bind-html="textos.texto1"></div>
+                    </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+
+    <gs-row ng-if="caption.listas.status === 'success'">
+        <gs>
+            <box>
+                <form name="form.checkboxes">
+
+                    <header>
+                        <h3>{{ lovs.lov_msg_venta_cuenta_obj['soliciteAutorizaciones'].desc }}</h3>
+                    </header>
+
+                    <gs-row>
+
+                        <gs col="x-12">
+                            <ul gui="check-list">
+                                <li ng-repeat="check in lovs.lov_checks_venta_en_linea">
+                                    <label cursor="pointer" ng-attr-color="{{ !form.checkboxes['check-' + check.codigo].$valid ? 'alizarin' : '' }}">
+                                        <input ng-name name="{{ 'check-' + check.codigo }}" type="checkbox" ng-model="account[routeApp[1]].checks[check.codigo]" ng-required="validateChecks[check.codigo]" />
+                                        <span ng-bind-html="check.desc"></span>
+                                        <span ng-if="check.codigo == '4x1000'"> <a ui-sref=".terms" title="{{ lovs.lov_msg_venta_cuenta_obj['condicionesGMF'].desc }}">Conozca las condiciones</a></span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </gs>
+
+                    </gs-row>
+
+                    <gui-caption type="info" ng-model="lovs.lov_msg_venta_cuenta_obj['siClienteNoAceptaHuella'].desc"></gui-caption>
+
+                    <gs-row>
+                        <gs>
+                            <hr />
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+
+                        <gs push-right>
+                            <input type="button" gui="form-button" bg-color="alizarin" value="Continuar" ng-disabled="!form.checkboxes.$valid" ui-sref=".biometric" />
+                        </gs>
+
+                    </gs-row>
+
+                </form>
+            </box>
+        </gs>
+    </gs-row>
+
+</div>

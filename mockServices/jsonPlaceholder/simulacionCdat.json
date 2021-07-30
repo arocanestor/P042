@@ -1,0 +1,54 @@
+{
+   "codMsgRespuesta": "0",
+   "proyecciones":    [
+            {
+         "idTipoProyeccion": "cdt",
+         "valTotalInteresEstimado": 90035,
+         "valNetoPeriodo": 86434,
+         "valTasaEfectiva": 5.5,
+         "valTotalInteresesNeto": 86434,
+         "fecFechaVencimiento": 1530853200000,
+         "valPlazoDias": 120,
+         "valNumeroCDT": "6321AF0000446271",
+         "valRetencionTotal": 3601,
+         "valRetencionTotalHomologado": "$3.601,00",
+         "fecFechaVencimientoHomologado": "2018/07/06",
+         "valTotalInteresEstimadoHomologado": "$90.035,00",
+         "valTotalInteresesNetoHomologado": "$86.434,00",
+         "valNetoPeriodoHomologado": "$86.434,00"
+      },
+            {
+         "idTipoProyeccion": "proyeccion1",
+         "valTotalInteresEstimado": 114815,
+         "valNetoPeriodo": 110222,
+         "valTasaEfectiva": 5.6,
+         "valTotalInteresesNeto": 110222,
+         "fecFechaVencimiento": 1533531600000,
+         "valPlazoDias": 150,
+         "valNumeroCDT": "6321AF0000446287",
+         "valRetencionTotal": 4593,
+         "valRetencionTotalHomologado": "$4.593,00",
+         "fecFechaVencimientoHomologado": "2018/08/06",
+         "valTotalInteresEstimadoHomologado": "$114.815,00",
+         "valTotalInteresesNetoHomologado": "$110.222,00",
+         "valNetoPeriodoHomologado": "$110.222,00"
+      },
+            {
+         "idTipoProyeccion": "proyeccion2",
+         "valTotalInteresEstimado": 164330,
+         "valNetoPeriodo": 157757,
+         "valTasaEfectiva": 5.7,
+         "valTotalInteresesNeto": 157757,
+         "fecFechaVencimiento": 1538802000000,
+         "valPlazoDias": 210,
+         "valNumeroCDT": "6321AF0000446292",
+         "valRetencionTotal": 6573,
+         "valRetencionTotalHomologado": "$6.573,00",
+         "fecFechaVencimientoHomologado": "2018/10/06",
+         "valTotalInteresEstimadoHomologado": "$164.330,00",
+         "valTotalInteresesNetoHomologado": "$157.757,00",
+         "valNetoPeriodoHomologado": "$157.757,00"
+      }
+   ],
+   "caracterAceptacion": "B"
+}

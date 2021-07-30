@@ -1,0 +1,14 @@
+{
+    "horaApertura": "16273645",
+    "total": "8001",
+    "respuestaErrorEMV": null,
+    "fechaApertura": "20180125",
+    "msgRespuesta": null,
+    "ultimoMensaje": "1",
+    "caracterAceptacion": "B",
+    "nombreOperacion": "aperturaCuentaAhorros",
+    "respuestaEMV": "&amp;lt;&amp;lt;&amp;gt;&amp;gt;",
+    "talon": "16273647",
+    "numeroProducto": "0000099201005578",
+    "codMsgRespuesta": "0"
+}

@@ -1,0 +1,245 @@
+<gs-row>
+    <gs>
+        <hgroup gui="hgroup">
+            <div>
+                <i class="fa fa-user-circle" color="asbestos"></i>
+            </div>
+            <div>
+                <h1>{{ title }}</h1>
+                <h2>{{ extract }}</h2>
+            </div>
+        </hgroup>
+    </gs>
+</gs-row>
+
+<div ui-view="cdat-reinversion">
+
+    <gs-row>
+        <gs col="100/1">
+            <box>
+
+                <header>
+                    <h3 style="color:#2980b9">Realice la reinversi&oacute;n del CDAT Virtual en 3 pasos:</h3>
+                </header>
+
+                <div gui="wizard-progress">
+                    <ul>
+                        <li gui-sref="app.cdat.reinversion.detalle.simulacion" gui-sref-class="current">
+                            <span>1</span>
+                            <b>Simulaci&oacute;n</b>
+                        </li>
+                        <li gui-sref="app.cdat.reinversion.detalle.simulacion.reinversion" gui-sref-class="current">
+                            <span>2</span>
+                            <b>Reinversi&oacute;n</b>
+                        </li>
+                        <li gui-sref="app.cdat.reinversion.detalle.simulacion.reinversion.resumen|app.cdat.reinversion.detalle.simulacion.reinversion.resumen.biometric" gui-sref-class="current">
+                            <span>3</span>
+                            <b>Confirmaci&oacute;n</b>
+                        </li>
+                    </ul>
+                </div>
+            </box>
+        </gs>
+    </gs-row>
+
+    <gs-row>
+        <gs>
+            <box>
+
+                <header>
+                    <h3 style="color:#2980b9">Paso 1: Simulación: Digite las condiciones de la reinversi&oacute;n y simule</h3>
+                </header>
+
+
+                <form name="form.valoresCDAT">
+                    <gs-row>
+
+                        <gs col="x-3|md-6">
+                            <label gui="label">Valor actual de la inversi&oacute;n:</label>
+                            <input gui="input-control" id="valorInversionActual" ng-model="simulacion.valorActual" text-align="right" readonly/>
+                            <!-- <input gui="input-control" id="valorInversion" ng-model="simulacion.valorInversion" gui-validate rules='{"required": true, "min":'{{ simulacion.tipoCDAT.montoMin }}', "max":'{{ simulacion.tipoCDAT.montoMax }}'}' text-align="right" chars="only-numbers" value= "{{ simulacion.tipoCDAT.montoMin }}"/> -->
+                        </gs>
+                        <gs col="x-3|md-6">
+                            <label gui="label">Valor total que el cliente desea reinvertir:</label>
+                            <label gui="overlabel" for="valorInversionRein" gui-mask="currency" ng-model="simulacion.valorReinvertir"></label>
+                            <input gui="input-control" id="valorInversionRein" ng-model="simulacion.valorReinvertir" ng-change="cambioValorSimulacion()" gui-validate rules='{"required": true, "min":"{{simulacion.tipoCDAT.montoMin}}", "max":"{{simulacion.tipoCDAT.montoMax}}"}' text-align="right"
+                                chars="only-numbers" gui-tooltip gui-title="{{ 'Valor mínimo de la inversión ' + ((simulacion.tipoCDAT.montoMin + 1) | currency)}}" />
+                            <!-- <input gui="input-control" id="valorInversion" ng-model="simulacion.valorInversion" gui-validate rules='{"required": true, "min":'{{ simulacion.tipoCDAT.montoMin }}', "max":'{{ simulacion.tipoCDAT.montoMax }}'}' text-align="right" chars="only-numbers" value= "{{ simulacion.tipoCDAT.montoMin }}"/> -->
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+                        <gs>
+                            <hr>
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+                        <gs col="x-3|md-6">
+                            <label gui="label">¿A qu&eacute; plazo?</label>
+                            <div gui="radio-group">
+                                <label style="width: 100px"><input type="radio" value="dias" ng-model="simulacion.tipoPlazo" ng-change="simulacion.plazo = '';simulacion.frecuencia = ''" required/> D&iacute;as</label>
+                                <label style="width: 100px"><input type="radio" value="meses" ng-model="simulacion.tipoPlazo" ng-change="simulacion.plazo = '';simulacion.frecuencia = ''" required/> Meses</label>
+                                <label style="width: 100px"><input type="radio" value="calendario" ng-model="simulacion.tipoPlazo" ng-change="simulacion.plazo = '';simulacion.frecuencia = ''" required/> Calendario</label>
+                            </div>
+                        </gs>
+                        <gs col="x-2|md-6" ng-if="simulacion.tipoPlazo">
+                            <label gui="label">{{simulacion.tipoPlazo != 'calendario' ? (simulacion.tipoPlazo == 'dias' ? '¿Cu&aacute;ntos d&iacute;as?' : '¿Cu&aacute;ntos meses?') : 'Fecha'}}</label>
+                            <input ng-if="simulacion.tipoPlazo != 'calendario'" gui="input-control" ng-model="simulacion.plazo" ng-disabled="!simulacion.tipoCDAT" gui-validate rules='{"required": true, "min":"{{ (simulacion.tipoPlazo == "dias" ? simulacion.tipoCDAT.plazoMin : (simulacion.tipoCDAT.plazoMin / 30)-1 | round ) }}", "max":"{{(simulacion.tipoPlazo == "dias" ? simulacion.tipoCDAT.plazoMax : (simulacion.tipoCDAT.plazoMax / 30)+1 | round ) }}"}'
+                                text-align="right" chars="only-numbers" ng-change="cambioValorSimulacion()" gui-tooltip gui-title="{{ simulacion.tipoPlazo == 'dias' ? 'El plazo mínimo es de ' + (simulacion.tipoCDAT.plazoMin + 1) + ' días y máximo de ' + (simulacion.tipoCDAT.plazoMax - 1) + ' días.' : 'El plazo mínimo es de ' + ((simulacion.tipoCDAT.plazoMin / 30) | round ) + ' mes y máximo ' + ((simulacion.tipoCDAT.plazoMax / 30) | round ) + ' meses.' }}"
+                            />
+
+                            <input type="text" ng-if="simulacion.tipoPlazo == 'calendario'" pikaday="$gui.form1.dateFrom" gui="input-control" ng-model="simulacion.dateFrom" gui-validate rules='{"display": "Fecha", "required": true}' readonly min-date="{{simulacion.tipoPlazo != 'calendario' ? '' : simulacion.tipoCDAT.fechaPlazoMin  }}"
+                                max-date="{{simulacion.tipoPlazo != 'calendario' ? '' : simulacion.tipoCDAT.fechaPlazoMax }}" ng-change="cambioValorSimulacion()" gui-tooltip gui-title="{{ 'Seleccione la fecha de vencimiento en el calendario.' }}"/>
+                        </gs>
+                        <gs col="x-2|md-6" ng-if="form.valoresCDAT.$valid">
+                            <label gui="label">Fecha de vencimiento
+                                <input type="text" gui="input-control" ng-model="simulacion.vencimiento" pikaday="$gui.form1.fechaVenc" disabled/>
+                            </label>
+                        </gs>
+                    </gs-row>
+                </form>
+
+                <gs-row>
+                    <gs>
+                        <hr>
+                    </gs>
+                </gs-row>
+
+                <gs-row>
+                    <form name="form.simulacion">
+                        <gs col="x-4|md-6">
+                            <label gui="label">¿El cliente quiere capitalizar sus intereses?
+                                <select gui="input-control" ng-model="simulacion.interes" ng-options="interes.value as interes.label for interes in intereses" ng-change="guardarPeriocidad()" gui-tooltip gui-title="Si el cliente desea capitalizar los intereses, estos se adicionarán automáticamente al valor de la inversión en el momento de la prórroga automática." required>
+                                    <option value="">Seleccione</option>
+                                </select>
+                            </label>
+                        </gs>
+                        <gs col="x-6|md-6" ng-if="simulacion.interes == 'No'">
+                            <label gui="label">¿Qu&eacute; periodicidad de pago de intereses desea el cliente?</label>
+                            <select gui="input-control" ng-model="simulacion.frecuencia" ng-disabled="!form.valoresCDAT.$valid" gui-validate rules='{"required": true}' ng-options="rendimiento as rendimiento.valDescripcionPeriodo for rendimiento in rendimientos" ng-change="guardarPeriocidad()">
+                                  <option value="">Seleccione frecuencia</option>
+                              </select>
+                        </gs>
+                    </form>
+
+                </gs-row>
+
+                <gs-row>
+                    <gs>
+                        <hr />
+                    </gs>
+                </gs-row>
+
+                <gs-row>
+                    <gs pull-left>
+                        <button gui="form-button" bg-color="asbestos" ui-sref="^">Regresar</button>
+                    </gs>
+                    <gs push-right>
+                        <button gui="form-button" bg-color="alizarin" ng-disabled="!form.simulacion.$valid || !form.valoresCDAT.$valid" ng-click="$gui.model.resultado = true; simular()">Simular</button>
+                    </gs>
+                </gs-row>
+
+            </box>
+        </gs>
+    </gs-row>
+
+    <gs-row ng-if="tipoProyeccion.seleccion != '' && $gui.model.resultado == true">
+        <gs>
+            <box>
+
+                <header>
+                    <h3 style="color:#2980b9">Paso 1: Informe al cliente los resultados de la simulaci&oacute;n</h3>
+                </header>
+
+                <form name="form.resultadoSimulacion">
+
+                    <gs-row>
+                        <gs>
+                            <table gui="table:table-bordered:table-fixed:table-editable:table-expanded" text-align="center">
+                                <thead>
+                                    <tr>
+                                        <th bg-color="silver"></th>
+                                        <th text-align="center" bg-color="concrete" gui="h3" position="relative"><i class="fa fa-user-circle fa-lg"></i> Opci&oacute;n solicitada por el cliente</th>
+                                        <th ng-if="proyeccion1.idTipoProyeccion" colspan="{{proyeccion2.idTipoProyeccion ? 2 : 1}}" text-align="center" bg-color="alizarin" gui="h3" position="relative"><i class="fa fa-check-circle fa-lg"></i> Davivienda le Sugiere</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th style="font-size:14px">Intereses despues<br>de impuestos</th>
+                                        <td bg-color="clouds" valign="bottom">
+                                            <h3 gui="badge" bg-color="asbestos" style="font-size:18px">{{proyeccionCDT.valTotalInteresesNetoHomologado}}</h3>
+                                        </td>
+                                        <td valign="bottom" ng-if="proyeccion1.idTipoProyeccion">
+                                            <h3 gui="badge:badge-x2" bg-color="sun-flower" style="font-size:18px">{{proyeccion1.valTotalInteresesNetoHomologado}}</h3>
+                                        </td>
+                                        <td valign="bottom" ng-if="proyeccion2.idTipoProyeccion">
+                                            <h3 gui="badge:badge-x3" bg-color="turquoise" style="font-size:18px">{{proyeccion2.valTotalInteresesNetoHomologado}}</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style="font-size:14px">Intereses antes de impuestos (Valor Total Unificado%)</th>
+                                        <td bg-color="clouds" style="font-size:18px">{{proyeccionCDT.valTotalInteresEstimadoHomologado}} </td>
+                                        <td ng-if="proyeccion1.idTipoProyeccion" style="font-size:18px">{{proyeccion1.valTotalInteresEstimadoHomologado}}</td>
+                                        <td ng-if="proyeccion2.idTipoProyeccion" style="font-size:18px">{{proyeccion2.valTotalInteresEstimadoHomologado}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="font-size:14px">Tasa E.A. (Valor Total Unificado%)</th>
+                                        <td bg-color="clouds" style="font-size:18px">{{proyeccionCDT.valTasaEfectiva ? proyeccionCDT.valTasaEfectiva + '%' : ''}} </td>
+                                        <td ng-if="proyeccion1.idTipoProyeccion" style="font-size:18px">{{proyeccion1.valTasaEfectiva ? proyeccion1.valTasaEfectiva + '%' : ''}}</td>
+                                        <td ng-if="proyeccion2.idTipoProyeccion" style="font-size:18px">{{proyeccion2.valTasaEfectiva ? proyeccion2.valTasaEfectiva + '%' : ''}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="font-size:14px">Plazo</th>
+                                        <td bg-color="clouds" style="font-size:18px">{{proyeccionCDT.valPlazoDias ? proyeccionCDT.valPlazoDias + ' días' : ''}}</td>
+                                        <td ng-if="proyeccion1.idTipoProyeccion" style="font-size:18px">{{proyeccion1.valPlazoDias ? proyeccion1.valPlazoDias + ' días' : ''}}</td>
+                                        <td ng-if="proyeccion2.idTipoProyeccion" style="font-size:18px">{{proyeccion2.valPlazoDias ? proyeccion2.valPlazoDias + ' días' : ''}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="font-size:14px">Fecha de Vencimiento</th>
+                                        <th bg-color="clouds" style="font-size:18px">{{proyeccionCDT.fecFechaVencimientoHomologado}}</th>
+                                        <th color="alizarin" ng-if="proyeccion1.idTipoProyeccion" style="font-size:18px">{{proyeccion1.fecFechaVencimientoHomologado}}</th>
+                                        <th color="alizarin" ng-if="proyeccion2.idTipoProyeccion" style="font-size:18px">{{proyeccion2.fecFechaVencimientoHomologado}}</th>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th color="alizarin" style="font-size:14px">Seleccione la opci&oacute;n que el cliente desee</th>
+
+                                        <td bg-color="clouds"><label><input type="radio" name="inversion" ng-model="tipoProyeccion.seleccion" value="cdt"/></label></td>
+                                        <td ng-if="proyeccion1.idTipoProyeccion"><label><input type="radio" name="inversion" ng-model="tipoProyeccion.seleccion" value="proyeccion1"/></label></td>
+                                        <td ng-if="proyeccion2.idTipoProyeccion"><label><input type="radio" name="inversion" ng-model="tipoProyeccion.seleccion" value="proyeccion2"/></label></td>
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </gs>
+
+                        <gs col="x-12|md-12">
+                            <gui-caption type="info" ng-model="caption.resultSimulacion" text-align="center"></gui-caption>
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+                        <gs>
+                            <hr />
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+                        <gs push-right>
+                            <button gui="form-button" ng-disabled="!form.simulacion.$valid" bg-color="alizarin" ng-click="guardarCDT()" ui-sref=".reinversion">Continuar</button>
+                        </gs>
+
+                        <gs push-right>
+                            <button gui="form-button" bg-color="alizarin" ng-disabled="!form.simulacion.$valid" ng-click="$gui.model.resultado = false; $gui.vaciarFormulario()">Volver a Simular</button>
+                        </gs>
+                    </gs-row>
+
+                </form>
+
+            </box>
+        </gs>
+    </gs-row>
+
+</div>

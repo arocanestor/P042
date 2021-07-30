@@ -1,0 +1,47 @@
+<div ui-view="cdat_main">
+
+    <form>
+    <gs-row>
+        <gs col="100/1">
+            <box>
+
+                <header>
+                    <h3 style="color:#2980b9"></h3>
+                </header>
+
+                <gs-row>  
+                    <gs col="x-100/4|md-12">
+                        <label gui="label">No. Cuenta para Retiros:
+                            <select gui="input-control" type="text"
+                                ng-options="c.numNumeroId as c.numNumeroId for c in cuentas"
+                                ng-model="selectedCuenta" required readonly>
+                                <option value="">Seleccione..</option>
+                            </select>
+                        </label>
+                    </gs>
+
+                    <!--<gs col="x-100/2|md-12">
+                        <label gui="label">Tipo de Cuenta:
+                            <select gui="input-control" type="text"
+                                ng-options="t.codigo as t.desc for t in tipo"
+                                ng-model="selectedTipo" required readonly>
+                                <option value="">Seleccione..</option>
+                            </select>
+                        </label>
+                    </gs>-->
+                </gs-row>
+
+                
+
+                <gs-row>
+                    <gs col="x-100/4|md-12">
+                        <button gui="form-button" bg-color="alizarin"  ng-click="$gui.aceptar(selectedCuenta)">Aceptar</button>
+                    </gs>
+                </gs-row>
+
+            </box>
+        </gs>
+    </gs-row>
+    </form>
+
+</div>

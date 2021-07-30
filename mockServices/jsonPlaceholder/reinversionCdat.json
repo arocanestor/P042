@@ -1,0 +1,10 @@
+{
+   "codMsgRespuesta": "0",
+   "valDireccionIpConsumidor": "90.28.15.30",
+   "caracterAceptacion": "B",
+   "confirmacionReinversion":    {
+      "valNumeroAprobacion": "012525",
+      "fecFechaAprobacion": 1521580136000,
+      "fecFechaAprobacionHomologado": "20/03/2018T16:08:56"
+   }
+}

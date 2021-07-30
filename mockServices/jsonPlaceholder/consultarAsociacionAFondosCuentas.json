@@ -1,0 +1,39 @@
+{
+    "nombreOperacion": "",
+    "total": 0,
+    "caracterAceptacion": "B",
+    "ultimoMensaje": 0,
+    "idTransaccion": "",
+    "numTipoId": 0,
+    "codMsgRespuesta": 0,
+    "msgRespuesta": "transaccion exitosa",
+    "numCantidadDeCuentas": 1,
+    "cuentas": {
+      "cuentas": [
+        {
+          "numNumeroId": 771171717171,
+          "valTipoId": "",
+          "numCodigoDeBanco": 0,
+          "numTipoDeProducto": 0,
+          "numNumeroDeProducto": 0,
+          "valAlias": ""
+        },
+        {
+          "numNumeroId": 771171717172,
+          "valTipoId": "",
+          "numCodigoDeBanco": 0,
+          "numTipoDeProducto": 0,
+          "numNumeroDeProducto": 0,
+          "valAlias": ""
+        },
+        {
+          "numNumeroId": 771171717178,
+          "valTipoId": "",
+          "numCodigoDeBanco": 0,
+          "numTipoDeProducto": 0,
+          "numNumeroDeProducto": 0,
+          "valAlias": ""
+        }
+      ]
+    }
+  }

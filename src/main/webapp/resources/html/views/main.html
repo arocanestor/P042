@@ -1,0 +1,20 @@
+<div ui-view="main_content">
+
+    <gs-row>
+        <gs col="x-3|md-6|xs-12" cursor="{{ account.codigo && !account.disabled ? 'pointer' : 'not-allowed' }}"
+            ui-sref=".{{ !account.disabled ? routeApp[account.codigo] : '' }}"
+            ng-repeat="account in lov.lov_productos_novedades_fondos_inversion | orderBy : ['codigo']">
+            <div gui="classic-kpi" title="Indicador de aperturas de {{ account.desc }}"
+                bg-color="{{ account.codigo && !account.disabled ? 'alizarin' : 'asbestos' }}">
+                <header>
+                    <h6>{{ account.desc }}</h6>
+                    <i class="{{ accountIcons[routeApp[account.codigo]] || 'flat-financial-' }}"></i>
+                </header>
+                <div class="bloqued-kpi" ng-show="account.disabled"><i class="fa fa-lock"></i><span
+                        ng-show="account.disabledBiometric">requiere autenticación por biométrico</span></div>
+            </div>
+        </gs>
+
+    </gs-row>
+
+</div>

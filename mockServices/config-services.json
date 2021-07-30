@@ -1,0 +1,913 @@
+[
+    
+    {
+        "request": {
+            "url": "api/novedades/fondos-cuentas",
+            "method": "POST"
+        },
+        "response": {
+            "status": 200,
+            "latency": 500,
+            "headers": {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://webappletdes.davivienda.loc",
+                "Respuesta": "Actualizado en Siebel"
+            },
+            "file": "./mockServices/jsonPlaceholder/consultarAsociacionAFondosCuentas.json"
+        }
+    },
+    {
+        "request": {
+            "url": "api/novedades/modificacion-cuentas",
+            "method": "POST"
+        },
+        "response": {
+            "status": 200,
+            "latency": 500,
+            "headers": {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://webappletdes.davivienda.loc",
+                "Respuesta": "Actualizado en Siebel"
+            },
+            "file": "./mockServices/jsonPlaceholder/daviplusYSolidezModificacionDeCuentas.json"
+        }
+    },
+    
+    {
+    "request": {
+        "url": "actualizaSiebel",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "latency": 500,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "https://webappletdes.davivienda.loc",
+            "Respuesta": "Actualizado en Siebel"
+        },
+        "file": "./mockServices/jsonPlaceholder/actualizaSiebel.json"
+    }
+}, {
+    "request": {
+        "url": "api/autenticacion/consultaCliente",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Origin": "https://webappletdes.davivienda.loc",
+            "Respuesta": "OK"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/consultaCliente.json"
+    }
+}, {
+    "request": {
+        "url": "api/siebelsp/consultaPersonaJuridica",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/consultaPersonaJuridica.json"
+    }
+}, {
+    "request": {
+        "url": "api/siebelsp/consultaPersonaNatural",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json;charset=utf-8",
+            "Access-Control-Allow-Origin": "https://webappletdes.davivienda.loc",
+            "Respuesta": "OK"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/consultaPersonaNatural.json"
+    }
+}, {
+    "request": {
+        "url": "api/compartidos/generacionDocumentos",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/generacionDocumentos.json"
+    }
+}, {
+    "request": {
+        "url": "api/compartidos/aperturaCuentaAhorros",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/aperturaCuentaAhorros.json"
+    }
+}, {
+    "request": {
+        "url": "api/cautela/listasRestrictivas",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/listasRestrictivas.json"
+    }
+}, {
+    "request": {
+        "url": "api/cautela/listaCautela",
+        "method": "POST"
+    },
+    "response": {
+        "status": 417,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "NO SE ENCONTRÓ AL USUARIO EN NINGUNA LISTA"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/listaCautela.json"
+    }
+}, {
+    "request": {
+        "url": "api/novedades/novedadesGMF",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/novedadesGMF.json"
+    }
+}, {
+    "request": {
+        "url": "api/parametros/getCombos",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json;charset=utf-8",
+            "Access-Control-Allow-Origin": "https://webappletdes.davivienda.loc",
+            "Respuesta": "OK"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/getCombos.json"
+    }
+}, {
+    "request": {
+        "url": "api/cdat/consultaTipoDepositoSolicitud",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json;charset=utf-8",
+            "Access-Control-Allow-Origin": "https://webappletdes.davivienda.loc",
+            "Respuesta": "OK"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/consultaTipoDepositoSolicitud.json"
+    }
+}, {
+    "request": {
+        "url": "api/cdat/consultaTipoDepositoProductoSolicitud",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/consultaTipoDepositoProductoSolicitud.json"
+    }
+}, {
+    "request": {
+        "url": "api/cdat/consultaPeriodoSolicitud",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/consultaPeriodoSolicitud.json"
+    }
+}, {
+    "request": {
+        "url": "api/cdat/simulacionCdat",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "La Fecha de Inversion es mayor a la fecha de algo"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/simulacionCdat.json"
+    }
+}, {
+    "request": {
+        "url": "api/cdat/constitucionCdat",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "La apertura de su CDaT no pudo ser completada porque la cuenta no cumple las condiciones para transferir el valor de la inversion. Por favor comuniquese con el  Call Center en Bogota  3383838 y en el resto del pais 018000123838."
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/constitucionCdat.json"
+    }
+}, {
+    "request": {
+        "url": "api/reportes/datosReporte",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al obtener datos del reporte"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/datosReporte.json"
+    }
+}, {
+    "request": {
+        "url": "/evaluadorLight/services/evaluacionWS",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/xml",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al obtener datos del reporte"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/evaluador.xml"
+    }
+}, {
+    "request": {
+        "url": "/evaluadorLight/services/evaluacionWS?wsdl",
+        "method": "GET"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/xml",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al obtener datos del reporte"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/evaluador.wsdl"
+    }
+}, {
+    "request": {
+        "url": "api/compartidos/validacionesPrevias",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/xml",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al obtener datos del reporte"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/validacionesPrevias.json"
+    }
+}, {
+    "request": {
+        "url": "api/reportes/getAutorizacionCentrales",
+        "method": "GET"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/xml",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al obtener datos del reporte"
+        },
+        "latency": 1000,
+        "body": "true"
+    }
+}, {
+    "request": {
+        "url": "api/reportes/textosReporte",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al obtener datos del reporte"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/textosCaracteristicasCDT.json"
+    }
+}, {
+    "request": {
+        "url": "api/compartidos/asignarMedio",
+        "method": "POST"
+    },
+    "response": {
+        "status": 417,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al obtener datos del reporte"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/asignarMedio.json"
+    }
+}, {
+    "request": {
+        "url": "api/compartidos/generarDocsDesembolso",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al obtener datos del reporte"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/generarDocsDesembolso.json"
+    }
+}, {
+    "request": {
+        "url": "api/compartidos/crearPagare",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al obtener datos del reporte"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/crearPagare.json"
+    }
+}, {
+    "request": {
+        "url": "api/cdat/consultaSaldosCdtCdat",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/consultaSaldosCdtCdat.json"
+    }
+}, {
+    "request": {
+        "url": "api/cdat/reinversionCdat",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "La apertura de su CDaT no pudo ser completada porque la cuenta no cumple las condiciones para transferir el valor de la inversion. Por favor comuniquese con el  Call Center en Bogota  3383838 y en el resto del pais 018000123838."
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/reinversionCdat.json"
+    }
+}, {
+    "request": {
+        "url": "api/cdat/cancelacionCdat",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "La apertura de su CDaT no pudo ser completada porque la cuenta no cumple las condiciones para transferir el valor de la inversion. Por favor comuniquese con el  Call Center en Bogota  3383838 y en el resto del pais 018000123838."
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/cancelacionCdat.json"
+    }
+}, {
+    "request": {
+        "url": "api/cdat/consultarProductos",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "La apertura de su CDaT no pudo ser completada porque la cuenta no cumple las condiciones para transferir el valor de la inversion. Por favor comuniquese con el  Call Center en Bogota  3383838 y en el resto del pais 018000123838."
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/conProducto.json"
+    }
+}, {
+    "request": {
+        "url": "api/productos/consultarProductos",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "La apertura de su CDaT no pudo ser completada porque la cuenta no cumple las condiciones para transferir el valor de la inversion. Por favor comuniquese con el  Call Center en Bogota  3383838 y en el resto del pais 018000123838."
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/conProducto.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/consultaPeriodoTasa",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/consultaPeriodoTasa.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/simulacionCdtClienteSolicitud",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/simulacionCdtClienteSolicitud.json"
+    }
+}, {
+    "request": {
+        "url": "api/pymes/enviarNotificacionesMail",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/enviarNotificacionesMail.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/crearActualizarClienteCobis",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/crearActualizarClienteCobis.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/constitucionCdtSolicitud",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/constitucionCdtSolicitud.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/consultaAtribucionesCdt",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/consultaAtribucionesCdt.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/consultaDetalleXcdt",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/consultaDetalleXcdt.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/consultaCdtXEstado",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "https://webappletdes.davivienda.loc",
+            "Respuesta": "OK"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/consultaCdtXEstado.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/reinversionCdtSolicitud",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/reinversionCdtSolicitud.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/mantenimientoCdt",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/mantenimientoCdt.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/fraccionarCdtOficina",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/fraccionarCdtOficina.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/endosarCdtOficina",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/endosarCdtOficina.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/fusionarCdtOficina",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/FusionarCDTOficina.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/bloqueoDesbloqueoCdt",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/bloqueoDesbloqueoCdt.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/cancelarCdtSolicitud",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/cancelarCdtSolicitud.json"
+    }
+}, {
+    "request": {
+        "url": "api/extractos/extractosDisponibles",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al obtener las listas de valor"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/extractosDisponibles.json"
+    }
+}, {
+    "request": {
+        "url": "api/consultacdt/consultaCuadreCDTOficina",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/consultaCuadreCDTOficina.json"
+    }
+},{
+    "request": {
+        "url": "api/extractos/enviarExtractosMail",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al obtener las listas de valor"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/enviarExtractosMail.json"
+    }
+},{
+    "request": {
+        "url": "api/reportes/guardaPdf",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al generar PDF"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/guardaPDF.json"
+    }
+},{
+    "request": {
+        "url": "api/reportes/obtienePdf/e48c3f62-ebdd-4789-ac4b-b8f1716c2bfd.pdf",
+        "method": "GET"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al generar PDF"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/obtienePdf.json"
+    }
+},{
+    "request": {
+        "url": "api/reportes/linkQueryFileNet",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al consultar FileNet"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/linkQueryFileNet.json"
+    }
+},{
+    "request": {
+        "url": "api/reportes/cosultaDocsFileNet",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error al generar PDF"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/consultaDocsFileNet.json"
+    }
+},{
+    "request": {
+        "url": "api/reportes/fileNet",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error en el Gestor FileNet"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/fileNet.json"
+    }
+},{
+    "request": {
+        "url": "api/administrador/consultarFuncionalidadesXUsuario",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error en el Gestor FileNet"
+        },
+        "latency": 1000,
+        "body": "Respuesta del servicio exitosa!",
+        "file": "./mockServices/jsonPlaceholder/consultarFuncionalidadesXUsuario.json"
+    }
+},{
+    "request": {
+        "url": "api/consultacdt/obtenerOficinaHost",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error en el Gestor FileNet"
+        },
+        "latency": 1000,
+        "body": "ZjBiZS9JQUVndVhMRFJNR1Y3THlwUT09OjpNNWR3MnJFSmxnN2wza1FScnQ1RW5nPT06Okhhd0JxZWlIWnRLUS9zWWt4dVNla0E9PQ==",
+        "file": ""
+    }
+},{
+    "request": {
+        "url": "api/administrador/consultaBancos",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error en el Gestor FileNet"
+        },
+        "latency": 1000,
+        "body": "B",
+        "file": "./mockServices/jsonPlaceholder/consultaBancos.json"
+    }
+}]

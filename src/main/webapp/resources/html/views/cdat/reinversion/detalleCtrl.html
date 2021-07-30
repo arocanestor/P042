@@ -1,0 +1,79 @@
+<div ui-view="cdat-detalle">
+
+    <gs-row>
+        <gs>
+            <hgroup gui="hgroup">
+                <div>
+                    <i class="fa fa-user-circle" color="asbestos"></i>
+                </div>
+                <div>
+                    <h1>{{ title }}</h1>
+                    <h2>{{ extract }}</h2>
+                </div>
+            </hgroup>
+        </gs>
+    </gs-row>
+
+    <gs-row>
+        <gs>
+            <box>
+
+                <gs-row ng-if="productos.length == 0">
+                    <gs>
+                        <gui-caption type="info" ng-model="dialogs.checkCDaT" text-align="center"></gui-caption>
+                    </gs>
+                </gs-row>
+
+                <form ng-if="productos.length > 0">
+
+                    <header>
+                        <h3 style="color:#2980b9">{{ subtitle }}</h3>
+                    </header>
+
+                    <gs-row>
+                        <gs>
+                            <div overflow="x">
+                                <table gui="table:table-bordered:table-zebra:table-summary">
+                                    <tbody>
+                                        <tr>
+                                            <th text-align="center">N&uacute;mero de CDAT Virtual</th>
+                                            <th text-align="center">Fecha de Apertura</th>
+                                            <th text-align="center">Fecha de vencimiento</th>
+                                            <th text-align="center">Valor inicial de la inversión</th>
+                                            <th text-align="center">Plazo (en d&iacute;as)</th>
+                                            <th text-align="center">Tasa (E.A)</th>
+                                            <th text-align="center">Intereses netos &uacute;ltimo periodo</th>
+                                            <th text-align="center">Capitalizaci&oacute;n intereses</th>
+                                            <th text-align="center">Valor actual de la inversi&oacute;n</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr ng-repeat="producto in productos">
+
+                                            <td>{{producto.numeroCompletoCDAT}}</td>
+                                            <td>{{producto.fechaExpedicion}}</td>
+                                            <td>{{producto.fechaProximoVencimiento}}</td>
+                                            <td>{{producto.valorInicial}}</td>
+                                            <td>{{producto.plazo +' d&iacute;as'}}</td>
+                                            <td>{{producto.sumatoriaTasas}}</td>
+                                            <td>{{producto.valorNetoUltimosInteresesLiquidados}}</td>
+                                            <td>{{producto.tipoDeNegocio == 'CAPITALIZABLE' ? 'Si' : 'No'}}</td>
+                                            <td>{{producto.valorNetoPagar}}</td>
+                                            <td><button gui="form-button" bg-color="alizarin" ng-disabled="((producto.valIndicadorReinversion != '3') && (producto.valIndicadorReinversion != '4'))" ng-click="reinversion(producto)">Reinversi&oacute;n</button></td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </gs>
+                    </gs-row>
+                    <gs-row>
+                        <gs pull-left>
+                            <button gui="form-button" bg-color="asbestos" ng-click="$gui.regresar()" ui-sref="^">Regresar</button>
+                        </gs>
+                    </gs-row>
+
+                </form>
+            </box>
+        </gs>
+    </gs-row>
+</div>

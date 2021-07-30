@@ -1,0 +1,13 @@
+{
+    "codMsgRespuesta": "0",
+    "relaciones": [{
+            "permiso": "3-CDT",
+            "funcionalidad": "CUENTAS"
+        },
+        {
+            "permiso": "2-CDAT",
+            "funcionalidad": "CUENTAS"
+        }
+    ],
+    "caracterAceptacion": "B"
+}

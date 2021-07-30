@@ -1,0 +1,92 @@
+<gs-row>
+    <gs>
+        <box>
+            <gs-row>
+                <gs>
+                    <header>
+                        <h3 style="color:#2980b9">Seleccione la fecha y jornada que quiere cuadrar:</h3>
+                    </header>
+                </gs>
+            </gs-row>
+            <gs-row>
+                <gs>
+                    <form name="form.fieldsFechas">
+                        <gs col="x-4|md-4|sm-12">
+                            <label gui="label">Fecha:
+                                <input max-date="{{ fechaHasta || 'toDay' }}" gui="input-control" type="text" pikaday="$gui.dates.dateFrom" ng-model="consulta.fechaCuadre" gui-validate rules='{"display":"Fecha desde", "required": true}' readonly />
+                            </label>
+                        </gs>
+                        <gs col="x-4|md-4|sm-12">
+                            <label gui="label">Jornada:
+                                <select gui="input-control" type="text" ng-options="lov.codigo as lov.desc for lov in lovs.lov_cdt_jornada" ng-model="consulta.jornada" required readonly>
+                                    <option value="">Seleccione..</option>
+                                </select>
+                            </label>
+                        </gs>
+                        <gs col="x-4|md-4|sm-12">
+                            <label gui="label">&nbsp;
+                                <input type="button" gui="form-button" bg-color="alizarin" value="Consultar" ng-click="$gui.consultarCuadre(consulta)" ng-disabled="form.fieldsFechas.$invalid" />
+                            </label>
+                        </gs>
+                    </form>
+                </gs>
+            </gs-row>
+        </box>
+    </gs>
+</gs-row>
+
+<gs-row ng-if="cuadre">
+    <gs>
+        <box>
+            <gs-row>
+                <gs>
+                    <!-- <header>
+                        <h3 class="text-center">LISTADO DE GIROS</h3>
+                    </header> -->
+                    <div class="over-table">
+                        <table gui="table:table-bordered:table-summary:table-fixed:table-zebra">
+                            <thead>
+                                <tr>
+                                    <th text-align="center" width="400">Tipo transacci&oacute;n</th>
+                                    <th text-align="center">Cantidad</th>
+                                    <th text-align="center">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="cuadre in consultaCuadre">
+                                <tr>
+                                    <td style="font-size:15px" align="left">
+                                        <h3>{{ cuadre.tipoTransaccion }}</h3>
+                                    </td>
+                                    <td align="center">{{ cuadre.cantidad }}</td>
+                                    <td align="left">{{ cuadre.valorTotal | currency }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </gs>
+            </gs-row>
+
+            <gs-row>
+                <gs>
+                    <gui-caption type="info" text-align="center" ng-model="caption.info"></gui-caption>
+                </gs>
+            </gs-row>
+            <gs-row>
+                <gs col="x-2|md-4">
+                    <label gui="label">&nbsp;
+                        <button gui="form-button" ng-disabled="!consultaCuadre.length" bg-color="alizarin" ng-click="$gui.imprimir(consultaCuadre)"><i class="fa fa-print"></i> Imprimir</button>
+                    </label>
+                </gs>
+            </gs-row>
+            <gui-print-pdf print-pdf-active="$program.printFlag" print-pdf-data="$program.data" print-pdf-reporte-id="R_CSLTA_CUADRE" print-pdf-reporte-rowid="$config.rowId"></gui-print-pdf>
+        </box>
+    </gs>
+</gs-row>
+
+<gs-row ng-if="captionService.estado">
+    <gs>
+        <box>
+            <gui-caption text-align="center" type="{{captionService.tipoCaption}}" ng-model="captionService.mensaje"></gui-caption>
+        </box>
+    </gs>
+</gs-row>

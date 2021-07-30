@@ -1,0 +1,7 @@
+{
+    "texto2": null,
+    "texto3": null,
+    "plantillaId": "T_CDAT",
+    "texto1": "<b>En la apertura:</b><ul><li>El valor de la inversión (mínimo $500.000) se tomará de la Cuenta de Ahorros* o Corriente que el cliente elija.</li><li>El CDAT Virtual es de manejo individual.</li><li>Le enviamos a su correo las condiciones pactadas en el producto, no habrá entrega de título físico.</li></ul><b>Antes del vencimiento:</b><ul><li>No podrá ceder o vender el CDAT a otra persona.</li></ul><b>En el vencimiento, sin necesidad de volver a la oficina:</b><ul><li>Los intereses serán consignados a la Cuenta de Ahorros* o Corriente que el cliente determine.</li><li>La reinversión o cancelación se podrá hacer a través de www.davivienda.com entre la 00:01 AM y 10:00 PM. Si cancela el CDAT Virtual, los recursos pasarán a la Cuenta de Ahorros* o Corriente que el cliente seleccione.</li><li>Si no cancela el CDAT Virtual, se prorrogará automáticamente al mismo plazo y con la tasa vigente en ese momento.</li></ul><sub>*Aplica para todos los subproductos de Cuentas de Ahorro excepto AFC.</sub><br><sub>*La transferencia de recursos en la apertura, reinversión, cancelación y pago intereses no genera cobro de 4x1.000.</sub>",
+    "reporteId": "R_CDAT_C023"
+}

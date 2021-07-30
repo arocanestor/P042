@@ -1,0 +1,49 @@
+{
+    "detallePagos": [{
+        "codTipoDocumento": "01",
+        "codClienteBeneficiarioTitular": 1020856054,
+        "valFormaPago": "AHO",
+        "valCuentaClienteStratus": "4646548486786",
+        "codMonedaPagoDeposito": 0,
+        "valOficinaPagoTransaccion": "5010",
+        "valPorcentajeDetallePago": 100.00,
+        "codTipoCuentaACH": null,
+        "codBancoAch": "0",
+        "valPeriodicidadPago": "NNN"
+    }],
+    "beneficiarios": [{
+            "codTipoDocumento": "01",
+            "codClienteBeneficiarioTitular": "1026284007",
+            "codRolCliente": "T",
+            "valCondicion": "Y",
+            "codTipoCliente": "T",
+            "valNombreBeneficiario": "CRISTIAN ROJAS FORERO"
+        },
+        {
+            "codTipoDocumento": "01",
+            "codClienteBeneficiarioTitular": "1026284008",
+            "codRolCliente": "A",
+            "valCondicion": "Y",
+            "codTipoCliente": "F",
+            "valNombreBeneficiario": "ANGELA ROJAS FORERO"
+        },
+        {
+            "codTipoDocumento": "01",
+            "codClienteBeneficiarioTitular": "1026284009",
+            "codRolCliente": "T",
+            "valCondicion": "Y",
+            "codTipoCliente": "F",
+            "valNombreBeneficiario": "CARLOS ROJAS DIAZ"
+        },
+        {
+            "codTipoDocumento": "01",
+            "codClienteBeneficiarioTitular": "1026284009",
+            "codRolCliente": "A",
+            "valCondicion": "Y",
+            "codTipoCliente": "T",
+            "valNombreBeneficiario": "FULANO DE TAL"
+        }
+    ],
+    "codMsgRespuesta": "0",
+    "caracterAceptacion": "B"
+}

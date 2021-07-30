@@ -1,0 +1,113 @@
+<div ui-view="cdat-constitucion-resumen-biometric">
+
+    <gs-row>
+        <gs>
+            <box>
+                <form>
+
+                    <header>
+                        <h3 style="color:#2980b9">Paso 3: Confirme con el cliente la informaci&oacute;n de apertura</h3>
+                    </header>
+
+                    <gs-row ng-if = "llamadoConstitucion == 2" >
+                      <gs col="x-12|md-12">
+
+                        <div caption="error" type="error" ng-model="caption.error">
+                            <i class="fa fa-minus-circle fa-2x"></i> <span>{{mensajeConstitucion}}</span>
+                        </div>
+
+                      </gs>
+                    </gs-row>
+
+                    <gs-row>
+
+                      <!-- <gs col="x-12|md-12">
+                          <gui-caption type="info" ng-model="caption.titleConstitucion1" text-align="center"></gui-caption>
+                      </gs> -->
+
+                      <gs col="x-6" col-push="x-3">
+                        <table gui="table:table-bo  rdered:table-summary:table-fixed">
+                            <tbody>
+                                <!-- <tr>
+                                    <th>Nombre CDAT</th>
+                                    <td align="right">{{constitucion.nombre}}</td>
+                                </tr> -->
+                                <tr>
+                                    <th>Valor de la inversi&oacute;n</th>
+                                    <td align="right">{{simulacion.valorInversion | currency}}</td>
+                                </tr>
+                                <tr>
+                                    <th >Plazo</th>
+                                    <td align="right">{{proyeccion.valPlazoDias ? proyeccion.valPlazoDias + ' días' : ''}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tasa E.A</th>
+                                    <td align="right">{{proyeccion.valTasaEfectiva ? proyeccion.valTasaEfectiva + '%' : ''}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Fecha vencimiento</th>
+                                    <td align="right">{{proyeccion.fecFechaVencimientoHomologado}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Total intereses despu&eacute;s de impuestos</th>
+                                    <td align="right">{{proyeccion.valTotalInteresesNetoHomologado}}</td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2" style="color:#2980b9">
+                                    <div>
+                                        <i class="{{tituloIcono}}" color="asbestos"></i><span ng-click="$gui.cambiarValor()">{{tituloVer}}</span>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr ng-if="habilitaVista">
+                                    <th >Capitalizaci&oacute;n intereses</th>
+                                    <td align="right">{{simulacion.interes}}</td>
+                                </tr>
+                                <tr  ng-if="habilitaVista">
+                                    <th>Periodicidad pago intereses</th>
+                                    <td align="right">{{simulacion.frecuenciaDesc}}</td>
+                                </tr>
+                                <tr  ng-if="habilitaVista">
+                                    <th>Intereses despu&eacute;s de impuestos por periodo</th>
+                                    <td align="right">{{proyeccion.valNetoPeriodoHomologado}}</td>
+                                </tr>
+                                <tr  ng-if="habilitaVista">
+                                    <th>Cuenta origen para valor de inversi&oacute;n</th>
+                                    <td align="right">{{constitucion.productoOrigen.label}}</td>
+                                </tr>
+                                <tr  ng-if="habilitaVista && simulacion.interes == 'No'">
+                                    <th>Cuenta para pago intereses</th>
+                                    <td align="right">{{constitucion.productoDestino.label}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                      </gs>
+
+                      <gs col="x-12|md-12">
+                          <gui-caption type="info" ng-model="caption.confirmHuella" text-align="center"></gui-caption>
+                      </gs>
+                  </gs-row>
+
+                    <gs-row>
+                        <gs>
+                            <hr />
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+                      <gs pull-left>
+                          <button gui="form-button" bg-color="asbestos" ng-click="$gui.regresar()" ui-sref="^">Regresar</button>
+                      </gs>
+
+                      <gs push-right>
+                          <button  gui="form-button" bg-color="alizarin" ui-sref=".biometric">Continuar</button>
+                      </gs>
+                    </gs-row>
+
+                </form>
+            </box>
+        </gs>
+    </gs-row>
+
+</div>

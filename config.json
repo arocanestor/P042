@@ -1,0 +1,50 @@
+{
+    "spa": {
+        "name": "NovedadesFondoDeInversion",
+        "code": "P042"
+    },
+    "server": {
+        "port": 4000,
+        "externalUrl": true,
+        "openBrowser": false,
+        "routes": {
+             "/WebBaseNg/resources/": "../SPA_000_BASE_NG/src/main/webapp/resources/",
+             "/resources/": "app_src/",
+             "/resources/pdf": "resources/pdf",
+             "/html/": "app_src/html/"
+        }
+    },
+    "mockServer": {
+        "isActive": true,
+        "location": "localhost",
+        "port": 8000,
+        "admin": 8889,
+        "httpsPort": 8001
+    },
+    "services": {
+        "endPoint": "",
+        "rewritePaths": {},
+        "rewriteEndpoints": {
+        }
+    },
+    "paths": {
+        "appSrc": {
+            "root": "./app_src/",
+            "scripts": "./app_src/js/",
+            "templates": "./app_src/html/"
+        },
+        "webappSrc": {
+            "root": "./src/main/webapp/",
+            "views": "./src/main/webapp/WEB-INF/views/",
+            "resources": {
+                "root": "./src/main/webapp/resources/",
+                "scripts": "./src/main/webapp/resources/js/",
+                "templates": "./src/main/webapp/resources/html/",
+                "styles": "./src/main/webapp/resources/css/"
+            }
+        },
+        "mockServices": {
+            "root": "./mockServices/"
+        }
+    }
+}

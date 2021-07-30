@@ -1,0 +1,73 @@
+<div ui-view="">
+
+    <gs-row>
+        <gs>
+
+            <form name="form.instruccion">
+
+                <box>
+
+                    <header>
+                        <h3 style="color:#2980b9">Realice la instrucci&oacute;n de cancelaci&oacute;n del CDT No. {{ numCDT[0].valNumeroCDT }}</h3>
+                    </header>
+                    <span>
+                        <h3>Ingrese las condiciones de cancelacion del t&iacute;tulo:</h3>
+                    </span>
+                    <gs-row>
+
+                        <gs col="x-4|md-6">
+                            <label gui="label">Forma de pago del valor de la inversión e intereses:</label>
+                            <input gui="input-control" ng-model="instruccion.formaPagoIntereses" disabled/>
+                        </gs>
+                        <gs col="x-3|md-6">
+                            <label gui="label">¿A cuál cuenta Davivienda?</label>
+                            <select gui="input-control" ng-model="instruccion.cuentaFormaPagoIntereses" gui-validate rules='{"required": true}' ng-disabled="llamadoConstitucion == 2" ng-options="producto as producto.label for producto in lovs.lov_productos" gui-tooltip gui-title="{{ 'Recuerde que sólo se habilitarán las Cuentas Davivienda del primer titular del CDT, sólo se puede seleccionar una Cuenta.' }}">
+                                    <option value="">Seleccione</option>
+                                </select>
+                        </gs>
+
+                        <gs col="x-3|md-6">
+                            <label gui="label">Correo electrónico:</label>
+                            <select gui="input-control" ng-model="instruccion.correo" gui-validate rules='{"required": true}' ng-disabled="llamadoConstitucion == 2" ng-options="lov as lov.Email for lov in lovs.lov_email">
+                                      <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+                    </gs-row>
+                    <gs-row>
+                        <!-- <gs pull-left>
+                            <label gui="label">&nbsp;
+                                <button gui="form-button" bg-color="alizarin" ng-disabled="emailOFF" ng-click="$gui.enviarNotificacion()">Enviar Email</button>
+                            </label>
+                        </gs> -->
+                        <gs push-right>
+                            <label gui="label">&nbsp;
+                                <button gui="form-button" bg-color="alizarin" ng-disabled="!form.instruccion.$valid || aplicarOFF " ng-click="$gui.aplicarCambio()">Aplicar Instrucci&oacute;n</button>
+                            </label>
+                        </gs>
+                    </gs-row>
+                    <gs-row ng-if="cambioAplicado == true">
+                        <gs>
+                            <div>
+                                <div caption="success" type="success" text-align="center">
+                                    <i class="fa fa-check-circle fa-2x"></i> <span>
+                                        <ul>
+                                            <li><h3>La instrucción de cancelación se ha aplicado</h3></li>
+                                            <li>Esta instrucción de cancelación se aplicará el día {{fechaExp.getDate() + '/' + (fechaExp.getMonth() + 1) + '/' + (fechaExp.getFullYear())}}, sin necesidad de que el cliente vuelva a la oficina.</li>
+                                            <li>Al titulo físico debe escribirle "CANCELADO" y lo debe enviar en el movimiento de HOY de la oficina.</li>
+                                            <li>Una vez aplicada la instrucción de cancelación, NO se puede reversar.</li>
+                                        </ul>
+                                    </span>
+                                </div>
+                            </div>
+                        </gs>
+                    </gs-row>
+
+                </box>
+
+                </form>
+
+        </gs>
+    </gs-row>
+
+
+</div>

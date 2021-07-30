@@ -1,0 +1,118 @@
+<div ui-view="cdt_main">
+
+    <style>
+        box {
+            position: relative;
+        }
+
+        box i {
+            display: inline-block;
+            padding: 15px;
+            background: #FFF;
+            top: -23px;
+            position: absolute;
+            left: 50%;
+            margin-left: -23px;
+            border-radius: 23px;
+            box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        box header {
+            margin-top: 5px;
+        }
+
+    </style>
+
+    <gs-row>
+        <gs>
+            <box>
+
+                <h1 text-align="center" style="color:#2980b9">¿Qué desea hacer el cliente?</h1>
+
+            </box>
+        </gs>
+    </gs-row>
+
+    <gs-row>
+        <gs></gs>
+    </gs-row>
+
+    <gs-row>
+        <gs>
+
+            <div display="table">
+
+                <box col="100/4" display="table-cell">
+
+                    <header text-align="center">
+                        <h3><i class="fa fa-asterisk"></i> En la apertura</h3>
+                    </header>
+
+                    <gs-row>
+                        <gs>
+                            <button gui="form-button" bg-color="alizarin" ui-sref=".caracteristicas">Simulación y Apertura</button>
+                        </gs>
+                    </gs-row>
+
+                </box>
+
+                <canal></canal>
+
+                <box col="100/4" display="table-cell">
+
+                    <i class="fa fa-calendar-check"></i>
+
+                    <header text-align="center">
+                        <h3>Antes del vencimiento</h3>
+                    </header>
+
+                    <gs-row>
+                        <gs>
+                            <button gui="form-button" bg-color="alizarin" ui-sref=".consulta">Consulta</button>
+                        </gs>
+                        <gs>
+                            <button gui="form-button" bg-color="alizarin" ui-sref=".novedades">Novedades</button>
+                        </gs>
+                    </gs-row>
+
+                </box>
+
+                <canal></canal>
+
+                <box col="100/4" display="table-cell">
+
+                    <header text-align="center">
+                        <h3><i class="fa fa-calendar-day"></i> En el vencimiento</h3>
+                    </header>
+
+                    <gs-row>
+                        <gs>
+                            <button gui="form-button" bg-color="alizarin" ui-sref=".reinversion">Reinversión</button>
+                        </gs>
+                    </gs-row>
+
+                </box>
+
+                <canal></canal>
+
+                <box col="100/4" display="table-cell">
+
+                    <header text-align="center">
+                        <h3><i class="fa fa-calendar-alt"></i> Control diario</h3>
+                    </header>
+
+                    <gs-row>
+                        <gs>
+                            <button gui="form-button" bg-color="alizarin" ui-sref=".cuadre">Cuadre CDT</button>
+                        </gs>
+                    </gs-row>
+
+                </box>
+
+            </div>
+
+        </gs>
+    </gs-row>
+
+
+</div>

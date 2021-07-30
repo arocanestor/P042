@@ -1,0 +1,61 @@
+<div ui-view="cdat-caracteristicas">
+
+  <gs-row>
+      <gs>
+          <hgroup gui="hgroup">
+              <div>
+                  <i class="fa fa-user-circle" color="asbestos"></i>
+              </div>
+              <div>
+                  <h1>{{ title }}</h1>
+                  <h2>{{ extract }}</h2>
+              </div>
+          </hgroup>
+      </gs>
+  </gs-row>
+
+  <gs-row ng-show="caption.listas.status">
+      <gs>
+          <box>
+              <gs-row>
+                  <gs>
+                      <gui-caption title="TOTAL" type="{{ caption.listas.status }}" ng-model="caption.listas.content" text-align="center"></gui-caption>
+                  </gs>
+              </gs-row>
+          </box>
+      </gs>
+  </gs-row>
+
+  <gs-row ng-if="caption.listas.status === 'success'">
+
+    <gs>
+
+      <box>
+              <header>
+                  <h3 style="color:#2980b9">{{ caracteristicas }}</h3>
+              </header>
+
+              <gs-row>
+                <gs>
+                  <div gui="wysiwyg" ng-bind-html="textos.texto1"></div>
+                </gs>
+
+                <gs col="x-12|md-12">
+                    <gui-caption type="info" ng-model="caption.informacion" text-align="center"></gui-caption>
+                </gs>
+
+              </gs-row>
+
+              <gs-row>
+
+                  <gs push-right>
+                      <button gui="form-button" bg-color="alizarin" ui-sref=".simulacion">Continuar</button>
+                  </gs>
+
+              </gs-row>
+      </box>
+
+    </gs>
+  </gs-row>
+
+</div>

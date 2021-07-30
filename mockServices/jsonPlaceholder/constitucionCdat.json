@@ -1,0 +1,11 @@
+{
+    "codMsgRespuesta": "0",
+    "valDireccionIpConsumidor": "0",
+    "caracterAceptacion": "B",
+    "valNumeroCDT": "6321AF0000451931",
+    "confirmacionDebito": {
+        "valNumeroAprobacion": "014259",
+        "fecFechaAprobacion": 1521749541000,
+        "fecFechaAprobacionHomologado": "22/03/2018T15:12:21"
+    }
+}

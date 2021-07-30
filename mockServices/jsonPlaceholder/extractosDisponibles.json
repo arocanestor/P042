@@ -1,0 +1,23 @@
+{
+    "total": "3004",
+    "codMsgRespuesta": "0",
+    "ultimoMensaje": "1",
+    "msgRespuesta": null,
+    "nombreOperacion": "ConsultarListaExtractosPorNumeroProducto",
+    "regtros": [{
+        "mes": "06",
+        "ano": "2018"
+    }, {
+        "mes": "05",
+        "ano": "2015"
+    }, {
+        "mes": "04",
+        "ano": "2018"
+    }, {
+        "mes": "03",
+        "ano": "2018"
+    }],
+    "idTransaccion": "1-5125133519",
+    "caracterAceptacion": "B",
+    "cantidadRegtros": "4"
+}

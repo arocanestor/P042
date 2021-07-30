@@ -1,0 +1,20 @@
+{
+  "nombreOperacion": "",
+  "total": 0,
+  "caracterAceptacion": "B",
+  "ultimoMensaje": 0,
+  "idTransaccion": "",
+  "numTipoId": 0,
+  "codMsgRespuesta": 0,
+  "msgRespuesta": "transaccion exitosa",
+  "valNumeroProducto": 771171717171,
+  "cuentaAsociada": {
+    "codTipoCuenta": 0,
+    "valNumeroCuenta": 771171717171
+  },
+  "cuentaRetiros": {
+    "codTipoCuenta": 0,
+    "valNumeroCuenta": 771171717171,
+    "valEntidadAchRetiros": 0
+  }
+}

@@ -1,0 +1,244 @@
+<div ui-view="novedad_main">
+
+    <gs-row>
+
+        <gs>
+
+            <box>
+                <header>
+                    <h3 style="color:#2980b9">Consulte el CDT que requiere:</h3>
+                </header>
+
+                <form name="form.consultacdt">
+                    <!-- productos creditos asociados -->
+                    <gs-row>
+                        <gs>
+                            <div style="{{cdts.length > 10 ? 'overflow-y:scroll': ''}}">
+                                <table gui="table:table-bordered:table-editable:table-narrow">
+                                    <thead>
+                                        <tr>
+                                            <th style="font-size:13px" width="90">Tipo de producto</th>
+                                            <th style="font-size:13px" width="140">N&uacute;mero de producto</th>
+                                            <th style="font-size:13px" width="160">Valor de la inversión</th>
+                                            <th style="font-size:13px" width="90">Plazo <br>(en días)</th>
+                                            <th style="font-size:13px" width="80">Tasa (E.A.)</th>
+                                            <th style="font-size:13px" width="120">Fecha vencimiento</th>
+                                            <th style="font-size:13px" width="120">Capitalizaci&oacute;n <br> intereses</th>
+                                            <th style="font-size:13px">Periodicidad <br> pago de intereses</th>
+                                            <th width="90"></th>
+                                            <th width="150"></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div style="{{cdts.length > 10 ? 'height: 300px;overflow-y:scroll': ''}}" ng-show="cdts.length != 0">
+                                <table gui="table:table-bordered:table-editable:table-narrow">
+                                    <tbody>
+                                        <tr ng-class="{active: cdt.on}" ng-repeat="cdt in cdts | orderBy:'-fecVencimientoOperacion'">
+                                            <td style="font-size:13px" width="90" text-align="center">{{cdt.valTipoDeposito}}</td>
+                                            <td style="font-size:13px" width="140" text-align="center">{{cdt.valNumeroCDT}}</td>
+                                            <td style="font-size:13px" width="160" text-align="right">{{cdt.valMontoActualOperacion | currency}}</td>
+                                            <td style="font-size:13px" width="90" text-align="center">{{cdt.valPlazoEnDias}}</td>
+                                            <td style="font-size:13px" width="80" text-align="center">{{cdt.valTasaEfectiva + '%'}}</td>
+                                            <td style="font-size:13px" width="120" text-align="center">{{cdt.fecVencimientoOperacionHomologado}}</td>
+                                            <td style="font-size:13px" width="120" text-align="center">{{ (cdt.codCapitalizaIntereses.toString() == 'S' || cdt.codCapitalizaIntereses.toString() == 'Y') ? 'SI' : ' NO ' }}</td>
+                                            <td style="font-size:13px" text-align="center">{{cdt.valDescPeriodicidadPago}}</td>
+                                            <td width="90">
+                                                <button gui="form-button" ng-click="$gui.consultarDetalle($index, cdts, cdt);$program.consultaExtracto()" bg-color="alizarin">Ver detalle</button>
+                                            </td>
+                                            <td width="150">
+                                                <button gui="form-button" ng-click="$program.consultarDoc(cdt);" bg-color="alizarin">Consulta tarjeta de firmas</button>
+                                            </td>
+                                            <!-- <td width="100">
+                                                <button gui="form-button" ng-click="$gui.consultarDetalle($index, cdts, cdt);$program.consultaExtracto()" bg-color="alizarin">Consultar Documento</button>
+                                            </td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div ng-show="indicadorCarga">
+                                <table gui="table:table-bordered:table-editable:table-narrow">
+                                    <tbody>
+                                        <tr>
+                                            <td style="font-size:13px" colspan="4" caption="info">
+                                                <center>
+                                                    <i class="fas fa-spinner fa-spin"></i> Cargando ...
+                                                </center>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </gs>
+
+                    </gs-row>
+
+                </form>
+
+            </box>
+
+        </gs>
+    </gs-row>
+
+    <gs-row ng-if="detalleCDT == true">
+
+        <gs>
+
+            <box>
+                <header>
+                    <h3 style="color:#2980b9">Detalle del CDT No. {{ detalle.valNumeroCDT }}</h3>
+                </header>
+
+                <gs-row>
+                    <gs col="x-6|lg-12">
+                        <table gui="table:table-zebra:table-summary:table-bordered:table-fixed">
+                            <tbody>
+                                <tr>
+                                    <th style="font-size:13px">N&uacute;mero CDT f&iacute;sico:</th>
+                                    <td style="font-size:13px">{{ detalle.valNumeroPreimpreso }} </td>
+                                </tr>
+                                <tr>
+                                    <th style="font-size:13px">Fecha de expedición:</th>
+                                    <td style="font-size:13px">{{ detalle.fecExpedicionHomologacion }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="font-size:13px">Estado:</th>
+                                    <td style="font-size:13px">{{ detalle.valEstado }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="font-size:13px">Subestado:</th>
+                                    <td style="font-size:13px">{{ detalle.valProductoEnGarantia == 'S' ? 'En Garantía' : (detalle.valProductoEnGarantia || '') }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="font-size:13px">Tipo de manejo:</th>
+                                    <td style="font-size:13px">{{ detalle.valTipoManejo }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </gs>
+
+                    <gs col="x-6|lg-12">
+                        <table gui="table:table-zebra:table-summary:table-bordered:table-fixed">
+                            <tbody>
+                                <tr>
+                                    <!-- aqui -->
+                                    <th style="font-size:13px"> Forma pago intereses:</th>
+                                    <!-- <td style="font-size:13px">{{ detalle.valDescPago }}</td> -->
+                                    <td style="font-size:13px">{{ detalle.valDescPagoHomologo }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="font-size:13px">Intereses pendientes por pagar:</th>
+                                    <td style="font-size:13px">{{ detalle.valRendimientoXPagaNeto | davCurrency : 'add' | currency }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="font-size:13px">Valor pr&oacute;ximo pago intereses:</th>
+                                    <td style="font-size:13px">{{ detalle.valMontoProximoPago | davCurrency : 'add' | currency }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="font-size:13px">Fecha próximo pago intereses:</th>
+                                    <td style="font-size:13px">{{ detalle.fecProximoPagoInteres }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="font-size:13px">Total intereses pagados:</th>
+                                    <td style="font-size:13px">{{ detalle.valTotalInteresPagados | davCurrency : 'add' | currency }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </gs>
+                </gs-row>
+
+
+                <gs-row>
+                    <gs>
+                        <header>
+                            <h3 style="color:#2980b9">Titulares</h3>
+                        </header>
+                        <table gui="table:table-bordered">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th style="font-size:13px" align="center">Tipo de identificación</th>
+                                    <th style="font-size:13px" align="center">Número de identificación</th>
+                                    <th style="font-size:13px" align="center">Nombres y apellidos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-size:13px">
+                                        <h3>Titular Principal</h3>
+                                    </td>
+                                    <td style="font-size:13px" align="center">{{ titularFilter.titular.codTipoDocumento | lov : listas.lov_tipo_identif }}</td>
+                                    <td style="font-size:13px" align="center">{{ titularFilter.titular.codClienteBeneficiarioTitular }}</td>
+                                    <td style="font-size:13px" align="center">{{ titularFilter.titular.valNombreBeneficiario }}</td>
+                                </tr>
+                                <tr ng-repeat="listaBeneficiarios in beneficiarioFilter.beneficiario">
+                                    <td style="font-size:13px">
+                                        <h3>Segundo Titular</h3>
+                                    </td>
+                                    <td style="font-size:13px" align="center">{{ listaBeneficiarios.codTipoDocumento | lov : listas.lov_tipo_identif }}</td>
+                                    <td style="font-size:13px" align="center">{{ listaBeneficiarios.codClienteBeneficiarioTitular }}</td>
+                                    <td style="font-size:13px" align="center">{{ listaBeneficiarios.valNombreBeneficiario }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+
+    <gs-row ng-if="detalleCDT == true">
+        <gs>
+            <box>
+                <header>
+                    <h3 style="color:#2980b9">Generar Certificación Comercial</h3>
+                </header>
+
+                <gs-row ng-show="extractos.data == false">
+                    <gs>
+                        <gui-caption type="attention" ng-model="caption.attention"></gui-caption>
+                    </gs>
+                </gs-row>
+
+                <gs-row ng-show="extractos.registros.length">
+                    <form name="formEmail">
+                        <gs col="x-4|md-4|sm-12">
+                            <label gui="label">Tipo:
+                                <select gui="input-control" type="text" ng-model="opciones.extracto" required readonly>
+                                    <option value="">Seleccione..</option>
+                                    <option value="pdf">PDF</option>
+                                    <option value="email">Email</option>
+                                </select>
+                            </label>
+                        </gs>
+                        <gs col="x-4|md-4|sm-12" ng-if="opciones.extracto == 'email'">
+                            <label gui="label">Correo destino:
+                                <select gui="input-control" ng-model="user.mail" gui-validate rules='{"required": true}' ng-options="lov as lov.Email for lov in lovs.lov_email">
+                                    <option value="">Seleccione..</option>
+                                </select>
+                            </label>
+                        </gs>
+                        <gs col="x-4|md-4|sm-12" ng-if="user.mail.Email == 'Otro' && opciones.extracto == 'email'">
+                            <label gui="label">&nbsp;
+                                <input type="text" ng-model="user.mail.otro" gui="input-control" placeholder="Ingrese Correo" chars="email" gui-validate rules='{"email": true,"required": {{user.mail.Email == "Otro"}} }' />
+                            </label>
+                        </gs>
+                    </form>
+                </gs-row>
+                <gs-row>
+                    <gs push-right>
+                        <input type="button" gui="form-button" bg-color="alizarin" ng-click="$program.ejecutarExtracto(opciones.extracto)" value="{{opciones.extracto == 'pdf' ? 'Generar PDF' : (opciones.extracto == 'email' ? 'Enviar Email' : 'Generar')}}"
+                          ng-disabled="opciones.extracto == 'pdf' ? !opciones.extracto || (cdts | filter : {on:true}).length == 0 : !opciones.extracto || (cdts | filter : {on:true}).length == 0 || !formEmail.$valid" ng-click="showDialog('success')" />
+                    </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+    <gs-row ng-if="captionService.estado">
+        <gs>
+            <box>
+                <gui-caption text-align="center" type="{{captionService.tipoCaption}}" ng-model="captionService.mensaje"></gui-caption>
+            </box>
+        </gs>
+    </gs-row>
+</div>

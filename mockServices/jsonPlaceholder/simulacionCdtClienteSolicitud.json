@@ -1,0 +1,26 @@
+{
+   "codMsgRespuesta": "0",
+   "proyecciones":    [
+            {
+         "idTipoProyeccion": "cdt",
+         "valTasaEfectiva": 5.85,
+         "valTotalInteresesNeto": 2655010,
+         "fecFechaVencimiento": 1482987600000,
+         "valPlazoDias": 719,
+         "valNumeroCDT": "6321AF0000011877",
+         "fecFechaVencimientoHomologado": "29/12/2016",
+         "valTotalInteresesNetoHomologado": "$2.655.010,00"
+      },
+            {
+         "idTipoProyeccion": "proyeccion1",
+         "valTasaEfectiva": 6.2,
+         "valTotalInteresesNeto": 2822796,
+         "fecFechaVencimiento": 1531112400000,
+         "valPlazoDias": 720,
+         "valNumeroCDT": "6321AF0000011882",
+         "fecFechaVencimientoHomologado": "09/07/2018",
+         "valTotalInteresesNetoHomologado": "$2.822.796,00"
+      }
+   ],
+   "caracterAceptacion": "B"
+}

@@ -1,0 +1,59 @@
+<div ui-view="">
+
+    <gs-row>
+        <gs>
+            <box>
+
+
+                    <header>
+                        <h3 style="color:#2980b9">Solicite Huella al cliente</h3>
+                    </header>
+
+                    <gs-row>
+
+                        <gs col="x-12|md-12">
+                            <app-biometric-assistant ng-model="$gui.bioCapture" casb="casbData"/>
+                        </gs>
+
+                    </gs-row>
+
+                    <gs-row ng-if = "llamadoConstitucion == 1">
+                      <gs col="x-12|md-12">
+
+                        <div caption="success" type="success" ng-model="caption.success" text-align="center">
+                            <i class="fa fa-check-circle fa-2x"></i> <span>{{mensajeConstitucion}}</span>
+                        </div>
+
+                      </gs>
+
+                      <gs>
+                          <div caption="info" type="info" ng-model="caption.firmaDigital" text-align="center">
+                              <i class="fa fa-info-circle fa-2x"></i> <span>Env&iacute;e las condiciones pactadas en la reinversi&oacute;n al correo<br>
+                                  <label gui="label-inline">
+                                      <gs col-push="x-2|md-6">
+                                          <label gui="label-inline"><span>Correo electrónico:</span>
+                                              <input gui="input-control"  gui-validate rules='{"required": true, "email": true}' ng-model-options="{ debounce: 3000 }" ng-change="$gui.timerEmail();" ng-model="datos.emailCliente" maxlength="60" ng-disabled="enviado" text-align="right" chars="email">
+                                          </label>
+                                      </gs>
+                                  </label>
+                              </span>
+                          </div>
+                      </gs>
+                    </gs-row>
+
+                    <gs-row ng-if = "llamadoConstitucion == 2" >
+                      <gs col="x-12|md-12">
+
+                        <div caption="error" type="error" ng-model="caption.error" text-align="center">
+                            <i class="fa fa-minus-circle fa-2x"></i> <span>{{mensajeConstitucion}}</span>
+                        </div>
+
+                      </gs>
+                    </gs-row>
+
+
+            </box>
+        </gs>
+    </gs-row>
+
+</div>

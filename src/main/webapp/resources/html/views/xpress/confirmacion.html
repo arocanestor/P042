@@ -1,0 +1,65 @@
+<div ui-view="caracteristicas.xpress.evaluacion.confirmacion">
+    <gs-row ng-if="estado == 'APR'">
+        <gs>
+            <box>
+            <gs-row>
+                <gs>
+                    <gui-caption type="info" ng-model="caption.confirmacion" text-align="center"></gui-caption>
+                </gs>
+            </gs-row>
+            </box>
+            <box>
+                <gs-row>
+                    <gs>
+                        <gui-caption type="success" ng-model="caption.originacion" text-align="center"></gui-caption>
+                    </gs>
+                </gs-row>
+                <gs-row >
+                    <gs col="x-4">
+                        <label gui="label:label-inline"><span>Tarjeta:</span>
+                            <input gui="input-control" ng-model="tarjeta" text-align="right" disabled/>
+                        </label>
+                    </gs>
+                    <gs col="x-4">
+                        <label gui="label:label-inline"><span>Cupo Aprobado:</span>
+                            <input gui="input-control" ng-model="evaluacion.monto" gui-validate text-align="right" disabled/>
+                        </label>
+                    </gs>
+                    <gs col="x-4">
+                        <label gui="label:label-inline"><span>Punto de Entrega:</span>
+                            <input gui="input-control" ng-model="ubicacion.DirRecidencia" gui-validate text-align="right" disabled/>
+                        </label>
+                    </gs>
+                </gs-row>
+                <gs-row>
+                    <gs col="x-12|md-12">
+                        <gui-caption type="info" ng-model="caption.info" text-align="center"></gui-caption>
+                    </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+    <gs-row ng-if="estado == 'NEG'">
+        <gs>
+            <box>
+            <gs-row>
+                <gs>
+                    <gui-caption type="info" ng-model="caption.confirmacion" text-align="center"></gui-caption>
+                </gs>
+            </gs-row>
+            </box>
+            <box>
+                <gs-row>
+                    <gs>
+                        <gui-caption type="error" ng-model="caption.originacionFallida" text-align="center"></gui-caption>
+                    </gs>
+                </gs-row>
+                <!-- <gs-row>
+                    <gs col="x-12|md-12">
+                        <gui-caption type="info" ng-model="caption.info" text-align="center"></gui-caption>
+                    </gs>
+                </gs-row> -->
+            </box>
+        </gs>
+    </gs-row>
+</div>

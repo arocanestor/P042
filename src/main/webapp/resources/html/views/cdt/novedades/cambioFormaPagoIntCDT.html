@@ -1,0 +1,104 @@
+<div ui-view="">
+
+    <gs-row ng-show="caption.listas.status">
+        <gs>
+            <box>
+                <gs-row>
+                    <gs>
+                        <gui-caption type="{{ caption.listas.status }}" ng-model="caption.listas.content" text-align="center"></gui-caption>
+                    </gs>
+
+                    <gs ng-show="caption.confirmacionNic.status">
+
+                        <gui-caption type="{{ caption.confirmacionNic.status }}" ng-model="caption.confirmacionNic.content" text-align="center"></gui-caption>
+
+                    </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+
+    <gs-row>
+        <gs>
+
+            <form name="form.forma">
+
+                <box>
+
+                    <header>
+                        <h3 style="color:#2980b9">Realice el cambio forma de pago de los pr&oacute;ximos intereses del CDT No. {{ numCDT[0].valNumeroCDT }}</h3>
+                    </header>
+                    <gs-row>
+
+                        <gs col="x-3|md-6">
+                            <label gui="label">Forma de pago de los próximos intereses:</label>
+                            <select gui="input-control" ng-change="$gui.changeforma()" ng-model="forma.formaPagoIntereses" gui-validate rules='{"required": true}' ng-disabled="llamadoConstitucion == 2" ng-options="lov as lov.desc for lov in lovs.lov_cdt_forma_pago_intereses_filtro"
+                              gui-tooltip gui-title="{{ 'Si se selecciona Cuenta Davivienda, los intereses se consignarán automáticamente sin necesidad que el cliente vuelva a la oficina.' }}">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+                        <gs col="x-3|md-6" ng-if="forma.formaPagoIntereses.codigo == '1'">
+                            <label gui="label">¿A cuál cuenta davivienda?</label>
+                            <select gui="input-control" ng-model="forma.cuentaFormaPagoIntereses" gui-validate rules='{"required": true}' ng-disabled="llamadoConstitucion == 2" ng-options="producto as producto.label for producto in lovs.lov_productos"
+                              gui-tooltip gui-title="{{ 'Recuerde que sólo se habilitarán las Cuentas Davivienda del primer titular del CDT, sólo se puede seleccionar una Cuenta.' }}">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+
+                        <gs col="x-3|md-6" ng-if="forma.formaPagoIntereses.codigo == '3'">
+                            <label gui="label">Banco Destino</label>
+                            <select gui="input-control" ng-model="forma.bancoDestino" gui-validate rules='{"required": true}' ng-options="banco as banco.nombreBanco for banco in listaBancos" >
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+
+                        <gs col="x-3|md-6">
+                            <label gui="label">Correo electrónico:</label>
+                            <select gui-tooltip gui-title="{{'Recuerde aplicar el cambio para enviar.'}}" gui="input-control" ng-model="forma.correo" gui-validate rules='{"required": true}' ng-disabled="llamadoConstitucion == 2" ng-options="lov as lov.Email for lov in lovs.lov_email">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+                    </gs-row>
+                    <gs-row>
+                        <gs col="x-3|md-6" ng-if="forma.formaPagoIntereses.codigo == '3'">
+                            <label gui="label">Tipo de producto</label>
+                            <select gui="input-control" ng-model="forma.tipoCuenta" gui-validate rules='{"required": true}' ng-options="cuenta as cuenta.tipo disable when ((cuenta.cod == 'AHO' && forma.bancoDestino.longitudCTAAH == 0) || (cuenta.cod == 'CTE' && forma.bancoDestino.logitudCTACTE == 0)) for cuenta in listaTipoCuentas" >
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+
+                        <gs col="x-3|md-6" ng-if="forma.formaPagoIntereses.codigo == '3'">
+                            <label gui="label">N&uacute;mero de producto</label>
+                            <input gui-tooltip type="text" gui="input-control" ng-model="forma.numProduct" gui-validate rules='{"required": true}' chars="only-numbers" maxlength="{{forma.tipoCuenta == 'AHO' ? forma.bancoDestino.longitudCTAAH : forma.bancoDestino.logitudCTACTE}}"/>
+                        </gs>
+                        <!-- <gs pull-left>
+                            <label gui="label">&nbsp;
+                                <button gui="form-button" bg-color="alizarin" ng-disabled="emailOFF" ng-click="$gui.enviarNotificacion()">Enviar Email</button>
+                            </label>
+                        </gs> -->
+                        <gs push-right>
+                            <label gui="label">&nbsp;
+                                <button gui="form-button" bg-color="alizarin" ng-disabled="!form.forma.$valid || aplicarOFF" ng-click="$gui.finalizar()">Aplicar Cambio</button>
+                            </label>
+                        </gs>
+                    </gs-row>
+                    <gs-row ng-if="cambioAplicado == true">
+                        <gs>
+                            <gui-caption type="success" text-align="center" ng-model="caption.info"></gui-caption>
+                        </gs>
+                    </gs-row>
+                    <gs-row ng-if="cambioAplicado == false">
+                        <gs>
+                            <gui-caption type="error" text-align="center" ng-model="caption.error"></gui-caption>
+                        </gs>
+                    </gs-row>
+
+                </box>
+
+            </form>
+
+        </gs>
+    </gs-row>
+
+
+</div>

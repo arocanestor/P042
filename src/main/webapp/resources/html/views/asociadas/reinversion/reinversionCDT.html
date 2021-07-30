@@ -1,0 +1,415 @@
+<gs-row>
+    <gs col="100/1">
+        <box>
+
+            <header>
+                <h3 style="color:#2980b9">Realice la apertura del CDT en 3 pasos:</h3>
+            </header>
+
+            <div gui="wizard-progress">
+                <ul>
+                    <li gui-sref="app.cdt.reinversion.simulacion" gui-sref-class="current">
+                        <span>1</span>
+                        <b>Simulaci&oacute;n</b>
+                    </li>
+                    <li gui-sref="app.cdt.reinversion.simulacion.reinversion" gui-sref-class="current">
+                        <span>2</span>
+                        <b>Reinversión</b>
+                    </li>
+                    <li gui-sref="app.cdt.reinversion.simulacion.reinversion.resumen" gui-sref-class="current">
+                        <span>3</span>
+                        <b>Confirmaci&oacute;n</b>
+                    </li>
+                </ul>
+            </div>
+        </box>
+    </gs>
+</gs-row>
+
+<div ui-view="cdt-reinversion-resumen">
+
+    <gs-row ng-if="simulacion.diferenciaValores <= 0">
+        <gs>
+
+            <form name="form.Reinversion">
+
+                <box>
+
+                    <header>
+                        <h3 style="color:#2980b9">Paso 2: Solicite al cliente la siguiente informaci&oacute;n</h3>
+                        <br>
+                        <h3 style="color:#2980b9" ng-if="simulacion.diferenciaValores < 0">Al cliente le deben pagar
+                            {{ simulacion.diferenciaValoresAbsoluto | currency }} del valor que disminuyó en la
+                            reinversión</h3>
+                    </header>
+
+                    <gs-row ng-if="simulacion.diferenciaValores < 0">
+
+                        <gs col="x-3|md-6">
+                            <label gui="label">Forma de pago del valor que disminuyó</label>
+                            <select gui="input-control" ng-model="reinversion.pagoDisminuyo"
+                                ng-options="lov as lov.desc for lov in lovs.lov_cdt_forma_pago_disminucion" gui-validate
+                                rules='{"required": true}'>
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+                        <gs col="x-3|md-6" ng-if="reinversion.pagoDisminuyo.codigo == '1'">
+                            <label gui="label">¿A cuál Cuenta Davivienda?</label>
+                            <select ng-disabled="" gui="input-control" ng-model="reinversion.cualPagoDisminuyo"
+                                gui-validate rules='{"required": true}'
+                                ng-options="producto as producto.label for producto in lovs.lov_productos" gui-tooltip
+                                gui-title="{{ 'Recuerde que sólo se habilitarán las Cuentas Davivienda del primer titular del CDT actual, sólo se puede seleccionar una Cuenta' }}">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+
+                    </gs-row>
+
+                    <gs-row>
+                        <gs col="x-3|md-6" ng-if="simulacion.interes == 'No'">
+                            <label gui="label">Forma de pago de intereses:</label>
+                            <select gui="input-control" ng-model="reinversion.formaPago" gui-validate
+                                rules='{"required": true}'
+                                ng-options="lov as lov.desc for lov in lovs.lov_cdt_forma_pago_intereses" gui-tooltip
+                                gui-title="{{ 'Si se selecciona Cuenta Davivienda, los intereses se consignarán automáticamente sin necesidad que el cliente vuelva a la oficina.' }}">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+                        <gs col="x-3|md-6" ng-if="reinversion.formaPago.codigo == '1' && simulacion.interes == 'No'">
+                            <label gui="label">¿A cuál Cuenta Davivienda?</label>
+                            <select gui="input-control" ng-model="reinversion.cuentaFormaPago" gui-validate
+                                rules='{"required": true}'
+                                ng-options="producto as producto.label for producto in lovs.lov_productos" gui-tooltip
+                                gui-title="{{ 'Recuerde que sólo se habilitarán las Cuentas Davivienda del primer titular del CDT, sólo se puede seleccionar una Cuenta.' }}">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+
+                        <gs col="x-12|md-12">
+                        </gs>
+
+                        <gs col="x-4|md-4">
+                            <label gui="label">Digite el código de agente/vendedor en caso de ser
+                                un referido:
+                                <input gui="input-control" chars="only-numbers" name="agente_vendedor-1"
+                                    ng-model="$data.codAgenteVendedor" gui-validate rules='{"required": true}'
+                                    maxlength="15" text-align="left" />
+                            </label>
+                        </gs>
+                        <gs col="x-1|md-1">
+                            <label gui="label">&nbsp;
+                                <button ng-click="$data.codAgenteVendedor = $data.codAgenteVendedorRecovery;
+                                    $data.codAgenteVendedorCopy = $data.codAgenteVendedorRecovery;" gui-tooltip
+                                    gui-title="{{'Restaurar Información'}}" ng-init="hover = false"
+                                    ng-mouseover="hover = true" ng-mouseleave="hover = false" gui="form-button"
+                                    bg-color="alizarin"><i
+                                        class="fa {{ hover ? 'fa-spin' : ''}} fa-sync-alt"></i></button>
+                            </label>
+                        </gs>
+
+
+                        <gs col="x-12|md-12">
+                        </gs>
+                        
+
+                        <gs col="x-4|md-4">
+                            <label gui="label">Confirme el código agente vendedor:
+                                <input gui="input-control" chars="only-numbers" name="agente_vendedor-2"
+                                    ng-model="$data.codAgenteVendedorCopy" gui-validate
+                                    rules='{"required": true, "equal":"{{$data.codAgenteVendedor}}"}' maxlength="15"
+                                    text-align="left" />
+                            </label>
+                        </gs>
+
+                        <gs col="x-12|md-12">
+                            <gui-caption ng-show="simulacion.interes == 'No'" type="info"
+                                ng-model="caption.confirmApertura" text-align="center"></gui-caption>
+                            <gui-caption ng-show="simulacion.interes == 'Si'" type="info"
+                                ng-model="caption.confirmAperturaConCapital" text-align="center"></gui-caption>
+                        </gs>
+
+                    </gs-row>
+
+                    <gs-row>
+                        <gs>
+                            <hr />
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+
+                        <gs push-right>
+                            <button tabindex="-1" gui="form-button" bg-color="alizarin"
+                                ng-disabled="!form.Reinversion.$valid" ui-sref=".resumen"
+                                ng-click="guardarInfo()">Continuar</button>
+                        </gs>
+
+                        <gs pull-left>
+                            <button tabindex="-1" gui="form-button" bg-color="asbestos" ui-sref="^">Regresar</button>
+                        </gs>
+
+                    </gs-row>
+
+                </box>
+            </form>
+
+        </gs>
+    </gs-row>
+
+    <gs-row ng-if="simulacion.diferenciaValores > 0">
+        <gs>
+
+            <form name="form.Reinversion">
+
+                <box>
+
+                    <header>
+                        <h3 style="color:#2980b9">Paso 2: Solicite al cliente la siguiente informaci&oacute;n</h3>
+                        <br>
+                        <h3 style="color:#2980b9">El cliente debe ingresar {{ simulacion.diferenciaValores | currency }}
+                            adicionales para completar el valor de la inversión</h3>
+                    </header>
+
+                    <gs-row>
+                        <gs col="x-3|md-6">
+                            <label gui="label">Forma de ingreso del valor adicional:</label>
+                        </gs>
+                    </gs-row>
+                    <gs-row>
+                        <gs col="x-3|md-6">
+                            <div gui="radio-group">
+                                <label style="width: 50px"><input type="checkbox"
+                                        ng-model="reinversion.checks.efectivoCheck"
+                                        ng-required="!reinversion.checks.chequeCheck && !reinversion.checks.cuentaCheck"
+                                        ng-change="$gui.actualizarValorCheque(cheques); reinversion.valorEfectivo = ''" />
+                                    Efectivo</label>
+                            </div>
+                        </gs>
+                    </gs-row>
+                    <gs-row>
+                        <gs col="x-3|md-6" ng-if="reinversion.checks.efectivoCheck && contadorChecks > '1'">
+                            <label gui="label">Valor de la inversión en efectivo:</label>
+                            <label gui="overlabel" for="valorEfectivo" gui-mask="currency"
+                                ng-model="reinversion.valorEfectivo"></label>
+                            <input gui="input-control" id="valorEfectivo" ng-model="reinversion.valorEfectivo"
+                                gui-validate
+                                rules='{"required": true, "min":"0", "lte":"{{simulacion.diferenciaValores}}"}'
+                                maxlength="15" text-align="right" chars="only-numbers"
+                                ng-change="$gui.calcularSumatoria()" />
+                        </gs>
+                    </gs-row>
+                    <gs-row>
+                        <gs col="x-3|md-6">
+                            <div>
+                                <label style="width: 70px"><input
+                                        cursor="{{ cdtSeleccionado.valTipoManejo !== 'INDIVIDUAL' ? 'not-allowed' : 'pointer' }}"
+                                        type="checkbox" ng-disabled="cdtSeleccionado.valTipoManejo !== 'INDIVIDUAL'"
+                                        ng-model="reinversion.checks.cuentaCheck"
+                                        ng-required="!reinversion.checks.chequeCheck && !reinversion.checks.efectivoCheck"
+                                        ng-change="$gui.actualizarValorCheque(cheques); reinversion.valorDebito = ''; reinversion.cuenta = ''" />
+                                    Cuenta Davivienda</label>
+                            </div>
+                        </gs>
+                    </gs-row>
+                    <gs-row>
+                        <gs col="x-3|md-6" ng-if="reinversion.checks.cuentaCheck">
+                            <label gui="label">¿Cuál?</label>
+                            <select gui="input-control" ng-model="reinversion.cuenta" gui-validate
+                                rules='{"required": true}'
+                                ng-options="producto as producto.label for producto in lovs.lov_productos" gui-tooltip
+                                gui-title="{{ 'Recuerde que sólo se habilitarán las Cuentas Davivienda del primer titular del CDT, sólo se puede seleccionar una Cuenta.' }}">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+                        <gs col="x-3|md-6" ng-if="reinversion.checks.cuentaCheck && contadorChecks > '1'">
+                            <label gui="label">Valor del débito</label>
+                            <label gui="overlabel" for="valorDebito" gui-mask="currency"
+                                ng-model="reinversion.valorDebito"></label>
+                            <input gui="input-control" id="valorDebito" ng-model="reinversion.valorDebito" gui-validate
+                                rules='{"required": true, "min":"0", "lte":"{{simulacion.diferenciaValores}}"}'
+                                maxlength="15" text-align="right" chars="only-numbers"
+                                ng-change="$gui.calcularSumatoria()" />
+                        </gs>
+                    </gs-row>
+                    <gs-row ng-show="false">
+                        <gs col="x-3|md-6">
+                            <div gui="radio-group">
+                                <label style="width: 50px"><input type="checkbox"
+                                        ng-model="reinversion.checks.chequeCheck"
+                                        ng-required="!reinversion.checks.efectivoCheck && !reinversion.checks.cuentaCheck"
+                                        ng-change="$gui.actualizarValorCheque(cheques)" /> Cheque</label>
+                            </div>
+                        </gs>
+                    </gs-row>
+
+                    <gs-row ng-if="reinversion.checks.chequeCheck">
+                        <gs>
+
+                            <table gui="table:table-narrow:table-bordered">
+                                <caption>Cheques</caption>
+                                <thead>
+                                    <tr>
+                                        <th align="left">Número cheque</th>
+                                        <th align="left">Número cuenta del cheque</th>
+                                        <th align="left">Código Banco</th>
+                                        <th align="left">Valor en cheque</th>
+                                        <th width="30"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="cheque in cheques">
+                                        <td>
+                                            <input type="text" gui="input-control" ng-model="cheque.numCheque"
+                                                gui-validate rules='{"required": true}' chars="only-numbers" />
+                                        </td>
+                                        <td>
+                                            <input type="text" gui="input-control" ng-model="cheque.numCuenta"
+                                                gui-validate rules='{"required": true}' chars="only-numbers" />
+                                        </td>
+                                        <td>
+                                            <input type="text" gui="input-control" ng-model="cheque.codBanco"
+                                                gui-validate rules='{"required": true}' chars="only-numbers" />
+                                        </td>
+                                        <!-- si se selecciona solo cheque se precarga el valor de la inversion de CDT y si se selecciona mas permite ingresar valor -->
+                                        <td>
+                                            <label gui="overlabel" for="valorCheque" gui-mask="currency"
+                                                ng-model="cheque.valorCheque"></label>
+                                            <input gui="input-control" id="valorCheque" ng-model="cheque.valorCheque"
+                                                gui-validate
+                                                rules='{"required": true, "min":"0", "lte":"{{simulacion.diferenciaValores}}"}'
+                                                maxlength="15" text-align="right" chars="only-numbers" gui-tooltip
+                                                gui-title="{{ 'Para la entrega del CDT Físico se deben esperar dos días hábiles para confirmar que el cheque haga canje.' }}" />
+                                        </td>
+                                        <td>
+                                            <button gui="form-button" ng-click="$gui.removeTitular($index, cheques);"
+                                                ng-disabled="cheque.remover == false"><i class="fa fa-times"
+                                                    ng-keypress="" color="alizarin"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </gs>
+
+                        <gs>
+                            <button gui="form-button" style="padding:10px; height: auto;" align="center"
+                                cursor="pointer" bg-color="peter-river" ng-click="$gui.agregarCheque()"><i
+                                    class="fa fa-plus"></i> Adicionar cheque</button>
+                        </gs>
+
+                    </gs-row>
+
+                    <gs-row>
+                        <gs col="x-3|md-6" ng-if="contadorChecks >= '1'">
+                            <label gui="label">Total recepción capital:</label>
+                            <label gui="overlabel" for="totalRecepcion" gui-mask="currency"
+                                ng-model="reinversion.totalRecepcion"></label>
+                            <input gui="input-control" name="totalRecepcion" ng-model="reinversion.totalRecepcion"
+                                ng-value="$program.calcularSumatoria(reinversion.valorEfectivo, reinversion.valorDebito, cheques)"
+                                gui-validate rules='{"required": true, "equal":"{{simulacion.diferenciaValores}}"}'
+                                maxlength="15" text-align="right" readonly />
+                        </gs>
+                        <gs col="x-9|md-6"
+                            ng-show="contadorChecks > '1' && reinversion.totalRecepcion != simulacion.diferenciaValores">
+                            <label gui="label">&nbsp;</label>
+                            <span gui="badge:badge-x2"
+                                style="font-size:14px;display: inline-block;line-height: 12px;">{{'El valor adicional ingresado es ' + (reinversion.totalRecepcion > simulacion.diferenciaValores ? 'mayor' : 'menor') + ' al señalado en la reinversión'}}</span>
+
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+                        <gs>
+                            <hr />
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+                        <gs col="x-3|md-6" ng-if="simulacion.interes == 'No'">
+                            <label gui="label">Forma de pago de intereses:</label>
+                            <select gui="input-control" ng-model="reinversion.formaPago" gui-validate
+                                rules='{"required": true}'
+                                ng-disabled="contadorChecks > '1' && !form.Reinversion.totalRecepcion.$valid"
+                                ng-options="lov as lov.desc for lov in lovs.lov_cdt_forma_pago_intereses" gui-tooltip
+                                gui-title="{{ 'Si se selecciona Cuenta Davivienda, los intereses se consignarán automáticamente sin necesidad que el cliente vuelva a la oficina.' }}">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+                        <gs col="x-3|md-6" ng-if="reinversion.formaPago.codigo == '1' && simulacion.interes == 'No'">
+                            <label gui="label">¿A cuál Cuenta Davivienda?</label>
+                            <select gui="input-control" ng-model="reinversion.cuentaFormaPago" gui-validate
+                                rules='{"required": true}'
+                                ng-disabled="contadorChecks > '1' && !form.Reinversion.totalRecepcion.$valid"
+                                ng-options="producto as producto.label for producto in lovs.lov_productos" gui-tooltip
+                                gui-title="{{ 'Recuerde que sólo se habilitarán las Cuentas Davivienda del primer titular del CDT, sólo se puede seleccionar una Cuenta.' }}">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+
+                        <gs col="x-12|md-12">
+                        </gs>
+
+                        <gs col="x-4|md-4">
+                            <label gui="label">Digite el código de agente/vendedor en caso de ser
+                                un referido:
+                                <input gui="input-control" chars="only-numbers" name="agente_vendedor-1"
+                                    ng-model="$data.codAgenteVendedor" gui-validate rules='{"required": true}'
+                                    maxlength="15" text-align="left" />
+                            </label>
+                        </gs>
+                        <gs col="x-1|md-1">
+                            <label gui="label">&nbsp;
+                                <button ng-click="$data.codAgenteVendedor = $data.codAgenteVendedorRecovery;
+                                    $data.codAgenteVendedorCopy = $data.codAgenteVendedorRecovery;" gui-tooltip
+                                    gui-title="{{'Restaurar Información'}}" ng-init="hover = false"
+                                    ng-mouseover="hover = true" ng-mouseleave="hover = false" gui="form-button"
+                                    bg-color="alizarin"><i
+                                        class="fa {{ hover ? 'fa-spin' : ''}} fa-sync-alt"></i></button>
+                            </label>
+                        </gs>
+
+                        <gs col="x-12|md-12">
+                        </gs>
+
+                        <gs col="x-4|md-4">
+                            <label gui="label">Confirme el código agente vendedor:
+                                <input gui="input-control" chars="only-numbers" name="agente_vendedor-2"
+                                    ng-model="$data.codAgenteVendedorCopy" gui-validate
+                                    rules='{"required": true, "equal":"{{$data.codAgenteVendedor}}"}' maxlength="15"
+                                    text-align="left" />
+                            </label>
+                        </gs>
+
+                        <gs col="x-12|md-12">
+                            <gui-caption type="info" ng-model="caption.confirmApertura" text-align="center">
+                            </gui-caption>
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+                        <gs>
+                            <hr />
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+
+                        <gs push-right>
+                            <button gui="form-button" bg-color="alizarin" ng-disabled="!form.Reinversion.$valid"
+                                ui-sref=".resumen" ng-click="guardarInfo()">Continuar</button>
+                        </gs>
+
+                        <gs pull-left>
+                            <button gui="form-button" bg-color="asbestos" ui-sref="^">Regresar</button>
+                        </gs>
+
+                    </gs-row>
+
+                </box>
+
+            </form>
+
+        </gs>
+    </gs-row>
+
+
+</div>

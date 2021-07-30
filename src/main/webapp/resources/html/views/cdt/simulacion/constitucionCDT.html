@@ -1,0 +1,484 @@
+<gs-row>
+    <gs col="100/1">
+        <box>
+
+            <header>
+                <h3 style="color:#2980b9">Realice la apertura del CDT en 3 pasos:</h3>
+            </header>
+
+            <div gui="wizard-progress">
+                <ul>
+                    <li gui-sref="app.cdt.caracteristicas.simulacion" gui-sref-class="current">
+                        <span>1</span>
+                        <b>Simulaci&oacute;n</b>
+                    </li>
+                    <li gui-sref="app.cdt.caracteristicas.simulacion.constitucion" gui-sref-class="current">
+                        <span>2</span>
+                        <b>Apertura</b>
+                    </li>
+                    <li gui-sref="app.cdt.caracteristicas.simulacion.constitucion.resumen|app.cdt.caracteristicas.simulacion.constitucion.resumen.biometric"
+                        gui-sref-class="current">
+                        <span>3</span>
+                        <b>Confirmaci&oacute;n</b>
+                    </li>
+                </ul>
+            </div>
+        </box>
+    </gs>
+</gs-row>
+
+<div ui-view="cdt-constitucion-resumen">
+
+    <gs-row>
+        <gs>
+
+            <form name="form.Apertura" novalidate>
+
+                <box>
+
+                    <header>
+                        <h3 style="color:#2980b9">Paso 2: Solicite al cliente la siguiente informaci&oacute;n</h3>
+                    </header>
+
+                    <gs-row>
+
+                        <gs col="x-3|md-6">
+                            <label gui="label">Tipo de manejo</label>
+                            <select gui="input-control" ng-model="apertura.tipoManejo"
+                                ng-options="lov as lov.desc for lov in lovs.lov_cdt_tipo_manejo" gui-validate
+                                rules='{"required": true}' gui-tooltip
+                                gui-title="{{ 'Manejo individual: Sólo un titular, quien es el único autorizado para realizar trámites.;Manejo alternativo: Más de un titular, cualquiera de los titulares puede realizar trámites.;Manejo Conjunto: Más de un titular, todos los titulares deben estar presentes para realizar trámites.' }}">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+
+                    </gs-row>
+
+
+                </box>
+
+                <box ng-if="apertura.tipoManejo.desc">
+                    <!-- CONJUNTO O ALTERNATIVO -->
+                    <gs-row>
+                        <gs>
+
+                            <table gui="table:table-bordered:table-compact:table-editable">
+                                <caption>Titulares</caption>
+                                <thead>
+                                    <tr>
+                                        <th width="140" align="left">Tipo de identificación</th>
+                                        <th width="140" align="left">Número de identificación</th>
+                                        <th width="220" align="left">Nombres<br>Razón social</th>
+                                        <th align="left">Confirmación NIC</th>
+                                        <th align="left">Listas restrictivas</th>
+                                        <th width="50"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="titular in titulares"
+                                        ng-class="{'error': !titular.vinculable, 'attention': titular.vinculable && titular.confirmacion}">
+                                        <td>
+                                            <select gui="input-control" ng-model="titular.tipoIdentificacion"
+                                                gui-validate rules='{"required": true}'
+                                                ng-options="lov as lov.desc for lov in lovs.lov_cdt_tipo_documento"
+                                                ng-change="$gui.validarListasNIC(titular)" ng-disabled="$index === 0">
+                                                <option value="">Seleccione </option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input gui-tooltip
+                                                gui-title="{{ 'Recuerde no repetir el Titular o Número de identificación.' }}"
+                                                type="text" gui="input-control" ng-model="titular.numIdentificacion"
+                                                gui-validate
+                                                rules='{"required": true, "boolean": {{ (titulares | filter : {tipoIdentificacion: titular.tipoIdentificacion, numIdentificacion: titular.numIdentificacion} : true).length < 2 }}}'
+                                                chars="only-numbers" ng-blur="$gui.validarListasNIC(titular)"
+                                                maxlength="16" ng-disabled="$index === 0"
+                                                name="titular-num-{{ $index }}" />
+                                        </td>
+                                        <td>{{ titular.nombres || titular.razonsocial }}</td>
+                                        <td>{{ titular.confirmacionNic.content }}</td>
+                                        <td>{{ titular.listas.content }}</td>
+                                        <td>
+                                            <button gui="form-button" ng-click="$gui.removeTitular($index, titulares);"
+                                                ng-disabled="$index === 0 || $index == 1 && (apertura.tipoManejo.desc != 'INDIVIDUAL')"
+                                                ng-keypress="">
+                                                <i class="fa fa-times" color="alizarin"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </gs>
+
+                        <gs>
+                            <button gui="form-button" style="padding:10px; height: auto;" align="center"
+                                cursor="pointer" bg-color="peter-river" ng-click="$gui.agregarTitular()"
+                                ng-disabled="titulares.length == 5 || apertura.tipoManejo.desc == 'INDIVIDUAL' || !apertura.tipoManejo.desc">
+                                <i class="fa fa-plus"></i> Adicionar un titular
+                            </button>
+                        </gs>
+
+
+                    </gs-row>
+
+                </box>
+
+                <!--ALGUN TITULAR CON NIT -->
+                <box
+                    ng-if="apertura.tipoManejo.desc && (titulares | filter : {tipoIdentificacion:{desc: 'NIT'}}).length">
+
+                    <header>
+                        <h3 style="color:#2980b9">Ingrese el autorizado</h3>
+                    </header>
+
+                    <gs-row>
+
+                        <gs>
+
+                            <table gui="table:table-bordered:table-compact:table-editable">
+                                <caption>Autorizado</caption>
+                                <thead>
+                                    <tr>
+                                        <th width="280" align="left">Titular</th>
+                                        <th width="220" align="left">Autorizado</th>
+                                        <th align="left">Identificación</th>
+                                        <th align="left">Confirmación NIC</th>
+                                        <th align="left">Listas restrictivas</th>
+                                        <th width="50"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-class="{'error': !titular.autorizado.vinculable, 'attention': titular.autorizado.vinculable && titular.autorizado.confirmacion}"
+                                        ng-repeat="titular in titulares | filter : {tipoIdentificacion: {desc: 'NIT'}}"
+                                        ng-init="titular.SP.relaciones = titular.SP.relaciones || []">
+                                        <td>{{ titular.razonsocial }}</td>
+                                        <td>
+                                            <input type="text" gui="input-control" ng-model="titular.relacionadoFilter"
+                                                ng-change="resetData()" gui-validate rules='{"required": true}'
+                                                placeholder="Nombre del relacionado" />
+                                            <gui-autocomplete ng-model="titular.autorizado" ac-strict
+                                                ac-search="titular.relacionadoFilter" ac-min-chars="3"
+                                                ac-options="titular.SP.relaciones" ac-callback="$gui.validarThrowAC">
+                                            </gui-autocomplete>
+                                        </td>
+                                        <td>{{ titular.autorizado.IdentificationTypeRel + ' - ' + titular.autorizado.IdentificationNumberRel }}
+                                        </td>
+                                        <td>{{ titular.autorizado.confirmacionNic.content }}</td>
+                                        <td>{{ titular.autorizado.listas.content }}</td>
+                                        <td>
+                                            <button gui="form-button" disabled>
+                                                <i class="fa fa-times" color="alizarin"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </gs>
+
+                    </gs-row>
+
+                </box>
+
+                <box ng-if="apertura.tipoManejo.desc">
+
+                    <gs-row>
+                        <gs col="x-3|md-6">
+                            <label gui="label">Forma de ingreso del valor de la inversión:</label>
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+                        <gs col="x-3|md-6">
+                            <div gui="radio-group">
+                                <label style="width: 50px">
+                                    <input type="checkbox" ng-model="apertura.checks.efectivoCheck"
+                                        ng-required="!apertura.checks.chequeCheck && !apertura.checks.cuentaCheck"
+                                        ng-change="$gui.actualizarValorCheque(cheques); apertura.valorInversion = ''"
+                                        ng-disabled="!apertura.tipoManejo || (apertura.tipoManejo.desc != 'INDIVIDUAL' && (titulares | filter : {vinculable: false || confirmacionNic.content == dialogs.sinFecha}).length)" />
+                                    Efectivo
+                                </label>
+                            </div>
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+                        <gs col="x-3|md-6" ng-if="apertura.checks.efectivoCheck && contadorChecks >= '2'">
+                            <label gui="label">Valor de la inversión en efectivo:
+                                <div gui="overlabel" for="valorInversion" gui-mask="davCurrency : 'add' | currency"
+                                    ng-model="apertura.valorInversion"></div>
+                                <input step="0.01" gui="input-control" id="valorInversion"
+                                    ng-model="apertura.valorInversion" gui-validate
+                                    rules='{"required": true, "min":"0", "lte":"{{simulacion.valorInversion}}","decimalPattern":true}'
+                                    maxlength="15" text-align="right" chars="0-9." />
+                            </label>
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+                        <gs col="x-3|md-6">
+                            <div gui="radio-group">
+                                <label style="width: 70px">
+                                    <input type="checkbox" ng-model="apertura.checks.cuentaCheck"
+                                        ng-required="!apertura.checks.chequeCheck && !apertura.checks.efectivoCheck"
+                                        ng-change="$gui.actualizarValorCheque(cheques); apertura.valorDebito = ''; apertura.cuenta = ''"
+                                        ng-disabled="(apertura.tipoManejo.desc != 'INDIVIDUAL') || !apertura.tipoManejo || (apertura.tipoManejo.desc != 'INDIVIDUAL' && (titulares | filter : {vinculable: false || confirmacionNic.content == dialogs.sinFecha}).length)" />
+                                    Cuenta Davivienda
+                                </label>
+                            </div>
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+
+                        <gs col="x-3|md-6" ng-if="apertura.checks.cuentaCheck && contadorChecks >= '1'">
+                            <label gui="label">¿Cuál?
+                                <select gui="input-control" ng-model="apertura.cuenta" gui-validate
+                                    rules='{"required": true}'
+                                    ng-options="producto as producto.label for producto in lovs.lov_productos"
+                                    gui-tooltip
+                                    gui-title="{{ 'Recuerde que sólo se habilitarán las Cuentas Davivienda del primer titular del CDT, sólo se puede seleccionar una Cuenta.' }}">
+                                    <option value="">Seleccione</option>
+                                </select>
+                            </label>
+                        </gs>
+
+                        <gs col="x-3|md-6" ng-if="apertura.checks.cuentaCheck && contadorChecks >= '2'">
+                            <label gui="label">Valor del débito
+                                <div gui="overlabel" for="valorDebito" gui-mask="davCurrency : 'add' | currency"
+                                    ng-model="apertura.valorDebito"></div>
+                                <input step="0.01" gui="input-control" id="valorDebito" ng-model="apertura.valorDebito"
+                                    gui-validate
+                                    rules='{"required": true, "min":"0", "lte":"{{simulacion.valorInversion}}","decimalPattern":true}'
+                                    maxlength="15" text-align="right" chars="0-9." />
+                            </label>
+                        </gs>
+
+                    </gs-row>
+
+                    <gs-row>
+                        <gs col="x-3|md-6">
+                            <div gui="radio-group">
+                                <label style="width: 50px">
+                                    <input type="checkbox" ng-model="apertura.checks.chequeCheck"
+                                        ng-required="!apertura.checks.efectivoCheck && !apertura.checks.cuentaCheck"
+                                        ng-change="$gui.actualizarValorCheque(cheques)"
+                                        ng-disabled="!apertura.tipoManejo || (apertura.tipoManejo.desc != 'INDIVIDUAL' && (titulares | filter : {vinculable: false || confirmacionNic.content == dialogs.sinFecha}).length)" />
+                                    Cheque
+                                </label>
+                            </div>
+                        </gs>
+                    </gs-row>
+
+                    <gs-row ng-if="apertura.checks.chequeCheck">
+                        <gs>
+
+                            <table gui="table:table-bordered:table-compact:table-editable">
+                                <caption>Cheques</caption>
+                                <thead>
+                                    <tr>
+                                        <th align="left">Número cheque</th>
+                                        <th align="left">Número cuenta del cheque</th>
+                                        <th align="left">Código Banco</th>
+                                        <th align="left">Valor en cheque</th>
+                                        <th width="30"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="cheque in cheques">
+                                        <td>
+                                            <input type="text" gui="input-control" ng-model="cheque.numCheque"
+                                                gui-validate rules='{"required": true}' chars="only-numbers" />
+                                        </td>
+                                        <td>
+                                            <input type="text" gui="input-control" ng-model="cheque.numCuenta"
+                                                gui-validate rules='{"required": true}' chars="only-numbers" />
+                                        </td>
+                                        <td>
+                                            <input type="text" gui="input-control" ng-model="cheque.codBanco"
+                                                gui-validate rules='{"required": true}' chars="only-numbers" />
+                                        </td>
+                                        <!-- si se selecciona solo cheque se precarga el valor de la inversion de CDT y si se selecciona mas permite ingresar valor -->
+                                        <td ng-if="apertura.checks.chequeCheck && contadorChecks >= '1'">
+                                            <label gui="overlabel" for="valorCheque"
+                                                gui-mask="davCurrency : 'add' | currency"
+                                                ng-model="cheque.valorCheque"></label>
+                                            <input ng-change="$program.noMoreDigits()" step="0.01" gui="input-control"
+                                                id="valorCheque" ng-model="cheque.valorCheque" gui-validate
+                                                rules='{"required": true, "min":"0", "lte":"{{simulacion.valorInversion}}","decimalPattern":true}'
+                                                maxlength="15" text-align="right" chars="0-9." gui-tooltip
+                                                gui-title="{{ 'Para la entrega del CDT Físico se deben esperar dos días hábiles para confirmar que el cheque haga canje.' }}" />
+                                        </td>
+                                        <td>
+                                            <button gui="form-button" ng-click="$gui.removeTitular($index, cheques);"
+                                                ng-disabled="cheque.remover == false"><i class="fa fa-times"
+                                                    ng-keypress="" color="alizarin"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </gs>
+
+                        <gs>
+                            <button gui="form-button" style="padding:10px; height: auto;" align="center"
+                                cursor="pointer" bg-color="peter-river" ng-click="$gui.agregarCheque(cheques)"><i
+                                    class="fa fa-plus"></i> Adicionar cheque</button>
+                        </gs>
+
+                    </gs-row>
+
+                    <gs-row>
+
+                        <gs col="x-3|md-6" ng-if="contadorChecks >= '1'">
+                            <label gui="label">Total recepción capital:
+                                <div gui="overlabel" for="totalRecepcion" gui-mask="currency"
+                                    ng-model="apertura.totalRecepcion"></div>
+                                <input gui="input-control" name="totalRecepcion" ng-model="apertura.totalRecepcion"
+                                    ng-value="$program.calcularSumatoria(apertura.valorInversion, apertura.valorDebito, cheques)"
+                                    gui-validate rules='{"required": true, "equal":"{{simulacion.valorInversion}}"}'
+                                    maxlength="15" text-align="right" readonly />
+                            </label>
+                        </gs>
+
+                    </gs-row>
+
+                    <gs-row>
+                        <gs>
+                            <hr />
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+
+                        <gs col="x-3|md-6" ng-if="simulacion.interes == 'No'">
+                            <label gui="label">Forma de pago de intereses:</label>
+                            <select gui="input-control" ng-model="apertura.formaPago" gui-validate
+                                rules='{"required": true}'
+                                ng-disabled="contadorChecks > '1' && !form.Apertura.totalRecepcion.$valid"
+                                ng-options="lov as lov.desc for lov in lovs.lov_cdt_forma_pago_intereses" gui-tooltip
+                                gui-title="{{ 'Si se selecciona Cuenta Davivienda, los intereses se consignarán automáticamente sin necesidad que el cliente vuelva a la oficina.' }}">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+
+                        <gs col="x-3|md-6" ng-if="apertura.formaPago.codigo == '1' && simulacion.interes == 'No'">
+                            <label gui="label">¿A cuál Cuenta Davivienda?</label>
+                            <select gui="input-control" ng-model="apertura.cuentaFormaPago" gui-validate
+                                rules='{"required": true}'
+                                ng-disabled="contadorChecks > '1' && !form.Apertura.totalRecepcion.$valid"
+                                ng-options="producto as producto.label for producto in lovs.lov_productos" gui-tooltip
+                                gui-title="{{ 'Recuerde que sólo se habilitarán las Cuentas Davivienda del primer titular del CDT, sólo se puede seleccionar una Cuenta.' }}">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs>
+
+                        <!-- <gs col="x-3|md-6" ng-if="apertura.formaPago.codigo == '1' && simulacion.interes == 'No'">
+                            <label gui="label">¿A cuál Cuenta Davivienda?</label>
+                            <select gui="input-control" ng-model="apertura.cuentaFormaPago" gui-validate
+                                rules='{"required": true}'
+                                ng-disabled="contadorChecks > '1' && !form.Apertura.totalRecepcion.$valid"
+                                ng-options="producto as producto.label for producto in lovs.lov_productos" gui-tooltip
+                                gui-title="{{ 'Recuerde que sólo se habilitarán las Cuentas Davivienda del primer titular del CDT, sólo se puede seleccionar una Cuenta.' }}">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </gs> -->
+
+                    </gs-row>
+
+                    <gs-row>
+
+                        <gs col="x-4|md-4">
+                            <label gui="label">Digite el código de agente/vendedor en caso de ser
+                                un referido:
+                                <input gui="input-control" chars="only-numbers" name="agente_vendedor-1"
+                                    ng-model="$data.codAgenteVendedor" gui-validate
+                                    rules='{"required": true}' maxlength="15"
+                                    text-align="left" />
+                            </label>
+                        </gs>
+                        <gs col="x-1|md-1">
+                            <label gui="label">&nbsp;
+                                <button
+                                    ng-click="$data.codAgenteVendedor = $data.codAgenteVendedorRecovery;
+                                    $data.codAgenteVendedorCopy = $data.codAgenteVendedorRecovery;"
+                                    gui-tooltip
+                                    gui-title="{{'Restaurar Información'}}"
+                                    ng-init="hover = false"
+                                    ng-mouseover="hover = true" ng-mouseleave="hover = false"
+                                    gui="form-button"
+                                    bg-color="alizarin"><i
+                                        class="fa {{ hover ? 'fa-spin' : ''}} fa-sync-alt"></i></button>
+                            </label>
+                        </gs>
+
+                    </gs-row>
+
+                    <gs-row>
+                        <gs col="x-4|md-4">
+                            <label gui="label">Confirme el código agente vendedor:
+                                <input gui="input-control" chars="only-numbers" name="agente_vendedor-2"
+                                    ng-model="$data.codAgenteVendedorCopy" gui-validate
+                                    rules='{"required": true, "equal":"{{$data.codAgenteVendedor}}"}' maxlength="15"
+                                    text-align="left" />
+                            </label>
+                        </gs>
+                    </gs-row>
+                </box>
+
+                <box ng-if="apertura.tipoManejo.desc">
+
+                    <header>
+                        <h3 style="color:#2980b9">Solicite la siguiente autorización al(los) cliente(s), marque las
+                            casilla si está(n) de acuerdo:</h3>
+                    </header>
+
+                    <gs-row>
+
+                        <gs col="x-12">
+                            <ul gui="check-list">
+                                <li ng-repeat="check in lovs.lov_checks_CDT_filtrado">
+                                    <label cursor="pointer"
+                                        ng-attr-color="{{ !form.Apertura['check-' + check.codigo].$valid ? 'alizarin' : '' }}">
+                                        <input ng-name name="{{ 'check-' + check.codigo }}" type="checkbox"
+                                            ng-model="account[routeApp[1]].checks[check.codigo]"
+                                            ng-required="validateChecks[check.codigo]" /> <span
+                                            ng-bind-html="check.desc"></span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </gs>
+
+                        <gs col="x-12|md-12">
+                            <gui-caption type="info" ng-model="caption.confirmApertura" text-align="center">
+                            </gui-caption>
+                        </gs>
+
+                    </gs-row>
+
+                    <gs-row>
+                        <gs>
+                            <hr />
+                        </gs>
+                    </gs-row>
+
+                    <gs-row>
+
+                        <gs push-right>
+                            <button gui="form-button" bg-color="alizarin"
+                                ng-disabled="!form.Apertura.$valid || (apertura.tipoManejo.desc != 'INDIVIDUAL' && (titulares | filter : {vinculable: false || confirmacionNic.content == dialogs.sinFecha}).length)"
+                                ui-sref=".resumen">Continuar</button>
+                        </gs>
+
+                        <gs pull-left>
+                            <button gui="form-button" bg-color="asbestos" ui-sref="^">Regresar</button>
+                        </gs>
+
+                    </gs-row>
+                </box>
+
+            </form>
+
+        </gs>
+    </gs-row>
+
+
+</div>

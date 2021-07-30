@@ -1,0 +1,48 @@
+<div ui-view="cdt_main">
+
+    <gs-row>
+        <gs col="100/1">
+            <box>
+
+                <header>
+                    <h3 style="color:#2980b9">¿Qué desea hacer el cliente?</h3>
+                </header>
+
+                <gs-row>
+                    <gs col="x-100/5|md-6">
+                        <label gui="label">En la apertura:</label>
+                        <button gui="form-button" bg-color="alizarin" ui-sref=".caracteristicas">Simulación y Apertura</button>
+                    </gs>
+                </gs-row>
+
+                <gs-row>
+                    <gs col="x-100/5|md-6">
+                        <label gui="label">Antes del vencimiento:</label>
+                        <button gui="form-button" bg-color="alizarin" ui-sref=".consulta">Consulta</button>
+                    </gs>
+                </gs-row>
+
+                <gs-row>
+                    <gs col="x-100/5|md-6">
+                        <button gui="form-button" bg-color="alizarin" ui-sref=".novedades">Novedades</button>
+                    </gs>
+                </gs-row>
+
+                <gs-row>
+                    <gs col="x-100/5|md-6">
+                        <label gui="label">En el vencimiento:</label>
+                        <button gui="form-button" bg-color="alizarin" ui-sref=".reinversion">Reinversión</button>
+                    </gs>
+                </gs-row>
+                <gs-row>
+                    <gs col="x-100/5|md-6">
+                        <label gui="label">Control diario:</label>
+                        <button gui="form-button" bg-color="alizarin" ui-sref=".cuadre">Cuadre CDT</button>
+                    </gs>
+                </gs-row>
+
+            </box>
+        </gs>
+    </gs-row>
+
+</div>

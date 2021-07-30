@@ -1,0 +1,32 @@
+<wsdl:definitions
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns="http://www.springframework.org/schema/beans"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:ns2="http://schemas.xmlsoap.org/soap/http"
+    xmlns:ns1="http://services.evaluadorlight.piac.davivienda.com"
+    name="EvaluadorLightService"
+    targetNamespace="http://www.springframework.org/schema/beans">
+    <wsdl:import location="http://localhost:8080/evaluadorLight/services/evaluacionWS?wsdl=EvaluadorService.wsdl" namespace="http://services.evaluadorlight.piac.davivienda.com"/>
+    <wsdl:binding name="EvaluadorLightServiceSoapBinding" type="ns1:EvaluadorService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="solicitarEvaluacionLight">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="solicitarEvaluacionLight">
+                <soap:header encodingStyle="" message="ns1:solicitarEvaluacionLight" part="sessionType" use="literal"/>
+                <soap:body parts="solicitarEvaluacionLight" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="solicitarEvaluacionLightResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SolicitarEvaluacionLightFault">
+                <soap:fault name="SolicitarEvaluacionLightFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="EvaluadorLightService">
+        <wsdl:port binding="tns:EvaluadorLightServiceSoapBinding" name="EvaluadorServicePort">
+            <soap:address location="http://localhost:8080/evaluadorLight/services/evaluacionWS"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

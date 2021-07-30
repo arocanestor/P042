@@ -1,0 +1,75 @@
+<div ui-view="cdt-simulacion">
+
+    <gs-row>
+        <gs>
+            <hgroup gui="hgroup">
+                <div>
+                    <i class="fa {{ icon }}" color="asbestos"></i>
+                </div>
+                <div>
+                    <h1>{{ title }}</h1>
+                    <div style="float:right">
+                        <i style="font-size:14px" class="fa fa-building" color="asbestos"></i>
+                         <i style="font-size:14px" color="asbestos">Oficina: {{ codOficina || $data.oficina }}</i>
+                    </div>
+                    <h2>{{ extract }}</h2>
+                </div>
+            </hgroup>
+        </gs>
+    </gs-row>
+
+    <gs-row ng-show="caption.listas.status">
+        <gs>
+            <box>
+                <gs-row>
+                    <gs>
+                        <gui-caption type="{{ caption.listas.status }}" ng-model="caption.listas.content"
+                            text-align="center"></gui-caption>
+                    </gs>
+
+                    <gs ng-show="caption.confirmacionNic.status">
+
+                        <gui-caption type="{{ caption.confirmacionNic.status }}"
+                            ng-model="caption.confirmacionNic.content" text-align="center"></gui-caption>
+
+                    </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+
+    <gs-row>
+
+        <gs>
+
+            <box>
+                <header>
+                    <h3 style="color:#2980b9">Mencione las características del CDT:</h3>
+                </header>
+
+                <gs-row>
+                    <gs>
+                        <div gui="wysiwyg" ng-bind-html="textos.texto1"></div>
+                    </gs>
+
+                    <gs col="x-12|md-12">
+                        <gui-caption type="info" ng-model="caption.informacion" text-align="center"></gui-caption>
+                    </gs>
+
+                </gs-row>
+
+                <gs-row>
+
+                    <gs push-right>
+                        <button gui="form-button" bg-color="alizarin"
+                            ng-disabled="caption.listas.status === 'error' || caption.confirmacionNic.status === 'error' || caption.validacionFecha.status === 'error'"
+                            ui-sref=".simulacion">Continuar</button>
+                    </gs>
+
+                </gs-row>
+            </box>
+
+        </gs>
+    </gs-row>
+
+</div>
