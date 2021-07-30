@@ -114,9 +114,9 @@
                             <jsSourceDir>resources/js</jsSourceDir>
                             <jsSourceFiles>
                                 <jsSourceFile>app.js</jsSourceFile>
-                                <jsSourceFile>routes/route-novaportes.js</jsSourceFile>
+                                <jsSourceFile>routes/route-novAportes.js</jsSourceFile>
                                 <jsSourceFile>routes/route-novasociada.js</jsSourceFile>
-                                <jsSourceFile>routes/route-novcuentas.js</jsSourceFile>
+                                <jsSourceFile>routes/route-novCuentasRetiros.js</jsSourceFile>
                                 <jsSourceFile>routes/route-proretiros.js</jsSourceFile>
                                 <jsSourceFile>routes/route-seguro.js</jsSourceFile>
                                 <jsSourceFile>routes/route-traportafolio.js</jsSourceFile>
@@ -148,6 +148,42 @@
                             <goal>minify</goal>
                         </goals>
                     </execution>
+                    <!-- NOVEDAD APORTES MINIFY -->
+                    <execution>
+                        <id>controllers-novAportes-minify</id>
+                        <configuration>
+                            <jsSourceDir>resources/js/controllers/novAportes</jsSourceDir>
+                            <jsSourceFiles>
+                                <jsSourceFile>novAportes.js</jsSourceFile>
+                            </jsSourceFiles>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <nosuffix>true</nosuffix>
+                            <skipMerge>true</skipMerge>
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
+                    <!-- NOVEDAD CUENTA RETIRO MINIFY -->
+                    <execution>
+                        <id>controllers-novedaCuentaRetiro-minify</id>
+                        <configuration>
+                            <jsSourceDir>resources/js/controllers/novedaCuentaRetiro</jsSourceDir>
+                            <jsSourceFiles>
+                                <!-- Main -->
+                                <jsSourceFile>mainNovCuentaRetiro.js</jsSourceFile>
+
+                                <!-- Crear -->
+                                <jsSourceFile>nuevaCuenta/nuevaCuentaCtrl.js</jsSourceFile>
+                            </jsSourceFiles>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <nosuffix>true</nosuffix>
+                            <skipMerge>true</skipMerge>
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
 
                     <!-- RETIROS MINIFY -->
                     <execution>
@@ -168,89 +204,7 @@
                         <goals>
                             <goal>minify</goal>
                         </goals>
-                    </execution>
-
-                    <!-- APORTES MINIFY -->
-                    <execution>
-                        <id>controllers-aportes-minify</id>
-                        <configuration>
-                            <jsSourceDir>resources/js/controllers/aportes</jsSourceDir>
-                            <jsSourceFiles>
-                                <jsSourceFile>ahorrosBiometricCtrl.js</jsSourceFile>
-                                <jsSourceFile>ahorrosCtrl.js</jsSourceFile>
-                                <jsSourceFile>ahorrosTermsCtrl.js</jsSourceFile>
-                            </jsSourceFiles>
-                            <jsEngine>CLOSURE</jsEngine>
-                            <nosuffix>true</nosuffix>
-                            <skipMerge>true</skipMerge>
-                        </configuration>
-                        <goals>
-                            <goal>minify</goal>
-                        </goals>
-                    </execution>
-
-                    <!-- CUENTAS MINIFY -->
-                    <execution>
-                        <id>controllers-cuentas-minify</id>
-                        <configuration>
-                            <jsSourceDir>resources/js/controllers/cuentas</jsSourceDir>
-                            <jsSourceFiles>
-
-                                <!-- Main -->
-                                <jsSourceFile>mainCDAT.js</jsSourceFile>
-
-                                <!-- Simulacion -->
-                                <jsSourceFile>simulacion/caracteristicasCDAT.js</jsSourceFile>
-                                <jsSourceFile>simulacion/simulacionCDAT.js</jsSourceFile>
-                                <jsSourceFile>simulacion/constitucionCDAT.js</jsSourceFile>
-                                <jsSourceFile>simulacion/resumenConstitucion.js</jsSourceFile>
-                                <jsSourceFile>simulacion/CDATBiometricCtrl.js</jsSourceFile>
-
-                                <!-- Reinversion -->
-                                <jsSourceFile>reinversion/caracteristicasCDAT.js</jsSourceFile>
-                                <jsSourceFile>reinversion/detalleCtrl.js</jsSourceFile>
-                                <jsSourceFile>reinversion/simulacionReinversion.js</jsSourceFile>
-                                <jsSourceFile>reinversion/reinversionCDAT.js</jsSourceFile>
-                                <jsSourceFile>reinversion/resumenReinversion.js</jsSourceFile>
-                                <jsSourceFile>reinversion/CDATBiometricCtrl.js</jsSourceFile>
-
-                                <!-- Cancelacion -->
-                                <jsSourceFile>cancelacion/cancelacionCDAT.js</jsSourceFile>
-                                <jsSourceFile>cancelacion/CDATBiometricCtrl.js</jsSourceFile>
-                                <jsSourceFile>cancelacion/resumenCancelacion.js</jsSourceFile>
-
-                            </jsSourceFiles>
-                            <jsEngine>CLOSURE</jsEngine>
-                            <nosuffix>true</nosuffix>
-                            <skipMerge>true</skipMerge>
-                        </configuration>
-                        <goals>
-                            <goal>minify</goal>
-                        </goals>
-                    </execution>
-
-                    <!-- PORTAFOLIO MINIFY -->
-                    <execution>
-                        <id>controllers-portafolio-minify</id>
-                        <configuration>
-                            <jsSourceDir>resources/js/controllers/portafolio</jsSourceDir>
-                            <jsSourceFiles>
-                                <jsSourceFile>mainXpressCtrl.js</jsSourceFile>
-                                <jsSourceFile>caracteristicasCtrl.js</jsSourceFile>
-                                <jsSourceFile>autorizacionCtrl.js</jsSourceFile>
-                                <jsSourceFile>confirmacionCtrl.js</jsSourceFile>
-                                <jsSourceFile>evaluacionXpressCtrl.js</jsSourceFile>
-                                <jsSourceFile>tarjetaMovilCtrl.js</jsSourceFile>
-                            </jsSourceFiles>
-                            <jsEngine>CLOSURE</jsEngine>
-                            <nosuffix>true</nosuffix>
-                            <skipMerge>true</skipMerge>
-                        </configuration>
-                        <goals>
-                            <goal>minify</goal>
-                        </goals>
-                    </execution>
-
+                    </execution> 
                 </executions>
             </plugin>
 
