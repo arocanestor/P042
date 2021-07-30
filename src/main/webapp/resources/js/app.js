@@ -17,6 +17,7 @@ define([
     './routes/route-novCuentasRetiros',
     './routes/route-novasociada',
     './routes/route-proretiros',
+    './routes/route-novAportes',
     './services/api',
     './factories/spa-utils',
     './filters/spa-filters'
@@ -29,7 +30,8 @@ define([
         'angularSoap',
         'routes.novedaCuentaRetiro',
         'routes.asociadas',
-        'routes.retiros'
+        'routes.retiros',
+        'routes.novAportes'
     ]);
 
     app.factory('servicioNumCDT', [function () {

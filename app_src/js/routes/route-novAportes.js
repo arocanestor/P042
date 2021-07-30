@@ -6,9 +6,9 @@ define(["angularAMD"], function (a) {
                 url: "/routes.novAportes",
                 views: {
                     main_content: a.route({
-                        templateUrl: "resources/html/views/asociadas/mainAsociadas.html",
-                        controller: "mainAsociadasCtrl", 
-                        controllerUrl: "controllers/asociadas/mainAsociadasCtrl"
+                        templateUrl: "resources/html/views/novAportes/novAportes.html",
+                        controller: "novAportes", 
+                        controllerUrl: "controllers/novAportes/novAportes"
                     })
                 },
                 data: { title: "Novedad Cuentas Asociadas", bread: "Novedad Cuentas Asociadas" },
