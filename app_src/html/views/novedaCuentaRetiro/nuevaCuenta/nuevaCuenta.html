@@ -1,0 +1,91 @@
+<div ui-view="retiros_main">
+    <gs-row>
+        <gs>
+            <box>
+                <gs-row>
+                    <gs text-align="center" >
+                        <h2 gui="h2">Cuentas Inscritas</h2>
+                    </gs>
+                    
+                    <gs col="x-2|md-4|sm-12">
+                        <button gui="form-button" bg-color="alizarin" ui-sref=".nuevaCuenta" ng-disabled="false" 
+                        ng-click="menuAgregar = !menuAgregar"
+                       >Agregar</button>    
+                    </gs>
+                </gs-row>
+                <gs-row ng-if="menuAgregar">
+                    <gs>
+                        <form name="form.fieldsFechas">
+                            <gs col="x-4|md-4|sm-12">
+                                <label gui="label">Banco:
+                                    <input input type="text" gui="input-control"
+                                        ng-model="numCuentaSeleccionada.numTipoDeProducto" ng-readonly="true" />
+                                    <!--<input input type="text" value="abc" ng-readonly="true" />-->
+                                </label>
+                            </gs>
+                            <gs col="x-4|md-4|sm-12">
+                                <label gui="label">No de Cuenta:
+                                    <input input type="text" gui="input-control"
+                                        ng-model="numCuentaSeleccionada.numTipoDeProducto" ng-readonly="true" />
+                                    <!--<input input type="text" value="abc" ng-readonly="true" />-->
+                                </label>
+                            </gs>
+                            <gs col="x-4|md-4|sm-12">
+                                <label gui="label">Tipo de Cuenta:
+                                    <select gui="input-control" type="text"
+                                        ng-options="item as item.numNumeroDeProducto for item in cuentas"
+                                        ng-model="numCuentaSeleccionada" required readonly>
+                                        <option value="" selected="selected">Seleccione...</option>
+                                    </select>
+                                </label>
+                            </gs>
+                            <gs col="x-4|md-4|sm-12">
+                                <label gui="label">Alias:
+                                    <input input type="text" gui="input-control"
+                                        ng-model="numCuentaSeleccionada.numTipoDeProducto" ng-readonly="true" />
+                                    <!--<input input type="text" value="abc" ng-readonly="true" />-->
+                                </label>
+                            </gs>                            
+                            <gs col="x-4|md-4|sm-12">
+                                <label  gui="label"><br/>
+                                 <button gui="form-button" bg-color="alizarin" ng-disabled="false"
+                                    ng-click="$gui.aceptar()">Aceptar</button>
+                                </label>
+                            </gs>
+                        </form>
+                    </gs>
+                </gs-row>
+                <gs-row>
+                    <gs>
+                        <div overflow="x">
+                            <table gui="table:table-bordered:table-zebra:table-summary">
+                                <caption>Listado de Productos</caption>
+                                <tbody>
+                                    <tr>
+                                        <th text-align="center">Banco</th>
+                                        <th text-align="center">No de Cuenta</th>
+                                        <th text-align="center">Tipo de Cuenta</th>
+                                        <th text-align="center">Alias</th>
+                                        <th text-align="center">Estado Cuenta</th>
+                                        <th text-align="center">Eliminar</th>
+                                    </tr>
+                                    <tr ng-repeat="retiro in retiros">
+                                        <td>{{retiro.tipoNovedad}}</td>
+                                        <td>{{retiro.valorTransaccion}}</td>
+                                        <td>{{retiro.fecPago}}</td>
+                                        <td>{{retiro.numeroProducto}}</td>
+                                        <td>{{retiro.numeroProducto}}</td>
+                                        <td td-form>
+                                            <button gui="button" title="Eliminar" color="alizarin"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+</div>

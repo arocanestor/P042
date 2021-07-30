@@ -1,0 +1,48 @@
+<div ui-view="retiros_main">
+    <gs-row>
+        <gs>
+            <box>
+                <gs-row>
+                    <gs>
+                        <header>
+                            <h3 style="color:#2980b9">Retiros programados para el Fondo de Inversión No.
+                                {{numProdDafaturo}}:</h3>
+                        </header>
+                    </gs>
+                    <gs push-right>
+                        <button gui="form-button" bg-color="alizarin" ng-disabled="false" ui-sref=".crear">Agregar
+                            Nueva Programación</button>
+                    </gs>
+                </gs-row>
+                <gs-row>
+                    <gs>
+                        <div overflow="x">
+                            <table gui="table:table-bordered:table-zebra:table-summary">
+                                <caption>Listado de Productos</caption>
+                                <tbody>
+                                    <tr>
+                                        <th text-align="center">Tipo de Programación</th>
+                                        <th text-align="center">Valor Programado</th>
+                                        <th text-align="center">Fecha de Abono a Cuenta</th>
+                                        <th text-align="center">Número de Cuenta</th>
+                                        <th text-align="center">Eliminar Programación</th>
+                                    </tr>
+                                    <tr ng-repeat="retiro in retiros">
+                                        <td>{{retiro.tipoNovedad}}</td>
+                                        <td>{{retiro.valorTransaccion}}</td>
+                                        <td>{{retiro.fecPago}}</td>
+                                        <td>{{retiro.numeroProducto}}</td>
+                                        <td td-form>
+                                            <button gui="button" title="Eliminar" color="alizarin"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+</div>
