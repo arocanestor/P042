@@ -32,8 +32,8 @@ define(['../app'], function (app) {
                 2: "novedad-cuentas-asociadas",
                 3: "programacion-retiros",
                 4: "novedad-aportes",
-                //4: "traslado-portafolios",
-                //5: "seguros",
+                5: "traslado-portafolios",
+                6: "seguros",
                 //6: "novedad-cuentas-retiros"
             };
 
@@ -46,8 +46,8 @@ define(['../app'], function (app) {
             $scope.accountIcons[$rootScope.routeApp[2]] = 'flat-financial-010-piggy-bank';
             $scope.accountIcons[$rootScope.routeApp[3]] = 'flat-financial-040-coin';
             $scope.accountIcons[$rootScope.routeApp[4]] = 'flat-financial-010-piggy-bank';
-            //$scope.accountIcons[$rootScope.routeApp[5]] = 'flat-financial-040-coin';
-            //$scope.accountIcons[$rootScope.routeApp[6]] = 'flat-financial-010-piggy-bank';
+            $scope.accountIcons[$rootScope.routeApp[5]] = 'flat-financial-040-coin';
+            $scope.accountIcons[$rootScope.routeApp[6]] = 'flat-financial-010-piggy-bank';
 
             // DATOS DE ENROLAMIENTO DEL CLIENTE
             $rootScope.autenticacion = casb.data;
