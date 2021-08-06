@@ -1,6 +1,9 @@
 define(["angularAMD"], function (a) {
     angular.module("routes.asociadas", ["ui.router"]).config(["$locationProvider", "$stateProvider", "$urlRouterProvider", "$httpProvider", function (d, b, e, f) {
-        var c = [{ name: "lov_novedades_fondos_inversion_tipo_asociacion_cuentas", id: "384" }];
+        var c = [
+                { name: "lov_novedades_fondos_inversion_tipo_asociacion_cuentas", id: "384" },
+                { name: "LOV_FONDOS_TIPO_CUENTA", id: "383"}
+            ];
         b.state("app.novedad-cuentas-asociadas",
             {
                 url: "/novedad-cuentas-asociadas",

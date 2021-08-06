@@ -32,8 +32,8 @@ define(['../app'], function (app) {
                 2: "novedad-cuentas-asociadas",
                 3: "programacion-retiros",
                 4: "novedad-aportes",
-                //4: "traslado-portafolios",
-                //5: "seguros",
+                5: "traslado-portafolios",
+                6: "seguros",
                 //6: "novedad-cuentas-retiros"
             };
 
@@ -42,12 +42,12 @@ define(['../app'], function (app) {
 
             // ICONOS DE LAS CUENTAS, RELACIONADOS AL MISMO NOMBRE DEL ROUTE
             $scope.accountIcons = {};
-            $scope.accountIcons[$rootScope.routeApp[1]] = 'flat-financial-033-money-bag';
-            $scope.accountIcons[$rootScope.routeApp[2]] = 'flat-financial-010-piggy-bank';
-            $scope.accountIcons[$rootScope.routeApp[3]] = 'flat-financial-040-coin';
-            $scope.accountIcons[$rootScope.routeApp[4]] = 'flat-financial-010-piggy-bank';
-            //$scope.accountIcons[$rootScope.routeApp[5]] = 'flat-financial-040-coin';
-            //$scope.accountIcons[$rootScope.routeApp[6]] = 'flat-financial-010-piggy-bank';
+            $scope.accountIcons[$rootScope.routeApp[1]] = 'flat-financial-003-tax-1';
+            $scope.accountIcons[$rootScope.routeApp[2]] = 'flat-financial-016-exchange';
+            $scope.accountIcons[$rootScope.routeApp[3]] = 'flat-financial-027-smartphone';
+            $scope.accountIcons[$rootScope.routeApp[4]] = 'flat-financial-023-check';
+            $scope.accountIcons[$rootScope.routeApp[5]] = 'flat-financial-018-briefcase-1';
+            $scope.accountIcons[$rootScope.routeApp[6]] = 'flat-financial-007-safebox';
 
             // DATOS DE ENROLAMIENTO DEL CLIENTE
             $rootScope.autenticacion = casb.data;
@@ -121,78 +121,6 @@ define(['../app'], function (app) {
 
                 });
 
-                /*angular.forEach(lov_productos_novedades_fondos_inversion, function (valor, i) {
-
-                    $spaUtils.disableInitProduct(valor.codigo);
-
-                });
-
-
-                if (siebelSP.DATOS_PN) {
-
-                    // Recorre la lista biometrica y la deshabilita.
-
-                    lovs.lov_productos_novedades_fondos_inversion.map(function (obj) {
-
-                        obj.disabledBiometric = false;
-
-                        return obj;
-
-                    });
-                    angular.forEach(lovs.lov_productos_novedades_fondos_inversion, function (prodObj) {
-
-                        var validIdsObj = $filter('filter')(lovs.lov_tipo_id_venta_linea, {
-                            codigo: prodObj.codigo
-                        })[0] || {
-                            desc: ''
-                        };
-
-                        // VALIDACION TIPO DOCUMENTO
-                        if (validIdsObj.desc.split(';').indexOf(siebelSP.DATOS_PN.CLIENTE.IdentificationTypeCode) == -1) {
-
-                            prodObj.disabled = true;
-
-                        }
-
-
-                    });
-
-
-                    if (siebelSP.DATOS_PN.CLIENTE.MetodoAutenticacion != 'BIOMÉTRICO') {
-
-                        angular.forEach(lovs.lov_bloqueo_biometrico, function (valor, i) {
-
-                            if (valor.desc == 'true') {
-
-                                $spaUtils.disableInitProductbiometric(valor.codigo);
-
-                            }
-
-                        });
-
-                    }
-
-                } else {
-
-                    angular.forEach(lovs.lov_productos_novedades_fondos_inversion, function (prodObj) {
-
-                        var validIdsObj = $filter('filter')(lovs.lov_tipo_id_venta_linea, {
-                            codigo: prodObj.codigo
-                        })[0] || {
-                            desc: ''
-                        };
-
-                        // VALIDACION TIPO DOCUMENTO
-                        if (validIdsObj.desc.split(';').indexOf(siebelSP.DATOS_PJ.CLIENTE.IdentificationTypeCode) == -1) {
-
-                            prodObj.disabled = true;
-
-                        }
-
-
-                    });
-
-                }*/
 
             });
 

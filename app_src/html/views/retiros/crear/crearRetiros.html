@@ -20,7 +20,7 @@
                                     <option value="" selected="selected">Seleccione...</option>
                                 </select>
                             </label>
-                        </gs>                        
+                        </gs>
                     </gs>
                 </gs-row>
             </box>
@@ -34,15 +34,16 @@
                         <form name="form.fieldsFechas">
                             <gs col="x-4|md-4|sm-12" ng-if="nuevaPrtogaramacion.tipoProgramSelec == '01' ">
                                 <label gui="label">Valor Programado:
-                                    <input type="text" gui="input-control" ng-init="valorProgramado = ''"
-                                        ng-model="valorProgramado" maxlength="200" required />
+                                    <div gui="overlabel"  gui-mask="currency" ng-model="novedad.nuevoCupoGlobal"></div>
+                                    <input gui="input-control"  gui-mask="currency" maxlength="17" ng-model="novedad.nuevoCupoGlobal"  text-align="right" chars="only-numbers" required />
                                 </label>
                             </gs>
                             <gs col="x-4|md-4|sm-12">
-                                <label gui="label">Fecha de Pago:
-                                    <input type="text" gui="input-control" ng-init="fechaPago = ''" ng-model="fechaPago"
-                                        maxlength="200" required />
-                                </label>
+                                <label gui="label">Fecha de pago:</label>
+                                <input type="text" pikaday="$gui.form1.fechaVenc" gui="input-control"
+                                    placeholder="Fecha" ng-model="portafolio.fecha" gui-validate
+                                    rules='{"required": true}' readonly  min-date="toDay"value="portafolio.fecha"
+                                    />
                             </gs>
                             <gs col="x-4|md-4|sm-12">
                                 <label gui="label">Cuenta a Abonar:
@@ -53,7 +54,8 @@
                                     </select>
                                 </label>
                             </gs>
-                            <gs col="x-4|md-4|sm-12" ng-if="nuevaPrtogaramacion.tipoProgramSelec == '02'|| nuevaPrtogaramacion.tipoProgramSelec == '03' ">
+                            <gs col="x-4|md-4|sm-12"
+                                ng-if="nuevaPrtogaramacion.tipoProgramSelec == '02'|| nuevaPrtogaramacion.tipoProgramSelec == '03' ">
                                 <label gui="label">Periocidad:
                                     <select gui="input-control" type="text"
                                         ng-options="item as item.desc for item in lovs.lov_fondos_periocidad"
@@ -78,10 +80,13 @@
                 <gs-row>
                     <gs push-right>
                         <button gui="form-button" bg-color="alizarin" ng-disabled="false"
-                            ng-click="$gui.aceptar()">Aceptar</button>
+                            ng-click="$gui.aplicarNovedad()">Aceptar</button>
                     </gs>
                 </gs-row>
             </box>
         </gs>
     </gs-row>
 </div>
+
+<app-devices-assistant datos-pdf="$gui.datosPdf" done="$program.actualizarNovedad" cancel="$program.cancelNovedad" assistant-active="$gui.assistant" 
+id-reporte="R_P042_PRG_RETRO_DAF"></app-devices-assistant>

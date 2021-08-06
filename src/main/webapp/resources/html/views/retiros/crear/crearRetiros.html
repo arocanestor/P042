@@ -1,0 +1,92 @@
+<div ui-view="crear_retiros_main">
+    <gs-row>
+        <gs>
+            <box>
+                <gs-row>
+                    <gs>
+                        <header>
+                            <h3 style="color:#2980b9">Crear nuevo retiro programado para el Fondo de Inversión No.
+                                {{numProdDafaturo}}:</h3>
+                        </header>
+                    </gs>
+                    <gs>
+                        <gs col="x-4|md-4|sm-12">
+                            <label gui="label">Tipo de Programación:
+                                <select gui="input-control" type="text"
+                                    ng-options="item as item.desc for item in lovs.lov_fondos_tipo_novedad_programacion"
+                                    ng-model="tipoNovedadSeleccionada"
+                                    ng-change="$gui.programacionSeleccionada(tipoNovedadSeleccionada)" required
+                                    readonly>
+                                    <option value="" selected="selected">Seleccione...</option>
+                                </select>
+                            </label>
+                        </gs>
+                    </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+    <gs-row ng-if="nuevaPrtogaramacion.tipoProgramSelec != '' ">
+        <gs>
+            <box>
+                <gs-row>
+                    <gs>
+                        <form name="form.fieldsFechas">
+                            <gs col="x-4|md-4|sm-12" ng-if="nuevaPrtogaramacion.tipoProgramSelec == '01' ">
+                                <label gui="label">Valor Programado:
+                                    <div gui="overlabel"  gui-mask="currency" ng-model="novedad.nuevoCupoGlobal"></div>
+                                    <input gui="input-control"  gui-mask="currency" maxlength="17" ng-model="novedad.nuevoCupoGlobal"  text-align="right" chars="only-numbers" required />
+                                </label>
+                            </gs>
+                            <gs col="x-4|md-4|sm-12">
+                                <label gui="label">Fecha de pago:</label>
+                                <input type="text" pikaday="$gui.form1.fechaVenc" gui="input-control"
+                                    placeholder="Fecha" ng-model="portafolio.fecha" gui-validate
+                                    rules='{"required": true}' readonly  min-date="toDay"value="portafolio.fecha"
+                                    />
+                            </gs>
+                            <gs col="x-4|md-4|sm-12">
+                                <label gui="label">Cuenta a Abonar:
+                                    <select gui="input-control" type="text"
+                                        ng-options="item as item.numNumeroDeProducto for item in cuentas"
+                                        ng-model="numCuentaAbonar" required readonly>
+                                        <option value="" selected="selected">Seleccione...</option>
+                                    </select>
+                                </label>
+                            </gs>
+                            <gs col="x-4|md-4|sm-12"
+                                ng-if="nuevaPrtogaramacion.tipoProgramSelec == '02'|| nuevaPrtogaramacion.tipoProgramSelec == '03' ">
+                                <label gui="label">Periocidad:
+                                    <select gui="input-control" type="text"
+                                        ng-options="item as item.desc for item in lovs.lov_fondos_periocidad"
+                                        ng-model="tipoPeriocidadSeleccionada" required readonly>
+                                        <option value="" selected="selected">Seleccione...</option>
+                                    </select>
+                                </label>
+                            </gs>
+                            <gs col="x-4|md-4|sm-12" ng-if="nuevaPrtogaramacion.tipoProgramSelec == '05' ">
+                                <label gui="label">Motivo Cancelación:
+                                    <select gui="input-control" type="text"
+                                        ng-options="item as item.desc for item in lovs.lov_fondos_motivo_cancelacion"
+                                        ng-model="motCancelacionSeleccionada" required readonly>
+                                        <option value="" selected="selected">Seleccione...</option>
+                                    </select>
+                                </label>
+                            </gs>
+
+                        </form>
+                    </gs>
+                </gs-row>
+                <gs-row>
+                    <gs push-right>
+                        <button gui="form-button" bg-color="alizarin" ng-disabled="false"
+                            ng-click="$gui.aplicarNovedad()">Aceptar</button>
+                    </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+</div>
+
+<app-devices-assistant datos-pdf="$gui.datosPdf" done="$program.actualizarNovedad" cancel="$program.cancelNovedad" assistant-active="$gui.assistant" 
+id-reporte="R_P042_PRG_RETRO_DAF"></app-devices-assistant>
