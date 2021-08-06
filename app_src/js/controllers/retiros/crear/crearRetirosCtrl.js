@@ -11,6 +11,7 @@ define(['../../../app'], function (app) {
         '$api',
         '$timeout',
         '$utilities',
+        'EXTRAS',
         'lovs',
         function (
             $scope,
@@ -21,6 +22,7 @@ define(['../../../app'], function (app) {
             $api,
             $timeout,
             $utilities,
+            EXTRAS,
             lovs
         ) {
 
@@ -42,7 +44,7 @@ define(['../../../app'], function (app) {
             $scope.valorProgramado = '';
             $scope.fechaPago = '';
             $scope.nuevaPrtogaramacion = {
-                tipoProgramSelec : ''
+                tipoProgramSelec: ''
             }
 
             /* ------------------------------------------------------------------------------------------
@@ -52,17 +54,17 @@ define(['../../../app'], function (app) {
 
                 programacionSeleccionada: function (value) {
                     $scope.nuevaPrtogaramacion.tipoProgramSelec = value.codigo;
-                    
+
                     if (value.codigo == '03' || value.codigo == '02') {//Retiro de Rendimientos ó Retiro Periódico Fijo                        
                         $scope.campMotCancelacion = false;
                         $scope.campPeriocidad = true;
                     } else if (value.codigo == '05') {//Retiro Total con Cancelación
                         $scope.campPeriocidad = false;
                         $scope.campMotCancelacion = true;
-                    } 
-                     else {
+                    }
+                    else {
                         $scope.campPeriocidad = false;
-                        $scope.campMotCancelacion = false;                        
+                        $scope.campMotCancelacion = false;
 
                         $scope.$api.asociacionAFondosCuentas().then(function (response) {
                             var data = response.data;
@@ -72,7 +74,7 @@ define(['../../../app'], function (app) {
                         });
 
                         $scope.downBox = true;
-                    }                   
+                    }
                 },
 
                 aceptar: function () {
@@ -95,13 +97,65 @@ define(['../../../app'], function (app) {
                         });
 
                     }
-                }
+                },
+                aplicarNovedad: function () {
+                    
+
+                        $scope.$gui.datosPdf = $scope.$program.datosPdf();
+                        $scope.$gui.assistant = true;                        
+                   
+
+                },
 
             };
             /* ------------------------------------------------------------------------------------------
              | PROGRAM FUNCTIONS
              -------------------------------------------------------------------------------------------- */
             $scope.$program = {
+                actualizarNovedad: function (done) {
+                    $api.reportes.guardaPdf($rootScope.$ada.datosReporte).then(function (response){
+
+                    },function (response) {
+                        $dialog.open({
+                            status: "error",
+                            content:
+                                response.headers("Respuesta") || "Error Inesperado"
+                        });
+                    })
+
+                },
+
+                datosPdf: function () { // se aplican los datos del PDF
+
+                    return {
+                        oficina: "0004",
+                        usuario: "HCUSBA",
+                        detalle: {
+                            numeroDeProducto: "0237541",
+                            programacionDeRetiro: "23/05/2021",
+                            aplicacionRetiro: "CFR 45 5DS",
+                            periodicidad: "U47RYH8EF32",
+                            medioDePago: "CFR 45 5DS",
+                            abonarACuentaNo: "U47RYH8EF32",
+                            entidad: "Entidad1",
+                            valorProgramado: "",
+                            fechaDePagoDelRetiro: "",
+                            nroDeIdentificacion: ""
+                        },
+                        tblMultifondoValorFecPago: [{
+                            multifondo: "Multifondo1",
+                            valor: "valor1",
+                            fechaDePago: "FechaDePago1"
+                        }
+                        ]
+                    }                   
+
+                },
+                cancelNovedad: function () {
+
+                    $scope.productoSeleccionado.esExcenta = !$scope.productoSeleccionado.esExcenta; // Revertimos el check en caso que se cancele la operacion
+
+                }
 
             };
             /* ------------------------------------------------------------------------------------------
@@ -164,6 +218,23 @@ define(['../../../app'], function (app) {
                             ]
                         }
                     );
+                },
+                updateNovedad: function () {
+
+                    return $api.novedades.gmf({ // se definen la data de el servicio novedades GMF
+                        rowId: CONFIG.rowId,
+                        usuario: CONFIG.usuario,
+                        subTipoConsulta: '',
+                        clasificacion: '',
+                        motivoConsulta: '',
+                        perfil: '0',
+                        idTransaccion: 'NovedadesGMF',
+                        valNumeroCuenta:"0550098100022718",
+                        valIndicadorMarcacion:  '0' , // el check cambia según si el valor es 1 o 0
+                        oficinaTotal: CONFIG.oficinaTotal
+
+                    });
+
                 }
             };
             /* ------------------------------------------------------------------------------------------

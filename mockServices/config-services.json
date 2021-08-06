@@ -910,4 +910,69 @@
         "body": "B",
         "file": "./mockServices/jsonPlaceholder/consultaBancos.json"
     }
+},{
+    "request": {
+        "url": "api/novedades/consultarAsociacionAFondosCuentasV1",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error en el Gestor FileNet"
+        },
+        "latency": 1000,
+        "body": "B",
+        "file": "./mockServices/jsonPlaceholder/consultarAsociacionAFondosCuentasV1.json"
+    }
+
+},{
+    "request": {
+        "url": "api/novedades/daviplusYSolidezModificacionDeCuentas",
+        "method": "POST"
+    },
+    "response": {
+        "status": 417,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error en el Gestor FileNet"
+        },
+        "latency": 1000,
+        "body": "B",
+        "file": "./mockServices/jsonPlaceholder/daviplusYSolidezModificacionDeCuentas.json"
+    }
+},{
+    "request": {
+        "url": "api/novedades/consultaProgramacionRetirosFondos",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error en el Gestor FileNet"
+        },
+        "latency": 1000,
+        "body": "B",
+        "file": "./mockServices/jsonPlaceholder/consultaProgramacionRetirosFondos.json"
+    }
+},{
+    "request": {
+        "url": "api/novedades/eliminarProgramacionRetiroFondos",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Respuesta": "Error en el Gestor FileNet"
+        },
+        "latency": 1000,
+        "body": "B",
+        "file": "./mockServices/jsonPlaceholder/eliminarProgramacionRetiroFondos.json"
+    }
 }]

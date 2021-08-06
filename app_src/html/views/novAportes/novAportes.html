@@ -5,23 +5,15 @@
                 <gs-row>
                     <gs>
                         <header>
-                            <h3 style="color:#2980b9">Seleccione la cuenta para asociar el Fondo de Inversión No.
-                                {{numProdDafaturo}}:</h3>
+                            <h3 style="color:#2980b9">Tipo de Aporte</h3>
                         </header>
                     </gs>
                 </gs-row>
                 <gs-row>
                     <gs>
-                        <form name="form.fieldsFechas">
-                            <gs col="x-4|md-4|sm-12">
-                                <label gui="label">Tipo de cuenta:
-                                    <input input type="text" gui="input-control"
-                                        ng-model="numCuentaSeleccionada.numTipoDeProducto" ng-readonly="true" />
-                                    <!--<input input type="text" value="abc" ng-readonly="true" />-->
-                                </label>
-                            </gs>
-                            <gs col="x-4|md-4|sm-12">
-                                <label gui="label">No. Cuenta para Retiros:
+                        <form name="form.fieldsFechas">   
+                            <gs  col="x-4|md-4|sm-12">
+                                <label gui="label">Tipo de Aporte:
                                     <select gui="input-control" type="text"
                                         ng-options="item as item.numNumeroDeProducto for item in cuentas"
                                         ng-model="numCuentaSeleccionada" required readonly>
@@ -29,15 +21,18 @@
                                     </select>
                                 </label>
                             </gs>
+                            <gs>
+                                <label gui="label"  col="x-2|md-4|sm-12">
+                                    <button gui="form-button" bg-color="alizarin" ng-disabled="false"
+                                    ng-click="$gui.aceptar()">Aceptar</button>
+                                </label>
+                            </gs>
+                                                          
+                            
                         </form>
                     </gs>
                 </gs-row>
-                <gs-row>
-                    <gs push-right>
-                        <button gui="form-button" bg-color="alizarin" ng-disabled="false"
-                            ng-click="$gui.aceptar()">Aceptar</button>
-                    </gs>
-                </gs-row>
+                
             </box>
         </gs>
     </gs-row>

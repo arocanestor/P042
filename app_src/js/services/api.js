@@ -64,7 +64,7 @@ define(['angularAMD'], function ($ngAMD) {
                 });
             };
 
-            api.novedadescuentas.eliminarProgramacionRetiroFondos = function (data) {
+            api.novedades.eliminarProgramacionRetiroFondos = function (data) {
                 return $http({
                     url: 'api/novedades/eliminarProgramacionRetiroFondos',
                     method: 'POST',
@@ -462,6 +462,30 @@ define(['angularAMD'], function ($ngAMD) {
                 });
 
             };
+            //////////////////////////////////////
+            api.novedades.daviSolModCuen = function (data) {               
+                return $http({
+                    url: 'api/novedades/daviplusYSolidezModificacionDeCuentas',
+                    method: 'POST',
+                    data: data,
+                    pushAction: {
+                        name: 'daviplusYSolidezModificacionDeCuentas'
+                    }
+                });
+
+            };
+            api.novedades.consultaProgramacionRetirosFondos = function (data) {               
+                return $http({
+                    url: 'api/novedades/consultaProgramacionRetirosFondos',
+                    method: 'POST',
+                    data: data,
+                    pushAction: {
+                        name: 'consultaProgramacionRetirosFondos'
+                    }
+                });
+
+            };
+
 
             return api;
 

@@ -12,32 +12,38 @@
                 </gs-row>
                 <gs-row>
                     <gs>
-                        <form name="form.fieldsFechas">
-                            <gs col="x-4|md-4|sm-12">
-                                <label gui="label">Tipo de cuenta:
-                                    <input input type="text" gui="input-control"
-                                        ng-model="numCuentaSeleccionada.numTipoDeProducto" ng-readonly="true" />
-                                    <!--<input input type="text" value="abc" ng-readonly="true" />-->
+                        <form name="form.fieldsFechas" ng-init="$gui.consultarAsociacionAFondosCuentas">
+                            <gs col="x-4|md-4|sm-12" >
+                                <label gui="label" >No. Cuenta para Retiros:<br>
+                                    <select                                        
+                                        gui="input-control" type="text"
+                                        ng-options="item as item.numNumeroDeProducto for item in cuentas"
+                                        ng-model="numCuentaSeleccionada"                                                                             
+                                       >
+                                        <option value="" >Seleccione...</option>
+                                    </select>
                                 </label>
                             </gs>
-                            <gs col="x-4|md-4|sm-12">
-                                <label gui="label">No. Cuenta para Retiros:
-                                    <select gui="input-control" type="text"
-                                        ng-options="item as item.numNumeroDeProducto for item in cuentas"
-                                        ng-model="numCuentaSeleccionada" required readonly>
-                                        <option value="" selected="selected">Seleccione...</option>
-                                    </select>
+                            <gs col="x-4|md-4|sm-12" >
+                                <label gui="label"  >Tipo de cuenta:<br>
+                                    <table gui="table-bordered">
+                                        <tr  gui="input-control">
+                                            <td>{{numCuentaSeleccionada.valTipoId | lov: lovs.LOV_FONDOS_TIPO_CUENTA}}</td>
+                                        </tr>
+                                    </table>                                                                      
+                                </label>
+                            </gs>
+                            
+                            <gs col="x-2|md-4|sm-12" >
+                                <label gui="label" ><br>
+                                    <button gui="form-button" bg-color="alizarin" ng-disabled="false"
+                                    ng-click="$gui.daviSolModCuen()">Aceptar</button>
                                 </label>
                             </gs>
                         </form>
                     </gs>
                 </gs-row>
-                <gs-row>
-                    <gs push-right>
-                        <button gui="form-button" bg-color="alizarin" ng-disabled="false"
-                            ng-click="$gui.aceptar()">Aceptar</button>
-                    </gs>
-                </gs-row>
+                
             </box>
         </gs>
     </gs-row>

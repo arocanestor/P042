@@ -11,12 +11,14 @@ define([
     'core-slm',
     'core-devices',
     'core-calendar',
+    'core-extras',
     'core-angularsoap',
     'core-soapclient',
     // app imports
     './routes/route-novCuentasRetiros',
     './routes/route-novasociada',
     './routes/route-proretiros',
+    './routes/route-novAportes',
     './services/api',
     './factories/spa-utils',
     './filters/spa-filters'
@@ -29,7 +31,8 @@ define([
         'angularSoap',
         'routes.novedaCuentaRetiro',
         'routes.asociadas',
-        'routes.retiros'
+        'routes.retiros',
+        'routes.novAportes'
     ]);
 
     app.factory('servicioNumCDT', [function () {
@@ -90,6 +93,9 @@ define([
                             }, {
                                 name: 'lov_productos_novedades_fondos_inversion',
                                 id: '382'
+                            },{
+                                name: 'LOV_FONDOS_TIPO_CUENTA',
+                                id: '383'
                             }
                             ]);
 

@@ -10,8 +10,9 @@
                         </header>
                     </gs>
                     <gs push-right>
-                        <button gui="form-button" bg-color="alizarin" ng-disabled="false" ui-sref=".crear">Agregar
-                            Nueva Programación</button>
+                        <button gui="form-button" bg-color="alizarin" ng-disabled="false" ui-sref=".crear">
+                            AgregarNueva Programación
+                        </button>
                     </gs>
                 </gs-row>
                 <gs-row>
@@ -33,8 +34,8 @@
                                         <td>{{retiro.fecPago}}</td>
                                         <td>{{retiro.numeroProducto}}</td>
                                         <td td-form>
-                                            <button gui="button" title="Eliminar" color="alizarin"><i
-                                                    class="fa fa-trash"></i></button>
+                                            <button ng-click="$gui.eliminarProgramacionRetiroFondos()" gui="button" title="Eliminar" color="alizarin">
+                                                <i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -46,3 +47,6 @@
         </gs>
     </gs-row>
 </div>
+
+<app-devices-assistant datos-pdf="$gui.datosPdf" done="$program.actualizarNovedad" cancel="$program.cancelNovedad" assistant-active="$gui.assistant" 
+id-reporte="R_P042_PRG_RETRO_DAF"></app-devices-assistant>

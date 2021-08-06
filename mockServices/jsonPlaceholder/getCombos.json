@@ -111,5 +111,14 @@
       "codigo": "12",
       "desc": "Prueba"
     }
+  ],"383":[
+    {
+      "codigo": "01",
+      "desc": "Cuenta Corriente"
+    },
+    {
+      "codigo": "03",
+      "desc": "Cuenta de Ahorros"
+    }
   ]
 }

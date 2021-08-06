@@ -1,0 +1,64 @@
+<div ui-view="retiros_main">
+    <gs-row>
+        <gs>
+            <box>
+                <gs-row>
+                  
+                    <gs col="x-3|md-4|sm-12">
+                        <h3 style="color:#2980b9">Informacion Vigente Del Cliente: </h3>
+                    </gs>
+                    <gs col="x-3|md-4|sm-12">
+                        <button gui="form-button" bg-color="alizarin" ui-sref=".nuevaCuenta"ng-disabled="false"
+                       >Inscribir Nueva Cuenta</button>    
+                    </gs>             
+                </gs-row>
+                <header></header>
+                <gs-row >
+                    <gs>
+                        <form name="form.fieldsFechas">
+                            <gs col="x-4|md-4|sm-12">
+                                <label gui="label">Tipo de cuenta:
+                                    <input input type="text" gui="input-control"
+                                        ng-model="numCuentaSeleccionada.numTipoDeProducto" ng-readonly="true" />
+                                    <!--<input input type="text" value="abc" ng-readonly="true" />-->
+                                </label>
+                            </gs>
+                            <gs col="x-4|md-4|sm-12">
+                                <label gui="label">Banco:
+                                    <input input type="text" gui="input-control"
+                                        ng-model="numCuentaSeleccionada.numTipoDeProducto" ng-readonly="true" />
+                                    <!--<input input type="text" value="abc" ng-readonly="true" />-->
+                                </label>
+                            </gs>
+                            <gs col="x-4|md-4|sm-12">
+                                <label gui="label">No. Cuenta para Retiros:
+                                    <select gui="input-control" type="text"
+                                        ng-options="item as item.numNumeroDeProducto for item in cuentas"
+                                        ng-model="numCuentaSeleccionada" required readonly>
+                                        <option value="" selected="selected">Seleccione...</option>
+                                    </select>
+                                </label>
+                            </gs>
+                        </form>
+                    </gs>
+                </gs-row>
+                <gs-row>
+                    <gs push-right>
+                        <button gui="form-button" bg-color="alizarin" ng-disabled="false"
+                            ng-click="$gui.aceptar()">Aceptar</button>
+                    </gs>
+                </gs-row>
+            </box>
+        </gs>
+    </gs-row>
+
+    <gs-row ng-if="captionService.estado">
+        <gs>
+            <box>
+                <gui-caption text-align="center" type="{{captionService.tipoCaption}}"
+                    ng-model="captionService.mensaje">
+                </gui-caption>
+            </box>
+        </gs>
+    </gs-row>
+</div>
