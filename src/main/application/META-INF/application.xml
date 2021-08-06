@@ -3,7 +3,7 @@
   <display-name>WebNovedadesFondoDeInversion</display-name>
   <module>
     <web>
-      <web-uri>WebNovedadesFondoDeInversion-1_0_4.war</web-uri>
+      <web-uri>WebNovedadesFondoDeInversion-1_0_2.war</web-uri>
       <context-root>WebNovedadesFondoDeInversion</context-root>
     </web>
   </module>

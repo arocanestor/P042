@@ -11,6 +11,7 @@ define([
     'core-slm',
     'core-devices',
     'core-calendar',
+    'core-extras',
     'core-angularsoap',
     'core-soapclient',
     // app imports
@@ -92,6 +93,9 @@ define([
                             }, {
                                 name: 'lov_productos_novedades_fondos_inversion',
                                 id: '382'
+                            },{
+                                name: 'LOV_FONDOS_TIPO_CUENTA',
+                                id: '383'
                             }
                             ]);
 

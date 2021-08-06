@@ -1,0 +1,54 @@
+{
+    "total": "4",
+    "codMsgRespuesta": "0",
+    "ultimoMensaje": "1",
+    "numCantidadDeCuentas": "5",
+    "msgRespuesta": "EXITOSO",
+    "cuentas": {
+        "cuentas": [
+            {
+                "numNumeroId": 1032399231,
+                "valTipoId": "01",
+                "numCodigoDeBanco": 0,
+                "numTipoDeProducto": 0,
+                "numNumeroDeProducto": 1231231231231,
+                "valAlias": ""
+            },
+            {
+                "numNumeroId": 1032399231,
+                "valTipoId": "03",
+                "numCodigoDeBanco": 0,
+                "numTipoDeProducto": 0,
+                "numNumeroDeProducto": 78974123465,
+                "valAlias": ""
+            },
+            {
+                "numNumeroId": 1032399231,
+                "valTipoId": "01",
+                "numCodigoDeBanco": 0,
+                "numTipoDeProducto": 0,
+                "numNumeroDeProducto": 521412345123,
+                "valAlias": ""
+            },
+            {
+                "numNumeroId": 1032399231,
+                "valTipoId": "03",
+                "numCodigoDeBanco": 0,
+                "numTipoDeProducto": 0,
+                "numNumeroDeProducto": 9877521547,
+                "valAlias": ""
+            },
+            {
+                "numNumeroId": 1032399231,
+                "valTipoId": "01",
+                "numCodigoDeBanco": 0,
+                "numTipoDeProducto": 0,
+                "numNumeroDeProducto": 897844152643,
+                "valAlias": ""
+            }
+        ]
+    },
+    "nombreOperacion": "consultarAsociacionAFondosCuentas_V1",
+    "idTransaccion": "1-6850651646",
+    "caracterAceptacion": "B"
+}

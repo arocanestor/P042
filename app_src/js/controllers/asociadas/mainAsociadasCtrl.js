@@ -37,6 +37,10 @@ define(['../../app'], function (app) {
 
             $scope.cuentas = [];
             $scope.tipoCuenta = '';
+            $scope.numCuentaSeleccionada={
+                valTipoId:" "
+            };
+            
 
             // N si es natural o J si es juridica para hacer validaciones en el hotmail
             $scope.tipoCliente = CONFIG.persona == 'natural' || CONFIG.naturalConNegocio ? 'N' : 'J';
@@ -60,20 +64,44 @@ define(['../../app'], function (app) {
              -------------------------------------------------------------------------------------------- */
             $scope.$gui = {
 
-                aceptar: function (cuenta) {
-                    $scope.$api.enviarNovedades(cuenta).then(function (response) {
-                        var data = response.data;
-                        if (data) {
+                daviSolModCuen: function () {                    
+                  
+                        $scope.$api.daviSolModCuen().then(function(response){
+
+                        },function (response) {
+
+                        if (response.status == 417) {                            
                             $dialog.open({
-                                status: 'success',
-                                content: data.msgRespuesta
+                                status: 'error',
+                                content: response.headers('Respuesta')                                
                             });
+
+                        } else {
+
+                            $dialog.open({
+                                status: 'error',
+                                content: 'Ha ocurrido un error inesperado'
+                                
+                            });
+
                         }
-
                     });
+                           
+                                    
+                },
+                formatear: function (data){
+                    //$filter('lov')(data,lovs.LOV_FONDOS_TIPO_CUENTA)
+                   
+                    $scope.numCuentaSeleccionada.valTipoId = 'Cuenta Corriente'
+                },
+               
+                consultarAsociacionAFondosCuentas:function(){
+                    $scope.$api.asociacionAFondosCuentas().then(function(res) {
+                       
+                    })
                 }
-
             };
+
 
             /* ------------------------------------------------------------------------------------------
              | PROGRAM FUNCTIONS
@@ -88,6 +116,7 @@ define(['../../app'], function (app) {
              -------------------------------------------------------------------------------------------- */
 
             $scope.$api = {
+                
                 asociacionAFondosCuentas: function () {
                     return $api.novedadescuentas.consultarAsociacionAFondosCuentas(
                         {
@@ -98,7 +127,7 @@ define(['../../app'], function (app) {
                             codPais: 'CO',
                             numNumeroId: CONFIG.idNumber,
                             numTipoId: CONFIG.idType,
-                            numTipoDeConsulta: 3,
+                            numTipoDeConsulta: '03',
                             valNaturalezaJuridica: CONFIG.persona == 'natural' ? 'N' : (CONFIG.naturalConNegocio ? 'A' : 'J'),
                             numCodigoDeBanco: 0,
                             numTipoDeProducto: 0,
@@ -120,8 +149,33 @@ define(['../../app'], function (app) {
                             seguridad: null
                         }
                     );
-                }
+                },
 
+                daviSolModCuen: function(){
+                   
+                    return $api.novedades.daviSolModCuen(
+                        {
+                            rowId: "1-37545452356",
+                            usuario: "HCUSBA",
+                            oficinaTotal: "8001",
+                            codIndTransaccion: "02",
+                            valNumeroProducto: "0600099800023133",
+                            cuentaAsociada: {
+                              codIndCambioTipoCuenta: 1,
+                              codTipoCuenta: 3,
+                              codIndCambioNumeroCuenta: 1,
+                              valNumCuenta: "0560098369999408"
+                            },
+                            cuentaRetiros: {
+                              codIndCambioTipoCuenta: 0,
+                              codTipoCuenta: 0,
+                              codIndCambioNumeroCuenta: 0,
+                              valNumeroCuenta: 0,
+                              valEntidadAch: 0
+                            }
+                        }
+                    )
+                }                
             };
 
             /* ------------------------------------------------------------------------------------------
