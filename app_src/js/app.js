@@ -19,6 +19,7 @@ define([
     './routes/route-novasociada',
     './routes/route-proretiros',
     './routes/route-novAportes',
+    './routes/route-traslados',
     './services/api',
     './factories/spa-utils',
     './filters/spa-filters'
@@ -32,7 +33,8 @@ define([
         'routes.novedaCuentaRetiro',
         'routes.asociadas',
         'routes.retiros',
-        'routes.novAportes'
+        'routes.novAportes',
+        'routes.traslados'
     ]);
 
     app.factory('servicioNumCDT', [function () {

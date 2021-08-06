@@ -42,12 +42,14 @@ define(['../app'], function (app) {
 
             // ICONOS DE LAS CUENTAS, RELACIONADOS AL MISMO NOMBRE DEL ROUTE
             $scope.accountIcons = {};
+
             $scope.accountIcons[$rootScope.routeApp[1]] = 'flat-financial-003-tax-1';
             $scope.accountIcons[$rootScope.routeApp[2]] = 'flat-financial-016-exchange';
             $scope.accountIcons[$rootScope.routeApp[3]] = 'flat-financial-027-smartphone';
             $scope.accountIcons[$rootScope.routeApp[4]] = 'flat-financial-023-check';
             $scope.accountIcons[$rootScope.routeApp[5]] = 'flat-financial-018-briefcase-1';
             $scope.accountIcons[$rootScope.routeApp[6]] = 'flat-financial-007-safebox';
+
 
             // DATOS DE ENROLAMIENTO DEL CLIENTE
             $rootScope.autenticacion = casb.data;
